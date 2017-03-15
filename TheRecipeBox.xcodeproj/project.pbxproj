@@ -1,0 +1,442 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FD7561FC1E75361B0059DE3D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7561FB1E75361B0059DE3D /* AppDelegate.swift */; };
+		FD7562011E75361B0059DE3D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD7561FF1E75361B0059DE3D /* Main.storyboard */; };
+		FD7562031E75361B0059DE3D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD7562021E75361B0059DE3D /* Assets.xcassets */; };
+		FD7562061E75361B0059DE3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD7562041E75361B0059DE3D /* LaunchScreen.storyboard */; };
+		FDD7D93B1E7738B600B19F21 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD7D93A1E7738B600B19F21 /* ProfileViewController.swift */; };
+		FDD7D9431E77395900B19F21 /* ProfileFeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD7D9421E77395900B19F21 /* ProfileFeedTableViewCell.swift */; };
+		FDD7D94A1E773BE000B19F21 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD7D9491E773BE000B19F21 /* Constants.swift */; };
+		FDD7D94E1E773D3D00B19F21 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDD7D94D1E773D3D00B19F21 /* CloudKit.framework */; };
+		FDD7D9591E77466600B19F21 /* RecipeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD7D9581E77466600B19F21 /* RecipeController.swift */; };
+		FDD7D95B1E7746B300B19F21 /* Recipe+CloudKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD7D95A1E7746B300B19F21 /* Recipe+CloudKit.swift */; };
+		FDD7D95D1E7746C900B19F21 /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD7D95C1E7746C900B19F21 /* CloudKitManager.swift */; };
+		FDD7D95F1E7754E400B19F21 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD7D95E1E7754E400B19F21 /* Recipe.swift */; };
+		FDD7D9611E7759CB00B19F21 /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD7D9601E7759CB00B19F21 /* Ingredient.swift */; };
+		FDD7D9631E7759D100B19F21 /* Instruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD7D9621E7759D100B19F21 /* Instruction.swift */; };
+		FDD7D9651E775B7F00B19F21 /* Ingredient+CloudKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD7D9641E775B7F00B19F21 /* Ingredient+CloudKit.swift */; };
+		FDD7D9671E775B8900B19F21 /* Instruction+CloudKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD7D9661E775B8900B19F21 /* Instruction+CloudKit.swift */; };
+		FDD7D9691E785AF100B19F21 /* AddRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD7D9681E785AF100B19F21 /* AddRecipeViewController.swift */; };
+		FDD7D96B1E78A3D500B19F21 /* RecipeListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD7D96A1E78A3D500B19F21 /* RecipeListTableViewController.swift */; };
+		FDD7D96F1E78C20400B19F21 /* RecipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD7D96E1E78C20400B19F21 /* RecipeTableViewCell.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		FD7561F81E75361B0059DE3D /* TheRecipeBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheRecipeBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD7561FB1E75361B0059DE3D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		FD7562001E75361B0059DE3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		FD7562021E75361B0059DE3D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FD7562051E75361B0059DE3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		FD7562071E75361B0059DE3D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FDD7D93A1E7738B600B19F21 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		FDD7D9421E77395900B19F21 /* ProfileFeedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileFeedTableViewCell.swift; sourceTree = "<group>"; };
+		FDD7D9491E773BE000B19F21 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		FDD7D94B1E773D3B00B19F21 /* TheRecipeBox.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TheRecipeBox.entitlements; sourceTree = "<group>"; };
+		FDD7D94D1E773D3D00B19F21 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		FDD7D9581E77466600B19F21 /* RecipeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeController.swift; sourceTree = "<group>"; };
+		FDD7D95A1E7746B300B19F21 /* Recipe+CloudKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Recipe+CloudKit.swift"; sourceTree = "<group>"; };
+		FDD7D95C1E7746C900B19F21 /* CloudKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitManager.swift; sourceTree = "<group>"; };
+		FDD7D95E1E7754E400B19F21 /* Recipe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
+		FDD7D9601E7759CB00B19F21 /* Ingredient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
+		FDD7D9621E7759D100B19F21 /* Instruction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Instruction.swift; sourceTree = "<group>"; };
+		FDD7D9641E775B7F00B19F21 /* Ingredient+CloudKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Ingredient+CloudKit.swift"; sourceTree = "<group>"; };
+		FDD7D9661E775B8900B19F21 /* Instruction+CloudKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Instruction+CloudKit.swift"; sourceTree = "<group>"; };
+		FDD7D9681E785AF100B19F21 /* AddRecipeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddRecipeViewController.swift; sourceTree = "<group>"; };
+		FDD7D96A1E78A3D500B19F21 /* RecipeListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeListTableViewController.swift; sourceTree = "<group>"; };
+		FDD7D96E1E78C20400B19F21 /* RecipeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeTableViewCell.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FD7561F51E75361B0059DE3D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FDD7D94E1E773D3D00B19F21 /* CloudKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FD7561EF1E75361B0059DE3D = {
+			isa = PBXGroup;
+			children = (
+				FD7561FA1E75361B0059DE3D /* TheRecipeBox */,
+				FD7561F91E75361B0059DE3D /* Products */,
+				FDD7D94C1E773D3D00B19F21 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		FD7561F91E75361B0059DE3D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FD7561F81E75361B0059DE3D /* TheRecipeBox.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FD7561FA1E75361B0059DE3D /* TheRecipeBox */ = {
+			isa = PBXGroup;
+			children = (
+				FDD7D94B1E773D3B00B19F21 /* TheRecipeBox.entitlements */,
+				FD7561FB1E75361B0059DE3D /* AppDelegate.swift */,
+				FDD7D9401E77390C00B19F21 /* Models */,
+				FDD7D93F1E77390A00B19F21 /* ModelControllers */,
+				FDD7D93E1E77390500B19F21 /* ViewControllers */,
+				FDD7D93D1E77390400B19F21 /* Views */,
+				FDD7D93C1E77390300B19F21 /* Helpers */,
+				FDD7D9411E77392800B19F21 /* Resources */,
+			);
+			path = TheRecipeBox;
+			sourceTree = "<group>";
+		};
+		FDD7D93C1E77390300B19F21 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				FDD7D9491E773BE000B19F21 /* Constants.swift */,
+				FDD7D95C1E7746C900B19F21 /* CloudKitManager.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+		FDD7D93D1E77390400B19F21 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FDD7D9421E77395900B19F21 /* ProfileFeedTableViewCell.swift */,
+				FDD7D96E1E78C20400B19F21 /* RecipeTableViewCell.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		FDD7D93E1E77390500B19F21 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				FD7561FF1E75361B0059DE3D /* Main.storyboard */,
+				FDD7D93A1E7738B600B19F21 /* ProfileViewController.swift */,
+				FDD7D9681E785AF100B19F21 /* AddRecipeViewController.swift */,
+				FDD7D96A1E78A3D500B19F21 /* RecipeListTableViewController.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		FDD7D93F1E77390A00B19F21 /* ModelControllers */ = {
+			isa = PBXGroup;
+			children = (
+				FDD7D9581E77466600B19F21 /* RecipeController.swift */,
+			);
+			name = ModelControllers;
+			sourceTree = "<group>";
+		};
+		FDD7D9401E77390C00B19F21 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				FDD7D9551E77441C00B19F21 /* Recipe */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		FDD7D9411E77392800B19F21 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				FD7562021E75361B0059DE3D /* Assets.xcassets */,
+				FD7562041E75361B0059DE3D /* LaunchScreen.storyboard */,
+				FD7562071E75361B0059DE3D /* Info.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		FDD7D94C1E773D3D00B19F21 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FDD7D94D1E773D3D00B19F21 /* CloudKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FDD7D9551E77441C00B19F21 /* Recipe */ = {
+			isa = PBXGroup;
+			children = (
+				FDD7D95E1E7754E400B19F21 /* Recipe.swift */,
+				FDD7D9601E7759CB00B19F21 /* Ingredient.swift */,
+				FDD7D9621E7759D100B19F21 /* Instruction.swift */,
+				FDD7D95A1E7746B300B19F21 /* Recipe+CloudKit.swift */,
+				FDD7D9641E775B7F00B19F21 /* Ingredient+CloudKit.swift */,
+				FDD7D9661E775B8900B19F21 /* Instruction+CloudKit.swift */,
+			);
+			name = Recipe;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FD7561F71E75361B0059DE3D /* TheRecipeBox */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FD75620A1E75361B0059DE3D /* Build configuration list for PBXNativeTarget "TheRecipeBox" */;
+			buildPhases = (
+				FD7561F41E75361B0059DE3D /* Sources */,
+				FD7561F51E75361B0059DE3D /* Frameworks */,
+				FD7561F61E75361B0059DE3D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TheRecipeBox;
+			productName = TheRecipeBox;
+			productReference = FD7561F81E75361B0059DE3D /* TheRecipeBox.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FD7561F01E75361B0059DE3D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0820;
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = "Christian McMullin";
+				TargetAttributes = {
+					FD7561F71E75361B0059DE3D = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 9Q8KVW72F5;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = FD7561F31E75361B0059DE3D /* Build configuration list for PBXProject "TheRecipeBox" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FD7561EF1E75361B0059DE3D;
+			productRefGroup = FD7561F91E75361B0059DE3D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FD7561F71E75361B0059DE3D /* TheRecipeBox */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FD7561F61E75361B0059DE3D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FD7562061E75361B0059DE3D /* LaunchScreen.storyboard in Resources */,
+				FD7562031E75361B0059DE3D /* Assets.xcassets in Resources */,
+				FD7562011E75361B0059DE3D /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FD7561F41E75361B0059DE3D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FDD7D95D1E7746C900B19F21 /* CloudKitManager.swift in Sources */,
+				FDD7D9611E7759CB00B19F21 /* Ingredient.swift in Sources */,
+				FDD7D9591E77466600B19F21 /* RecipeController.swift in Sources */,
+				FDD7D93B1E7738B600B19F21 /* ProfileViewController.swift in Sources */,
+				FDD7D95B1E7746B300B19F21 /* Recipe+CloudKit.swift in Sources */,
+				FDD7D9431E77395900B19F21 /* ProfileFeedTableViewCell.swift in Sources */,
+				FDD7D9651E775B7F00B19F21 /* Ingredient+CloudKit.swift in Sources */,
+				FDD7D9671E775B8900B19F21 /* Instruction+CloudKit.swift in Sources */,
+				FDD7D95F1E7754E400B19F21 /* Recipe.swift in Sources */,
+				FDD7D9691E785AF100B19F21 /* AddRecipeViewController.swift in Sources */,
+				FD7561FC1E75361B0059DE3D /* AppDelegate.swift in Sources */,
+				FDD7D96B1E78A3D500B19F21 /* RecipeListTableViewController.swift in Sources */,
+				FDD7D94A1E773BE000B19F21 /* Constants.swift in Sources */,
+				FDD7D9631E7759D100B19F21 /* Instruction.swift in Sources */,
+				FDD7D96F1E78C20400B19F21 /* RecipeTableViewCell.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		FD7561FF1E75361B0059DE3D /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FD7562001E75361B0059DE3D /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		FD7562041E75361B0059DE3D /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FD7562051E75361B0059DE3D /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FD7562081E75361B0059DE3D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FD7562091E75361B0059DE3D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FD75620B1E75361B0059DE3D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = TheRecipeBox/TheRecipeBox.entitlements;
+				DEVELOPMENT_TEAM = 9Q8KVW72F5;
+				INFOPLIST_FILE = TheRecipeBox/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.christianmcmullin.TheRecipeBox;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		FD75620C1E75361B0059DE3D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = TheRecipeBox/TheRecipeBox.entitlements;
+				DEVELOPMENT_TEAM = 9Q8KVW72F5;
+				INFOPLIST_FILE = TheRecipeBox/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.christianmcmullin.TheRecipeBox;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FD7561F31E75361B0059DE3D /* Build configuration list for PBXProject "TheRecipeBox" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FD7562081E75361B0059DE3D /* Debug */,
+				FD7562091E75361B0059DE3D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FD75620A1E75361B0059DE3D /* Build configuration list for PBXNativeTarget "TheRecipeBox" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FD75620B1E75361B0059DE3D /* Debug */,
+				FD75620C1E75361B0059DE3D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FD7561F01E75361B0059DE3D /* Project object */;
+}
