@@ -21,9 +21,9 @@ class Recipe {
     var instructions: [Instruction]
     var recordID: CKRecordID?
     
-    var recipeImage: UIImage {
-        guard let recipeImageData = recipeImageData,
-            let image = UIImage(data: recipeImageData) else { return UIImage() }
+    var recipeImage: UIImage? {
+        guard let data = recipeImageData,
+            let image = UIImage(data: data) else { return UIImage() }
         return image
     }
     
@@ -37,23 +37,8 @@ class Recipe {
         self.instructions = instructions
     }
 
-    init?(cloudKitRecord: CKRecord) {
-        guard let name = cloudKitRecord[Constants.recipeNameKey] as? String,
-            let prepTime = cloudKitRecord[Constants.prepTimeKey] as? String,
-            let servingSize = cloudKitRecord[Constants.servingSizeKey] as? String,
-            let cookTime = cloudKitRecord[Constants.cookTimeKey] as? String
-        
-            else { return nil }
-        let recipeImageData = cloudKitRecord[Constants.recipeImageKey] as? Data
-//        self.init(name: name, prepTime: prepTime, servings: servings, cookTime: cookTime, recipeImageData: recipeImageData)
-        self.name = name
-        self.prepTime = prepTime
-        self.servingSize = servingSize
-        self.cookTime = cookTime
-        self.recipeImageData = recipeImageData
-        self.ingredients = []
-        self.instructions = []
-        self.recordID = cloudKitRecord.recordID
+    
     }
+    
+   
 
-}

@@ -26,6 +26,7 @@
 		FDD7D9691E785AF100B19F21 /* AddRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD7D9681E785AF100B19F21 /* AddRecipeViewController.swift */; };
 		FDD7D96B1E78A3D500B19F21 /* RecipeListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD7D96A1E78A3D500B19F21 /* RecipeListTableViewController.swift */; };
 		FDD7D96F1E78C20400B19F21 /* RecipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD7D96E1E78C20400B19F21 /* RecipeTableViewCell.swift */; };
+		FDD7D9711E79B0C400B19F21 /* UIImage+CKAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD7D9701E79B0C400B19F21 /* UIImage+CKAsset.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +52,7 @@
 		FDD7D9681E785AF100B19F21 /* AddRecipeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddRecipeViewController.swift; sourceTree = "<group>"; };
 		FDD7D96A1E78A3D500B19F21 /* RecipeListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeListTableViewController.swift; sourceTree = "<group>"; };
 		FDD7D96E1E78C20400B19F21 /* RecipeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeTableViewCell.swift; sourceTree = "<group>"; };
+		FDD7D9701E79B0C400B19F21 /* UIImage+CKAsset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+CKAsset.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 			children = (
 				FDD7D9491E773BE000B19F21 /* Constants.swift */,
 				FDD7D95C1E7746C900B19F21 /* CloudKitManager.swift */,
+				FDD7D9701E79B0C400B19F21 /* UIImage+CKAsset.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -264,6 +267,7 @@
 				FDD7D9671E775B8900B19F21 /* Instruction+CloudKit.swift in Sources */,
 				FDD7D95F1E7754E400B19F21 /* Recipe.swift in Sources */,
 				FDD7D9691E785AF100B19F21 /* AddRecipeViewController.swift in Sources */,
+				FDD7D9711E79B0C400B19F21 /* UIImage+CKAsset.swift in Sources */,
 				FD7561FC1E75361B0059DE3D /* AppDelegate.swift in Sources */,
 				FDD7D96B1E78A3D500B19F21 /* RecipeListTableViewController.swift in Sources */,
 				FDD7D94A1E773BE000B19F21 /* Constants.swift in Sources */,

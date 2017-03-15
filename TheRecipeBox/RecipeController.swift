@@ -34,22 +34,26 @@ class RecipeController {
     
     func createInstructionWith(instruction: String) -> Instruction {
         let newInstruction = Instruction(instruction: instruction)
-       
+        
         return newInstruction
     }
     
     func addRecipeToCloudKit(recipe: Recipe, ingredients: [Ingredient], instructions: [Instruction], completion: @escaping ((Error?) -> Void) = { _ in }) {
+        guard let image = recipe.recipeImage,
+              let data = UIImagePNGRepresentation(image) else { return }
         
         let newRecipe = recipe
         newRecipe.ingredients = ingredients
         newRecipe.instructions = instructions
+        newRecipe.recipeImageData = data
         
         let recipeRecord = CKRecord(recipe: newRecipe)
         newRecipe.recordID = recipeRecord.recordID
         
+        
         Constants.publicDatabase.save(recipeRecord) { (_, error) in
             if let error = error {
-                NSLog("Error: \(error.localizedDescription)\nProblem saving to public database")
+                NSLog("Error: \(error)\nProblem saving to public database")
                 completion(error)
                 return
             } else {
@@ -61,6 +65,7 @@ class RecipeController {
                 for instruction in newRecipe.instructions {
                     instruction.recipeReference = CKReference(recordID: recipeRecordID, action: .deleteSelf)
                 }
+                
                 
                 let ingredientRecords = newRecipe.ingredients.flatMap { CKRecord(ingredient:  $0) }
                 let instructionRecords = newRecipe.instructions.flatMap { CKRecord(instruction:  $0) }
@@ -86,28 +91,28 @@ class RecipeController {
     }
     
     func fetchAllRecipes(completion: @escaping() -> Void) {
-//        let predicate = NSPredicate(value: true)
-//        let query = CKQuery(recordType: Constants.recipeRecordType, predicate: predicate)
-//        Constants.publicDatabase.perform(query, inZoneWith: nil) { (records, error) in
+                let predicate = NSPredicate(value: true)
+                let query = CKQuery(recordType: Constants.recipeRecordType, predicate: predicate)
+                Constants.publicDatabase.perform(query, inZoneWith: nil) { (records, error) in
+                    if let error = error {
+                        NSLog("Error: \(error.localizedDescription)\nCould not fetch recipe from cloudKit")
+                    } else {
+                        guard let records = records else { return }
+                        let recipes = records.flatMap { Recipe(cloudKitRecord: $0) }
+                        self.recipes = recipes
+                        completion()
+                    }
+                }
+//        cloudKitManager.fetchRecords(ofType: Constants.recipeRecordType) { (records, error) in
+//            defer { completion() }
 //            if let error = error {
-//                NSLog("Error: \(error.localizedDescription)\nCould not fetch recipe from cloudKit")
-//            } else {
-//                guard let records = records else { return }
-//                var recipes = records.flatMap { Recipe(cloudKitRecord: $0) }
-//                self.recipes = recipes
-//                completion()
+//                print("error \(error.localizedDescription)")
 //            }
+//            guard let records = records else { return }
+//            self.recipes = records.flatMap { Recipe(cloudKitRecord: $0) }
+//            completion()
 //        }
-        cloudKitManager.fetchRecords(ofType: Constants.recipeRecordType) { (records, error) in
-            defer { completion() }
-            if let error = error {
-                print("error \(error.localizedDescription)")
-            }
-            guard let records = records else { return }
-            self.recipes = records.flatMap { Recipe(cloudKitRecord: $0) }
-            completion()
-        }
-
+//        
     }
     
     func fetchIngredientsFor(recipe: Recipe, completion: @escaping() -> Void) {
@@ -141,7 +146,22 @@ class RecipeController {
                 completion()
             }
         }
-
+        
     }
+    
+    func convertImageToCKAsset(image: UIImage, completion: @escaping(CKAsset) -> Void) {
+        
+        let tempURL = URL(fileURLWithPath: NSTemporaryDirectory())
+        let endPoint = tempURL.appendingPathComponent(UUID().uuidString+".dat")
+        let imageData = UIImagePNGRepresentation(image)
+        do {
+            try imageData?.write(to: tempURL, options: [])
+        } catch let error {
+            print("Error \(error.localizedDescription)")
+        }
+        let asset = CKAsset(fileURL: endPoint)
+        completion(asset)
+    }
+    
     
 }

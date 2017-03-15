@@ -10,31 +10,53 @@ import Foundation
 import CloudKit
 
 
-//extension Recipe {
-//
-//    convenience init?(cloudKitRecord: CKRecord) {
-//        guard let name = cloudKitRecord[Constants.recipeNameKey] as? String,
-//            let prepTime = cloudKitRecord[Constants.prepTimeKey] as? String,
-//            let servings = cloudKitRecord[Constants.servingSizeKey] as? String,
-//            let cookTime = cloudKitRecord[Constants.cookTimeKey] as? String,
-//            let recipeImageData = cloudKitRecord[Constants.recipeImageKey] as? Data
-//        else { return nil }
-//        self.init(name: name, prepTime: prepTime, servings: servings, cookTime: cookTime, recipeImageData: recipeImageData)
-//            self.ingredients = []
-//            self.instructions = []
-//            self.recordID = cloudKitRecord.recordID
-//        
-//    }
-// }
+extension Recipe {
+
+    
+    convenience init?(cloudKitRecord: CKRecord) {
+        guard let name = cloudKitRecord[Constants.recipeNameKey] as? String,
+            let prepTime = cloudKitRecord[Constants.prepTimeKey] as? String,
+            let servingSize = cloudKitRecord[Constants.servingSizeKey] as? String,
+            let cookTime = cloudKitRecord[Constants.cookTimeKey] as? String,
+            let photoAsset = cloudKitRecord[Constants.recipeImageKey] as? CKAsset
+            else { return nil }
+        
+        let recipeImageData = try? Data(contentsOf: photoAsset.fileURL)
+        self.init(name: name, prepTime: prepTime, servingSize: servingSize, cookTime: cookTime, recipeImageData: recipeImageData)
+        self.recipeImageData = recipeImageData
+        self.ingredients = []
+        self.instructions = []
+        self.recordID = cloudKitRecord.recordID
+    }
+    
+    fileprivate var temporaryPhotoURL: URL {
+        
+        let tempDir = NSTemporaryDirectory()
+        let tempURL = URL(fileURLWithPath: tempDir)
+        let fileURL = tempURL.appendingPathComponent(UUID().uuidString).appendingPathExtension("png")
+        
+        try? recipeImageData?.write(to: fileURL, options: [.atomic])
+        
+        return fileURL
+    }
+}
 
 extension CKRecord {
     
     convenience init(recipe: Recipe) {
-        self.init(recordType: "Recipe")
+        self.init(recordType: Constants.recipeRecordType)
         self.setValue(recipe.name, forKey: Constants.recipeNameKey)
         self.setValue(recipe.prepTime, forKey: Constants.prepTimeKey)
         self.setValue(recipe.servingSize, forKey: Constants.servingSizeKey)
         self.setValue(recipe.cookTime, forKey: Constants.cookTimeKey)
-        self.setValue(recipe.recipeImageData, forKey: Constants.recipeImageKey)
+        self[Constants.recipeImageKey] = CKAsset(fileURL: recipe.temporaryPhotoURL)
+        
+        /* 
+         let recordID = CKRecordID(recordName: UUID().uuidString)
+         self.init(recordType: post.recordType, recordID: recordID)
+         
+         self[Post.timestampKey] = post.timestamp as CKRecordValue?
+         self[Post.photoDataKey] = CKAsset(fileURL: post.temporaryPhotoURL)
+         */
     }
 }

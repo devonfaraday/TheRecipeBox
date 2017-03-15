@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CloudKit
 
 class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -38,7 +39,7 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
-        return "\(sections[0])"
+            return "\(sections[0])"
         } else {
             return "\(sections[1])"
         }
@@ -108,14 +109,14 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
             let prepTime = prepTimeTextField.text,
             let servings = servingsTextField.text,
             let cookTime = cookTimeTextField.text
-        else { return }
+            else { return }
         if let image = recipeImageView.image {
             let imageData = UIImagePNGRepresentation(image)
             let recipe = Recipe(name: name, prepTime: prepTime, servingSize: servings, cookTime: cookTime, recipeImageData: imageData)
             RecipeController.shared.addRecipeToCloudKit(recipe: recipe, ingredients: ingredients, instructions: instructions)
         } else {
             let recipe = Recipe(name: name, prepTime: prepTime, servingSize: servings, cookTime: cookTime, recipeImageData: nil)
-        RecipeController.shared.addRecipeToCloudKit(recipe: recipe, ingredients: ingredients, instructions: instructions)
+            RecipeController.shared.addRecipeToCloudKit(recipe: recipe, ingredients: ingredients, instructions: instructions)
         }
     }
     @IBAction func addPhotoButtonTapped(_ sender: UIButton) {
@@ -137,7 +138,7 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
             actionController.addAction(uploadAction)
             actionController.addAction(cameraAction)
         } else if UIImagePickerController.isSourceTypeAvailable(.camera) {
-        actionController.addAction(cameraAction)
+            actionController.addAction(cameraAction)
         } else if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
             actionController.addAction(uploadAction)
         }
@@ -150,7 +151,7 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
     
     
     // MARK: - functions for upload or camera
-     func uploadButton() {
+    func uploadButton() {
         //Hide any keyboards that maybe open
         recipeNameTextField.resignFirstResponder()
         servingsTextField.resignFirstResponder()
@@ -185,8 +186,23 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
         present(imagePickerController, animated: true, completion: nil)
         
     }
-
     
-
+    func convertImageToCKAsset() -> CKAsset {
+        
+        let tempURL = URL(fileURLWithPath: NSTemporaryDirectory())
+        let endPoint = tempURL.appendingPathComponent(UUID().uuidString+".dat")
+        if let image = recipeImageView.image {
+            
+            let imageData = UIImagePNGRepresentation(image)
+            do {
+                try imageData?.write(to: endPoint, options: [])
+            } catch let error {
+                print("Error \(error.localizedDescription)")
+            }
+        }
+        return CKAsset(fileURL: endPoint)
+    }
+    
+    
     
 }
