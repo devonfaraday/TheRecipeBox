@@ -14,11 +14,25 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
     override func viewDidLoad() {
         super.viewDidLoad()
         recipeImageView.layer.masksToBounds = true
+        
     }
     
+    var ingredients = [Ingredient]()
+    var instructions = [Instruction]()
+    
+    var recipe: Recipe?   {
+        didSet {
+            if !isViewLoaded {
+                loadViewIfNeeded()
+            }
+            updateViews()
+        }
+    }
     // MARK: - Properties
     let sections = ["Ingredients", "Instructions"]
     
+    @IBOutlet weak var addInstructionButton: UIButton!
+    @IBOutlet weak var addIngredientButton: UIButton!
     @IBOutlet weak var recipeImageView: UIImageView!
     @IBOutlet weak var recipeNameTextField: UITextField!
     @IBOutlet weak var prepTimeTextField: UITextField!
@@ -28,9 +42,8 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
     @IBOutlet weak var instructionTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var addPhotoButton: UIButton!
-    var ingredients = [Ingredient]()
-    var instructions = [Instruction]()
     
+    @IBOutlet weak var saveButton: UIBarButtonItem!
     
     // MARK: - Table view data source
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -84,6 +97,13 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
         
     }
     
+    // MARK: - Text Field Delegate
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
     // MARK: - UI Functions
     
     
@@ -111,7 +131,7 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
             let cookTime = cookTimeTextField.text
             else { return }
         if let image = recipeImageView.image {
-            let imageData = UIImagePNGRepresentation(image)
+            let imageData = UIImageJPEGRepresentation(image, 1.0)
             let recipe = Recipe(name: name, prepTime: prepTime, servingSize: servings, cookTime: cookTime, recipeImageData: imageData)
             RecipeController.shared.addRecipeToCloudKit(recipe: recipe, ingredients: ingredients, instructions: instructions)
         } else {
@@ -151,6 +171,7 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
     
     
     // MARK: - functions for upload or camera
+    
     func uploadButton() {
         //Hide any keyboards that maybe open
         recipeNameTextField.resignFirstResponder()
@@ -187,22 +208,48 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
         
     }
     
-    func convertImageToCKAsset() -> CKAsset {
-        
-        let tempURL = URL(fileURLWithPath: NSTemporaryDirectory())
-        let endPoint = tempURL.appendingPathComponent(UUID().uuidString+".dat")
-        if let image = recipeImageView.image {
-            
-            let imageData = UIImagePNGRepresentation(image)
-            do {
-                try imageData?.write(to: endPoint, options: [])
-            } catch let error {
-                print("Error \(error.localizedDescription)")
+    // MARK: - Helper Functions
+    
+    func updateViews() {
+        guard let recipe = recipe else { return }
+        recipeNameTextField.text = recipe.name
+        prepTimeTextField.text = recipe.prepTime
+        servingsTextField.text = recipe.servingSize
+        cookTimeTextField.text = recipe.cookTime
+        recipeImageView.image = recipe.recipeImage
+        addPhotoButton.setTitle("", for: .normal)
+        instructionTextField.isHidden = true
+        ingredientTextField.isHidden = true
+        addInstructionButton.isHidden = true
+        addIngredientButton.isHidden = true
+        RecipeController.shared.fetchIngredientsFor(recipe: recipe) { (ingredients) in
+            self.ingredients = ingredients
+            DispatchQueue.main.async {
+            self.tableView.reloadData()
             }
         }
-        return CKAsset(fileURL: endPoint)
+        RecipeController.shared.fetchInstructionsFor(recipe: recipe) { (instructions) in
+            self.instructions = instructions
+            DispatchQueue.main.async {
+            self.tableView.reloadData()
+            }
+            
+        }
+        let tableViewTopContraint = NSLayoutConstraint(item: tableView, attribute: .top, relatedBy: .equal, toItem: servingsTextField, attribute: .bottom, multiplier: 1.0, constant: 8.0)
+        let servingSizeHeight = NSLayoutConstraint(item: servingsTextField, attribute: .height, relatedBy: .equal, toItem: prepTimeTextField, attribute: .height, multiplier: 1.0, constant: 0)
+        let servingSizeTopConstraint = NSLayoutConstraint(item: servingsTextField, attribute: .top, relatedBy: .equal, toItem: prepTimeTextField, attribute: .top, multiplier: 1.0, constant: 0)
+        view.addConstraints([tableViewTopContraint, servingSizeHeight, servingSizeTopConstraint])
+        
     }
     
+    func updateIngredients() {
+        guard let recipe = recipe else { return }
+        ingredients = recipe.ingredients
+    }
     
+    func updateInstructions() {
+        guard let recipe = recipe else { return }
+        instructions = recipe.instructions
+    }
     
 }

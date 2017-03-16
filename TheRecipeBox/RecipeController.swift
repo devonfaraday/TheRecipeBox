@@ -40,7 +40,7 @@ class RecipeController {
     
     func addRecipeToCloudKit(recipe: Recipe, ingredients: [Ingredient], instructions: [Instruction], completion: @escaping ((Error?) -> Void) = { _ in }) {
         guard let image = recipe.recipeImage,
-              let data = UIImagePNGRepresentation(image) else { return }
+              let data = UIImageJPEGRepresentation(image, 1.0) else { return }
         
         let newRecipe = recipe
         newRecipe.ingredients = ingredients
@@ -115,7 +115,7 @@ class RecipeController {
 //        
     }
     
-    func fetchIngredientsFor(recipe: Recipe, completion: @escaping() -> Void) {
+    func fetchIngredientsFor(recipe: Recipe, completion: @escaping([Ingredient]) -> Void) {
         guard let recipeRecordID = recipe.recordID else { return }
         
         let predicate = NSPredicate(format: "recipeReference == %@", recipeRecordID)
@@ -126,13 +126,13 @@ class RecipeController {
             } else {
                 guard let records = records else { return }
                 let ingredients = records.flatMap { Ingredient(cloudKitRecord: $0) }
-                recipe.ingredients = ingredients
-                completion()
+               
+                completion(ingredients)
             }
         }
     }
     
-    func fetchInstructionsFor(recipe: Recipe, completion: @escaping() -> Void) {
+    func fetchInstructionsFor(recipe: Recipe, completion: @escaping([Instruction]) -> Void) {
         guard let recipeRecordID = recipe.recordID else { return }
         let predicate = NSPredicate(format: "recipeReference == %@", recipeRecordID)
         let query = CKQuery(recordType: Constants.instructionsRecordType, predicate: predicate)
@@ -142,8 +142,8 @@ class RecipeController {
             } else {
                 guard let records = records else { return }
                 let instructions = records.flatMap { Instruction(cloudKitRecord: $0) }
-                recipe.instructions = instructions
-                completion()
+                
+                completion(instructions)
             }
         }
         

@@ -24,7 +24,6 @@ class RecipeListTableViewController: UITableViewController {
         return RecipeController.shared.recipes.count
     }
     
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.recipeCellIdentifier, for: indexPath) as? RecipeTableViewCell else { return RecipeTableViewCell() }
         
@@ -35,8 +34,7 @@ class RecipeListTableViewController: UITableViewController {
         return cell
     }
     
-    
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+       override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
@@ -48,7 +46,14 @@ class RecipeListTableViewController: UITableViewController {
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+        guard let indexPath = tableView.indexPathForSelectedRow else { return }
+        if segue.identifier == Constants.toShowRecipeSegue {
+            guard let detailVC = segue.destination as? AddRecipeViewController else { return }
+                let recipe = RecipeController.shared.recipes[indexPath.row]
+            
+            detailVC.recipe = recipe
+           
+        }
     }
     
     

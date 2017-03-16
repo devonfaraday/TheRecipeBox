@@ -13,7 +13,6 @@ extension Instruction {
     convenience init?(cloudKitRecord: CKRecord) {
         guard let instruction = cloudKitRecord[Constants.instructionKey] as? String else { return nil }
         self.init(instruction: instruction)
-        
         self.recipeReference = cloudKitRecord[Constants.recipeReferenceKey] as? CKReference
     }
 }

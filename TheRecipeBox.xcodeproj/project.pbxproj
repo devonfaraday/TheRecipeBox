@@ -27,6 +27,10 @@
 		FDD7D96B1E78A3D500B19F21 /* RecipeListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD7D96A1E78A3D500B19F21 /* RecipeListTableViewController.swift */; };
 		FDD7D96F1E78C20400B19F21 /* RecipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD7D96E1E78C20400B19F21 /* RecipeTableViewCell.swift */; };
 		FDD7D9711E79B0C400B19F21 /* UIImage+CKAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD7D9701E79B0C400B19F21 /* UIImage+CKAsset.swift */; };
+		FDD7D9741E7A58BA00B19F21 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD7D9731E7A58BA00B19F21 /* User.swift */; };
+		FDD7D9761E7A58C400B19F21 /* User+CloudKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD7D9751E7A58C400B19F21 /* User+CloudKit.swift */; };
+		FDD7D9791E7AE02F00B19F21 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD7D9781E7AE02F00B19F21 /* Group.swift */; };
+		FDD7D97B1E7AE05000B19F21 /* Group+CloudKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD7D97A1E7AE05000B19F21 /* Group+CloudKit.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +57,10 @@
 		FDD7D96A1E78A3D500B19F21 /* RecipeListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeListTableViewController.swift; sourceTree = "<group>"; };
 		FDD7D96E1E78C20400B19F21 /* RecipeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeTableViewCell.swift; sourceTree = "<group>"; };
 		FDD7D9701E79B0C400B19F21 /* UIImage+CKAsset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+CKAsset.swift"; sourceTree = "<group>"; };
+		FDD7D9731E7A58BA00B19F21 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		FDD7D9751E7A58C400B19F21 /* User+CloudKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "User+CloudKit.swift"; sourceTree = "<group>"; };
+		FDD7D9781E7AE02F00B19F21 /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
+		FDD7D97A1E7AE05000B19F21 /* Group+CloudKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Group+CloudKit.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +148,8 @@
 		FDD7D9401E77390C00B19F21 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				FDD7D9771E7AE01D00B19F21 /* Group */,
+				FDD7D9721E7A58AD00B19F21 /* Users */,
 				FDD7D9551E77441C00B19F21 /* Recipe */,
 			);
 			name = Models;
@@ -174,6 +184,24 @@
 				FDD7D9661E775B8900B19F21 /* Instruction+CloudKit.swift */,
 			);
 			name = Recipe;
+			sourceTree = "<group>";
+		};
+		FDD7D9721E7A58AD00B19F21 /* Users */ = {
+			isa = PBXGroup;
+			children = (
+				FDD7D9731E7A58BA00B19F21 /* User.swift */,
+				FDD7D9751E7A58C400B19F21 /* User+CloudKit.swift */,
+			);
+			name = Users;
+			sourceTree = "<group>";
+		};
+		FDD7D9771E7AE01D00B19F21 /* Group */ = {
+			isa = PBXGroup;
+			children = (
+				FDD7D9781E7AE02F00B19F21 /* Group.swift */,
+				FDD7D97A1E7AE05000B19F21 /* Group+CloudKit.swift */,
+			);
+			name = Group;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,11 +287,15 @@
 			files = (
 				FDD7D95D1E7746C900B19F21 /* CloudKitManager.swift in Sources */,
 				FDD7D9611E7759CB00B19F21 /* Ingredient.swift in Sources */,
+				FDD7D97B1E7AE05000B19F21 /* Group+CloudKit.swift in Sources */,
 				FDD7D9591E77466600B19F21 /* RecipeController.swift in Sources */,
 				FDD7D93B1E7738B600B19F21 /* ProfileViewController.swift in Sources */,
 				FDD7D95B1E7746B300B19F21 /* Recipe+CloudKit.swift in Sources */,
 				FDD7D9431E77395900B19F21 /* ProfileFeedTableViewCell.swift in Sources */,
+				FDD7D9791E7AE02F00B19F21 /* Group.swift in Sources */,
 				FDD7D9651E775B7F00B19F21 /* Ingredient+CloudKit.swift in Sources */,
+				FDD7D9761E7A58C400B19F21 /* User+CloudKit.swift in Sources */,
+				FDD7D9741E7A58BA00B19F21 /* User.swift in Sources */,
 				FDD7D9671E775B8900B19F21 /* Instruction+CloudKit.swift in Sources */,
 				FDD7D95F1E7754E400B19F21 /* Recipe.swift in Sources */,
 				FDD7D9691E785AF100B19F21 /* AddRecipeViewController.swift in Sources */,

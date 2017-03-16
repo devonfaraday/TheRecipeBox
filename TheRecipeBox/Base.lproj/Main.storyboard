@@ -11,6 +11,38 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--View Controller-->
+        <scene sceneID="35v-uO-11g">
+            <objects>
+                <viewController id="MQT-lK-lZc" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ezg-RJ-QMq"/>
+                        <viewControllerLayoutGuide type="bottom" id="RS0-da-nYq"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hF7-tH-fQh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter A Username" textAlignment="center" minimumFontSize="17" background="LongTextField" translatesAutoresizingMaskIntoConstraints="NO" id="T1h-ZF-ab8">
+                                <rect key="frame" x="16" y="254" width="343" height="41"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FqD-ZD-prk">
+                                <rect key="frame" x="16" y="303" width="343" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fkJ-mj-Bf5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="693.60000000000002" y="-581.55922038980509"/>
+        </scene>
         <!--Profile View Controller-->
         <scene sceneID="Yqi-Ac-26z">
             <objects>
@@ -372,6 +404,9 @@
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="ldY-Bg-hi3" id="chX-7Z-4Ko"/>
+                                        </connections>
                                     </textField>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="LQq-BL-aaj" userLabel="timesStack">
                                         <rect key="frame" x="8" y="250" width="359" height="30"/>
@@ -384,6 +419,9 @@
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="ldY-Bg-hi3" id="7G7-n1-Red"/>
+                                                </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Servings" textAlignment="center" minimumFontSize="17" background="ShortTextField" translatesAutoresizingMaskIntoConstraints="NO" id="cKb-Ou-Plc">
                                                 <rect key="frame" x="120.5" y="0.0" width="118" height="30"/>
@@ -393,6 +431,9 @@
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="ldY-Bg-hi3" id="DWM-Dz-YLC"/>
+                                                </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Cook Time" textAlignment="center" minimumFontSize="17" background="ShortTextField" translatesAutoresizingMaskIntoConstraints="NO" id="ffG-CI-9Qu">
                                                 <rect key="frame" x="241.5" y="0.0" width="117.5" height="30"/>
@@ -402,6 +443,9 @@
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="ldY-Bg-hi3" id="YjW-nU-Jm9"/>
+                                                </connections>
                                             </textField>
                                         </subviews>
                                     </stackView>
@@ -416,6 +460,9 @@
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="ldY-Bg-hi3" id="3ZV-3D-ppz"/>
+                                                </connections>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sbq-8z-qI6" userLabel="Add Ingredient Button">
                                                 <rect key="frame" x="317" y="0.0" width="42" height="35"/>
@@ -441,6 +488,9 @@
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="ldY-Bg-hi3" id="MmS-18-ek3"/>
+                                                </connections>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HPQ-jf-ciZ" userLabel="Add Instruction Button">
                                                 <rect key="frame" x="318" y="0.0" width="41" height="30"/>
@@ -529,6 +579,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addIngredientButton" destination="sbq-8z-qI6" id="eeF-7m-52R"/>
+                        <outlet property="addInstructionButton" destination="HPQ-jf-ciZ" id="W4t-lQ-Dj4"/>
                         <outlet property="addPhotoButton" destination="rpd-xG-3Jq" id="kqu-J1-zW5"/>
                         <outlet property="cookTimeTextField" destination="ffG-CI-9Qu" id="gpS-s6-aBP"/>
                         <outlet property="ingredientTextField" destination="Y47-0r-eOS" id="Dzm-Mn-Mc3"/>
@@ -536,6 +588,7 @@
                         <outlet property="prepTimeTextField" destination="2AG-Da-xUA" id="LaS-CB-CTW"/>
                         <outlet property="recipeImageView" destination="pm3-fv-9mv" id="rmi-hr-aTx"/>
                         <outlet property="recipeNameTextField" destination="dBi-dC-Qqf" id="cW1-NY-8Nq"/>
+                        <outlet property="saveButton" destination="Iq9-7i-XXq" id="Kci-Mh-AYq"/>
                         <outlet property="servingsTextField" destination="cKb-Ou-Plc" id="1DW-Xm-Xbn"/>
                         <outlet property="tableView" destination="ge2-s8-WWU" id="CXw-I5-zNY"/>
                     </connections>
@@ -560,7 +613,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="369"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Had-ue-4HQ">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Had-ue-4HQ">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="369"/>
                                         </imageView>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Line Seperator White" translatesAutoresizingMaskIntoConstraints="NO" id="zEh-J7-YhD">
@@ -672,6 +725,7 @@
                                     <outlet property="recipeImageView" destination="Had-ue-4HQ" id="tMD-rI-cav"/>
                                     <outlet property="recipeNameLabel" destination="BKl-8A-Fuh" id="gue-ar-TQo"/>
                                     <outlet property="servingsLabel" destination="Dhb-AW-a5x" id="xfq-FP-Izp"/>
+                                    <segue destination="ldY-Bg-hi3" kind="show" identifier="toShowRecipe" id="eIa-i9-ruO"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -683,7 +737,7 @@
                     <navigationItem key="navigationItem" title="Title" id="Moa-HA-24E">
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="ns2-Ad-xoJ">
                             <connections>
-                                <segue destination="ldY-Bg-hi3" kind="show" id="hmU-eq-caW"/>
+                                <segue destination="ldY-Bg-hi3" kind="show" identifier="toAddRecipe" id="hmU-eq-caW"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -718,4 +772,7 @@
         <image name="LongTextField" width="402" height="38"/>
         <image name="ShortTextField" width="110" height="38"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="hmU-eq-caW"/>
+    </inferredMetricsTieBreakers>
 </document>

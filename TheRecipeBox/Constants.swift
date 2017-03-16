@@ -25,6 +25,11 @@ struct Constants {
     static let ingredientKey = "ingredient"
     static let instructionKey = "instruction"
     
+    // MARK: - Segues
+    
+    static let toAddRecipeSegue = "toAddRecipe"
+    static let toShowRecipeSegue = "toShowRecipe"
+    
     // MARK: - Notification Names
     
     static let recipesDidChangeNotificationName = Notification.Name("recipesDidChange")
