@@ -11,4 +11,14 @@ import CloudKit
 
 class Group {
     
+    var users: [User]
+    var recipes: [Recipe]
+    var groupName: String
+    var groupRecordID: CKRecordID?
+    
+    init(users: [User] = [], recipes: [Recipe] = [], groupName: String) {
+        self.users = users
+        self.recipes = recipes
+        self.groupName = groupName
+    }
 }

@@ -20,6 +20,7 @@ class Recipe {
     var ingredients: [Ingredient]
     var instructions: [Instruction]
     var recordID: CKRecordID?
+    var userReference: CKReference?
     
     var recipeImage: UIImage? {
         guard let data = recipeImageData,
@@ -38,7 +39,7 @@ class Recipe {
     }
 
     
-    }
+}
     
    
 

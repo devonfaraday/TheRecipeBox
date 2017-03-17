@@ -27,6 +27,33 @@ class CloudKitManager {
         }
     }
     
+    
+    func fetchUsername(for recordID: CKRecordID,
+                       completion: @escaping ((_ givenName: String?, _ familyName: String?) -> Void) = { _,_ in }) {
+        
+        let recordInfo = CKUserIdentityLookupInfo(userRecordID: recordID)
+        let operation = CKDiscoverUserIdentitiesOperation(userIdentityLookupInfos: [recordInfo])
+        
+        var userIdenties = [CKUserIdentity]()
+        operation.userIdentityDiscoveredBlock = { (userIdentity, _) in
+            userIdenties.append(userIdentity)
+        }
+        operation.discoverUserIdentitiesCompletionBlock = { (error) in
+            if let error = error {
+                NSLog("Error getting username from record ID: \(error)")
+                completion(nil, nil)
+                return
+            }
+            
+            let nameComponents = userIdenties.first?.nameComponents
+            completion(nameComponents?.givenName, nameComponents?.familyName)
+        }
+        
+        CKContainer.default().add(operation)
+    }
+    
+    
+    
     func subscribeToCreationOfRecords(withType type: String, completion: @escaping ((Error?) -> Void) = { _ in }) {
         let subscription = CKQuerySubscription(recordType: type, predicate: NSPredicate(value: true), options: .firesOnRecordCreation)
         let notificationInfo = CKNotificationInfo()

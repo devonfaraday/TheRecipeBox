@@ -27,6 +27,7 @@ extension Recipe {
         self.ingredients = []
         self.instructions = []
         self.recordID = cloudKitRecord.recordID
+        self.userReference = cloudKitRecord[Constants.userReferenseKey] as? CKReference
     }
     
     fileprivate var temporaryPhotoURL: URL {

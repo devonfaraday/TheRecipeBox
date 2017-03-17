@@ -103,16 +103,6 @@ class RecipeController {
                         completion()
                     }
                 }
-//        cloudKitManager.fetchRecords(ofType: Constants.recipeRecordType) { (records, error) in
-//            defer { completion() }
-//            if let error = error {
-//                print("error \(error.localizedDescription)")
-//            }
-//            guard let records = records else { return }
-//            self.recipes = records.flatMap { Recipe(cloudKitRecord: $0) }
-//            completion()
-//        }
-//        
     }
     
     func fetchIngredientsFor(recipe: Recipe, completion: @escaping([Ingredient]) -> Void) {
@@ -162,6 +152,4 @@ class RecipeController {
         let asset = CKAsset(fileURL: endPoint)
         completion(asset)
     }
-    
-    
 }

@@ -167,9 +167,6 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
         present(actionController, animated: true, completion: nil)
     }
     
-    
-    
-    
     // MARK: - functions for upload or camera
     
     func uploadButton() {

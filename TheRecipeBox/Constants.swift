@@ -24,6 +24,10 @@ struct Constants {
     static let recipeReferenceKey = "recipeReference"
     static let ingredientKey = "ingredient"
     static let instructionKey = "instruction"
+    static let profileImageKey = "profileImage"
+    static let userFullNameKey = "fullName"
+    static let groupNameKey = "groupName"
+    static let userReferenseKey = "userReference"
     
     // MARK: - Segues
     

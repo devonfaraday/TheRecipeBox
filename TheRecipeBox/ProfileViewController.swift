@@ -34,9 +34,6 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
         return cell
     }
     
-    
-    
-    
     // MARK: - UI Functions
     
     @IBAction func addProfileImageButtonTapped(_ sender: UIButton) {
