@@ -21,6 +21,7 @@ class RecipeController {
             NotificationCenter.default.post(name: Constants.recipesDidChangeNotificationName, object: self)
         }
     }
+    var currentUser: User?
     
     // MARK: - Recipe Functions
     
@@ -39,13 +40,22 @@ class RecipeController {
     }
     
     func addRecipeToCloudKit(recipe: Recipe, ingredients: [Ingredient], instructions: [Instruction], completion: @escaping ((Error?) -> Void) = { _ in }) {
+        
+        cloudKitManager.fetchCurrentUser { (user) in
+            guard let user = user else { return }
+            self.currentUser = user
+        }
         guard let image = recipe.recipeImage,
-              let data = UIImageJPEGRepresentation(image, 1.0) else { return }
+            let data = UIImageJPEGRepresentation(image, 1.0),
+            let currentUser = currentUser
+            else { return }
+        guard let userID = currentUser.userRecordID else { return }
         
         let newRecipe = recipe
         newRecipe.ingredients = ingredients
         newRecipe.instructions = instructions
         newRecipe.recipeImageData = data
+        newRecipe.userReference = CKReference(recordID: userID, action: .deleteSelf)
         
         let recipeRecord = CKRecord(recipe: newRecipe)
         newRecipe.recordID = recipeRecord.recordID
@@ -84,25 +94,23 @@ class RecipeController {
                 Constants.publicDatabase.add(modifyOperation)
                 print("Saving success")
             }
-            
-            
         }
-        
     }
     
+    
     func fetchAllRecipes(completion: @escaping() -> Void) {
-                let predicate = NSPredicate(value: true)
-                let query = CKQuery(recordType: Constants.recipeRecordType, predicate: predicate)
-                Constants.publicDatabase.perform(query, inZoneWith: nil) { (records, error) in
-                    if let error = error {
-                        NSLog("Error: \(error.localizedDescription)\nCould not fetch recipe from cloudKit")
-                    } else {
-                        guard let records = records else { return }
-                        let recipes = records.flatMap { Recipe(cloudKitRecord: $0) }
-                        self.recipes = recipes
-                        completion()
-                    }
-                }
+        let predicate = NSPredicate(value: true)
+        let query = CKQuery(recordType: Constants.recipeRecordType, predicate: predicate)
+        Constants.publicDatabase.perform(query, inZoneWith: nil) { (records, error) in
+            if let error = error {
+                NSLog("Error: \(error.localizedDescription)\nCould not fetch recipe from cloudKit")
+            } else {
+                guard let records = records else { return }
+                let recipes = records.flatMap { Recipe(cloudKitRecord: $0) }
+                self.recipes = recipes
+                completion()
+            }
+        }
     }
     
     func fetchIngredientsFor(recipe: Recipe, completion: @escaping([Ingredient]) -> Void) {
@@ -116,7 +124,7 @@ class RecipeController {
             } else {
                 guard let records = records else { return }
                 let ingredients = records.flatMap { Ingredient(cloudKitRecord: $0) }
-               
+                
                 completion(ingredients)
             }
         }
@@ -136,20 +144,5 @@ class RecipeController {
                 completion(instructions)
             }
         }
-        
-    }
-    
-    func convertImageToCKAsset(image: UIImage, completion: @escaping(CKAsset) -> Void) {
-        
-        let tempURL = URL(fileURLWithPath: NSTemporaryDirectory())
-        let endPoint = tempURL.appendingPathComponent(UUID().uuidString+".dat")
-        let imageData = UIImagePNGRepresentation(image)
-        do {
-            try imageData?.write(to: tempURL, options: [])
-        } catch let error {
-            print("Error \(error.localizedDescription)")
-        }
-        let asset = CKAsset(fileURL: endPoint)
-        completion(asset)
     }
 }

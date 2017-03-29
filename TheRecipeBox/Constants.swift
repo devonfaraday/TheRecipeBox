@@ -11,11 +11,16 @@ import CloudKit
 
 struct Constants {
     
-    // MARK: - CloudKit Keys
+    // MARK: - CloudKit Types
     
     static let recipeRecordType = "Recipe"
     static let ingredientRecordType = "Ingredient"
     static let instructionsRecordType = "Instructions"
+    static let userRecordType = "User"
+    static let groupRecordType = "Group"
+    
+    // MARK: - CloudKit Keys
+    
     static let recipeNameKey = "name"
     static let prepTimeKey = "prepTime"
     static let servingSizeKey = "servingSize"
@@ -25,14 +30,19 @@ struct Constants {
     static let ingredientKey = "ingredient"
     static let instructionKey = "instruction"
     static let profileImageKey = "profileImage"
-    static let userFullNameKey = "fullName"
+    static let userusernameKey = "username"
     static let groupNameKey = "groupName"
-    static let userReferenseKey = "userReference"
+    static let userReferenceKey = "userReference"
+    static let userReferencesKey = "userReferences"
+    static let recipeReferencesKey = "recipeReferences"
+    static let defaultUserReferenceKey = "appleUserRef"
     
     // MARK: - Segues
     
     static let toAddRecipeSegue = "toAddRecipe"
     static let toShowRecipeSegue = "toShowRecipe"
+    static let toUserCreationSegue = "toUserCreation"
+    static let toProfileSegue = "toProfile"
     
     // MARK: - Notification Names
     
@@ -47,5 +57,7 @@ struct Constants {
     static let profileFeedIdentifier = "profileFeedCell"
     static let addRecipeCellIdentifier = "addRecipeCell"
     static let recipeCellIdentifier = "recipeCell"
+    static let groupCellIdentifier = "groupCell"
+    static let userCellIdentifier = "userCell"
     
 }

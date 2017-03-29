@@ -18,20 +18,18 @@ class RecipeTableViewCell: UITableViewCell {
    
     var recipe: Recipe? {
         didSet{
-            DispatchQueue.main.async {
-            self.updateViews()
-            }
+            updateViews()
         }
     }
-    
     
     func updateViews() {
         guard let recipe = recipe else { return }
         recipeNameLabel.text = recipe.name
-        recipeImageView.image = recipe.recipeImage
         prepTimeLabel.text = recipe.prepTime
         servingsLabel.text = recipe.servingSize
         cookTimeLabel.text = recipe.cookTime
+        DispatchQueue.main.async {
+            self.recipeImageView.image = recipe.recipeImage
+        }
     }
-    
 }

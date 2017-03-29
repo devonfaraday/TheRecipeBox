@@ -37,6 +37,7 @@ class ProfileFeedTableViewCell: UITableViewCell {
     // MARK: - UI Functions
     
     @IBAction func profileImageButtonTapped(_ sender: UIButton) {
+        
     }
 
 }

@@ -9,16 +9,18 @@
 import Foundation
 import CloudKit
 
-class Group {
+class Group: Equatable {
     
-    var users: [User]
-    var recipes: [Recipe]
     var groupName: String
     var groupRecordID: CKRecordID?
+    var userReferences: [CKReference]?
+    var recipeReferences: [CKReference]?
     
-    init(users: [User] = [], recipes: [Recipe] = [], groupName: String) {
-        self.users = users
-        self.recipes = recipes
+    init(groupName: String) {
         self.groupName = groupName
     }
+}
+
+func ==(lhs: Group, rhs: Group) -> Bool {
+    return lhs === rhs
 }

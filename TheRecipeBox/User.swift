@@ -10,12 +10,15 @@ import Foundation
 import UIKit
 import CloudKit
 
-class User {
+class User: Equatable {
     
-    var fullName: String
+    var username: String
     var userRecordID: CKRecordID?
     var profilePhotoData: Data?
-    var recipes: [Recipe]
+    var recipes: [Recipe]?
+    
+    var appleUserRef: CKReference
+    
     
     var profilePhoto: UIImage {
         guard let imageData = profilePhotoData,
@@ -23,10 +26,14 @@ class User {
         return image
     }
     
-    init(fullName: String, recipes: [Recipe] = [], profilePhotoData: Data? = nil) {
-        self.fullName = fullName
+    init(username: String, recipes: [Recipe] = [], profilePhotoData: Data? = nil, appleUserRef: CKReference) {
+        self.username = username
         self.recipes = recipes
         self.profilePhotoData = profilePhotoData
+        self.appleUserRef = appleUserRef
     }
-    
+}
+
+func ==(lhs: User, rhs: User) -> Bool {
+    return lhs === rhs
 }

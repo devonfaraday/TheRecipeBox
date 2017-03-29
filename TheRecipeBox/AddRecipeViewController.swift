@@ -112,7 +112,9 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
         let newIngredient = Ingredient(nameAndAmount: ingredient)
         ingredients.append(newIngredient)
         ingredientTextField.text = ""
-        tableView.reloadData()
+        DispatchQueue.main.async {
+        self.tableView.reloadData()
+        }
     }
     
     
@@ -121,7 +123,9 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
         let newInstruction = Instruction(instruction: instruction)
         instructions.append(newInstruction)
         instructionTextField.text = ""
-        tableView.reloadData()
+        DispatchQueue.main.async {
+        self.tableView.reloadData()
+        }
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {

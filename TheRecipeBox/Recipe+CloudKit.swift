@@ -27,7 +27,7 @@ extension Recipe {
         self.ingredients = []
         self.instructions = []
         self.recordID = cloudKitRecord.recordID
-        self.userReference = cloudKitRecord[Constants.userReferenseKey] as? CKReference
+        self.userReference = cloudKitRecord[Constants.userReferenceKey] as? CKReference
     }
     
     fileprivate var temporaryPhotoURL: URL {
@@ -50,6 +50,7 @@ extension CKRecord {
         self.setValue(recipe.prepTime, forKey: Constants.prepTimeKey)
         self.setValue(recipe.servingSize, forKey: Constants.servingSizeKey)
         self.setValue(recipe.cookTime, forKey: Constants.cookTimeKey)
+        self.setValue(recipe.userReference, forKey: Constants.userReferenceKey)
         self[Constants.recipeImageKey] = CKAsset(fileURL: recipe.temporaryPhotoURL)
         
         /* 

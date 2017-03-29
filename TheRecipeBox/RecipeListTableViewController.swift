@@ -10,24 +10,28 @@ import UIKit
 
 class RecipeListTableViewController: UITableViewController {
     
+    var recipes = [Recipe]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        RecipeController.shared.fetchAllRecipes {
+        UserController.shared.fetchRecipesForCurrentUser { (recipes) in
+            self.recipes = recipes
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
         }
+        
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return RecipeController.shared.recipes.count
+        return recipes.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.recipeCellIdentifier, for: indexPath) as? RecipeTableViewCell else { return RecipeTableViewCell() }
         
-        let recipe = RecipeController.shared.recipes[indexPath.row]
+        let recipe = recipes[indexPath.row]
         
         cell.recipe = recipe
         
