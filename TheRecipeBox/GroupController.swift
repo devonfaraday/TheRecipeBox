@@ -143,7 +143,14 @@ class GroupController {
         publicDB.fetch(withRecordID: groupID) { (record, error) in
             if let error = error { NSLog("\(error.localizedDescription)"); completion(error) }
             if let record = record {
-                group.recipeReferences?.append(CKReference(recordID: recipeID, action: .none))
+                let recipeReference = CKReference(recordID: recipeID, action: .none)
+                if group.recipeReferences == nil {
+                    group.recipeReferences = [recipeReference]
+                } else {
+                    group.recipeReferences?.append(recipeReference)
+                }
+                
+                
                 guard let recipeReferences = group.recipeReferences else { return }
                 record.setValue(recipeReferences, forKey: Constants.recipeReferencesKey)
                 self.publicDB.save(record, completionHandler: { (_, error) in
@@ -160,21 +167,3 @@ class GroupController {
         }
     }
 }
-
-
-
-/*
- 
- guard let userReferences = group.userReferences else { return }
- record.setValue(userReferences, forKey: "userReferences")
- self.publicDatabase.save(record, completionHandler: { (_, error) in
- if let error = error {
- print("\(error)")
- completion(error)
- } else {
- print("saving succeeded")
- completion(nil)
- }
-
- 
- */
