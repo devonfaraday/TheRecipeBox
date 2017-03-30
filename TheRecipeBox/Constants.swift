@@ -43,6 +43,8 @@ struct Constants {
     static let toShowRecipeSegue = "toShowRecipe"
     static let toUserCreationSegue = "toUserCreation"
     static let toProfileSegue = "toProfile"
+    static let toRecipeList = "toRecipeList"
+    static let toAddRecipeToGroupSegue = "toAddRecipeToGroup"
     
     // MARK: - Notification Names
     

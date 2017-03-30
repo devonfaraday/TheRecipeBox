@@ -24,6 +24,7 @@ class UserController {
             NotificationCenter.default.post(name: currentUserWasSetNotification, object: nil)
         }
     }
+    var currentRecipes: [Recipe] = []
     
     init() {
         CKContainer.default().fetchUserRecordID { (recordID, error) in
@@ -31,6 +32,11 @@ class UserController {
          self.appleUserRecordID = recordID
             self.CKManager.fetchCurrentUser { (currentUser) in
                 self.currentUser = currentUser
+            }
+        }
+        fetchRecipesForCurrentUser { (recipes) in
+            DispatchQueue.main.async {
+                self.currentRecipes = recipes
             }
         }
     }
@@ -57,6 +63,74 @@ class UserController {
     func fetchGroupsForCurrentUser() {
         
     }
+    
+    func addUserToGroupRecord(user: User, group: Group, completion: @escaping(Error?) -> Void = { _ in }) {
+        
+        guard let userID = user.userRecordID,
+            let groupID = group.groupRecordID  else { return }
+        publicDatabase.fetch(withRecordID: groupID) { (record, error) in
+            if let error = error {
+                print("\(error)")
+                completion(error)
+            } else if let record = record {
+                let reference = CKReference(recordID: userID, action: .none)
+                
+                if group.userReferences == nil {
+                    group.userReferences = [reference]
+                } else {
+                    group.userReferences?.append(reference)
+                }
+                
+                guard let userReferences = group.userReferences else { return }
+                record.setValue(userReferences, forKey: "userReferences")
+                self.publicDatabase.save(record, completionHandler: { (_, error) in
+                    if let error = error {
+                        print("\(error)")
+                        completion(error)
+                    } else {
+                        print("saving succeeded")
+                        completion(nil)
+                    }
+                })
+            }
+        }
+    }
+
+    
+    func checkForUser(username: String, completion: @escaping(User) -> Void = { _ in }) {
+        
+        
+        let predicate = NSPredicate(format: "username == %@ ", username)
+        let query = CKQuery(recordType: "User", predicate: predicate)
+        publicDatabase.perform(query, inZoneWith: nil) { (records, error) in
+            if let error = error {
+                NSLog("Error retrieving username\n\(error.localizedDescription)")
+            } else {
+                guard let records = records else { return }
+                let users = records.flatMap { User(cloudKitRecord:  $0 )}
+                guard let user = users.first else { return }
+                
+                completion(user)
+            }
+        }
+    }
+    
+    func fetchUsersIn(user: User, completion: @escaping([User]) -> Void = { _ in }) {
+        guard let userRecordID = user.userRecordID else { return }
+        
+        let predicate = NSPredicate(format: "userReferences ==  %@", userRecordID)
+        let query = CKQuery(recordType: "Group", predicate: predicate)
+        publicDatabase.perform(query, inZoneWith: nil) { (records, error) in
+            if let error = error {
+                NSLog("Error getting users \(error)")
+            } else {
+                guard let records = records else { return }
+                let users = records.flatMap { User.init(cloudKitRecord: $0) }
+                completion(users)
+            }
+        }
+    }
+
     
     func createUserWith(username: String, profilePhotoData: Data?, completion: @escaping (User?) -> Void) {
         

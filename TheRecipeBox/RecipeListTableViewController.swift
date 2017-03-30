@@ -10,18 +10,17 @@ import UIKit
 
 class RecipeListTableViewController: UITableViewController {
     
-    var recipes = [Recipe]()
+    var recipes = [Recipe]() {
+        didSet {
+            if !isViewLoaded {
+                loadViewIfNeeded()
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        UserController.shared.fetchRecipesForCurrentUser { (recipes) in
-            self.recipes = recipes
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        }
-        
+               
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -50,7 +49,7 @@ class RecipeListTableViewController: UITableViewController {
         guard let indexPath = tableView.indexPathForSelectedRow else { return }
         if segue.identifier == Constants.toShowRecipeSegue {
             guard let detailVC = segue.destination as? AddRecipeViewController else { return }
-                let recipe = RecipeController.shared.recipes[indexPath.row]
+                let recipe = self.recipes[indexPath.row]
             
             detailVC.recipe = recipe
            

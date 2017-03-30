@@ -9,13 +9,24 @@
 import UIKit
 
 class GroupListTableViewController: UITableViewController {
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        GroupController.shared.fetchAllGroups { 
+        
+        GroupController.shared.fetchAllGroups {
             DispatchQueue.main.async {
+                NSLog("Reloading TableView data")
                 self.tableView.reloadData()
             }
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+
+        
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -24,13 +35,9 @@ class GroupListTableViewController: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.groupCellIdentifier
-            , for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.groupCellIdentifier, for: indexPath)
         let group = GroupController.shared.groups[indexPath.row]
-        
         cell.textLabel?.text = group.groupName
-        
-        
         return cell
     }
     
@@ -43,10 +50,16 @@ class GroupListTableViewController: UITableViewController {
     
     
     
-    
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let indexPath = tableView.indexPathForSelectedRow,
+        let destinationVC = segue.destination  as? GroupDetailViewController else { return }
+
+        let group = GroupController.shared.groups[indexPath.row]
+        
+        GroupController.shared.currentGroup = group
+        destinationVC.group = group
         
     }
     

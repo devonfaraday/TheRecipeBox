@@ -14,11 +14,12 @@
 		FDA5312E1E7B904C00DC3DB3 /* Group+CloudKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA5312D1E7B904C00DC3DB3 /* Group+CloudKit.swift */; };
 		FDA531301E7BB96A00DC3DB3 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA5312F1E7BB96A00DC3DB3 /* UserController.swift */; };
 		FDA531321E7BB97300DC3DB3 /* GroupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA531311E7BB97300DC3DB3 /* GroupController.swift */; };
-		FDC0FA091E8ADE9200D32052 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC0FA081E8ADE9200D32052 /* Enums.swift */; };
 		FDC0FA0B1E8AF50800D32052 /* LaunchScreenCopyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC0FA0A1E8AF50800D32052 /* LaunchScreenCopyViewController.swift */; };
 		FDC0FA301E8C05AE00D32052 /* GroupListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC0FA2F1E8C05AE00D32052 /* GroupListTableViewController.swift */; };
 		FDC0FA321E8C0F7100D32052 /* AddGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC0FA311E8C0F7100D32052 /* AddGroupViewController.swift */; };
 		FDC0FA341E8C0F8000D32052 /* GroupDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC0FA331E8C0F8000D32052 /* GroupDetailViewController.swift */; };
+		FDC0FA381E8C56C500D32052 /* GroupRecipesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC0FA371E8C56C500D32052 /* GroupRecipesTableViewController.swift */; };
+		FDC0FA3A1E8C751200D32052 /* AddRecipesToGroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC0FA391E8C751200D32052 /* AddRecipesToGroupTableViewController.swift */; };
 		FDD7D93B1E7738B600B19F21 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD7D93A1E7738B600B19F21 /* ProfileViewController.swift */; };
 		FDD7D9431E77395900B19F21 /* ProfileFeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD7D9421E77395900B19F21 /* ProfileFeedTableViewCell.swift */; };
 		FDD7D94A1E773BE000B19F21 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD7D9491E773BE000B19F21 /* Constants.swift */; };
@@ -51,11 +52,12 @@
 		FDA5312D1E7B904C00DC3DB3 /* Group+CloudKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Group+CloudKit.swift"; sourceTree = "<group>"; };
 		FDA5312F1E7BB96A00DC3DB3 /* UserController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = UserController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		FDA531311E7BB97300DC3DB3 /* GroupController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupController.swift; sourceTree = "<group>"; };
-		FDC0FA081E8ADE9200D32052 /* Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		FDC0FA0A1E8AF50800D32052 /* LaunchScreenCopyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchScreenCopyViewController.swift; sourceTree = "<group>"; };
 		FDC0FA2F1E8C05AE00D32052 /* GroupListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupListTableViewController.swift; sourceTree = "<group>"; };
 		FDC0FA311E8C0F7100D32052 /* AddGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGroupViewController.swift; sourceTree = "<group>"; };
 		FDC0FA331E8C0F8000D32052 /* GroupDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupDetailViewController.swift; sourceTree = "<group>"; };
+		FDC0FA371E8C56C500D32052 /* GroupRecipesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupRecipesTableViewController.swift; sourceTree = "<group>"; };
+		FDC0FA391E8C751200D32052 /* AddRecipesToGroupTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddRecipesToGroupTableViewController.swift; sourceTree = "<group>"; };
 		FDD7D93A1E7738B600B19F21 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ProfileViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		FDD7D9421E77395900B19F21 /* ProfileFeedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileFeedTableViewCell.swift; sourceTree = "<group>"; };
 		FDD7D9491E773BE000B19F21 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Constants.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -129,6 +131,8 @@
 				FDC0FA2F1E8C05AE00D32052 /* GroupListTableViewController.swift */,
 				FDC0FA311E8C0F7100D32052 /* AddGroupViewController.swift */,
 				FDC0FA331E8C0F8000D32052 /* GroupDetailViewController.swift */,
+				FDC0FA371E8C56C500D32052 /* GroupRecipesTableViewController.swift */,
+				FDC0FA391E8C751200D32052 /* AddRecipesToGroupTableViewController.swift */,
 			);
 			name = GroupViewControllers;
 			sourceTree = "<group>";
@@ -149,7 +153,6 @@
 				FDD7D9491E773BE000B19F21 /* Constants.swift */,
 				FDD7D95C1E7746C900B19F21 /* CloudKitManager.swift */,
 				FDD7D9701E79B0C400B19F21 /* UIImage+CKAsset.swift */,
-				FDC0FA081E8ADE9200D32052 /* Enums.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -327,6 +330,7 @@
 			files = (
 				FDA5312E1E7B904C00DC3DB3 /* Group+CloudKit.swift in Sources */,
 				FDC0FA341E8C0F8000D32052 /* GroupDetailViewController.swift in Sources */,
+				FDC0FA3A1E8C751200D32052 /* AddRecipesToGroupTableViewController.swift in Sources */,
 				FDD7D95D1E7746C900B19F21 /* CloudKitManager.swift in Sources */,
 				FDD7D9611E7759CB00B19F21 /* Ingredient.swift in Sources */,
 				FDA531301E7BB96A00DC3DB3 /* UserController.swift in Sources */,
@@ -340,6 +344,7 @@
 				FDD7D9651E775B7F00B19F21 /* Ingredient+CloudKit.swift in Sources */,
 				FDC0FA301E8C05AE00D32052 /* GroupListTableViewController.swift in Sources */,
 				FDD7D9761E7A58C400B19F21 /* User+CloudKit.swift in Sources */,
+				FDC0FA381E8C56C500D32052 /* GroupRecipesTableViewController.swift in Sources */,
 				FDD7D9741E7A58BA00B19F21 /* User.swift in Sources */,
 				FDD7D9671E775B8900B19F21 /* Instruction+CloudKit.swift in Sources */,
 				FDD7D95F1E7754E400B19F21 /* Recipe.swift in Sources */,
@@ -350,7 +355,6 @@
 				FDD7D96B1E78A3D500B19F21 /* RecipeListTableViewController.swift in Sources */,
 				FDD7D94A1E773BE000B19F21 /* Constants.swift in Sources */,
 				FDD7D9631E7759D100B19F21 /* Instruction.swift in Sources */,
-				FDC0FA091E8ADE9200D32052 /* Enums.swift in Sources */,
 				FDC0FA0B1E8AF50800D32052 /* LaunchScreenCopyViewController.swift in Sources */,
 				FDD7D96F1E78C20400B19F21 /* RecipeTableViewCell.swift in Sources */,
 			);

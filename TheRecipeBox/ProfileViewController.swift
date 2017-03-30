@@ -9,7 +9,7 @@
 import UIKit
 
 class ProfileViewController: UIViewController, UITableViewDataSource {
-
+    
     // MARK: - Properties
     let CKManager = CloudKitManager()
     let userController = UserController()
@@ -21,8 +21,9 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
     @IBOutlet weak var followingNumberLabel: UILabel!
     @IBOutlet weak var recipesNumberLabel: UILabel!
     @IBOutlet weak var groupsNumberLabel: UILabel!
+    @IBOutlet weak var tableView: UITableView!
     
-    
+    // segue from recipes button to recipe list without a second network call.
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,16 +31,18 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
             guard let user = user else {  return  }
             
             DispatchQueue.main.async {
-            self.nameLabel.text = user.username
-            self.profileImageView.image = user.profilePhoto
+                self.nameLabel.text = user.username
+                self.profileImageView.image = user.profilePhoto
             }
         }
         userController.fetchRecipesForCurrentUser { (recipes) in
-            
-            self.recipesNumberLabel.text = "\(recipes.count)"
+            DispatchQueue.main.async {
+                self.recipesNumberLabel.text = "\(recipes.count)"
+                self.recipes = recipes
+            }
         }
         profileImageDisplay()
-    
+        
     }
     
     // MARK: - Table view dataSource
@@ -60,11 +63,14 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
     @IBAction func addProfileImageButtonTapped(_ sender: UIButton) {
         
     }
-
+    
+    
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let destinationVC = segue.destination as? RecipeListTableViewController else { return }
         
+        destinationVC.recipes = recipes
     }
     
     func profileImageDisplay() {

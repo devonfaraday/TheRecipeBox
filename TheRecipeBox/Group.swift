@@ -18,6 +18,7 @@ class Group: Equatable {
     
     init(groupName: String) {
         self.groupName = groupName
+        self.userReferences = []
     }
 }
 

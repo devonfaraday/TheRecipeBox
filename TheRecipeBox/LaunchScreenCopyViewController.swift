@@ -15,8 +15,6 @@ class LaunchScreenCopyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-     
         cloudKitManager.fetchCurrentUser { (user) in
         if user != nil {
             self.performSegue(withIdentifier: Constants.toProfileSegue, sender: self)
