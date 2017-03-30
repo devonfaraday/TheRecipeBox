@@ -24,9 +24,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="It's Freaking Loading" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pSc-Pk-4BH">
-                                <rect key="frame" x="50.5" y="315.5" width="274" height="36"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pSc-Pk-4BH">
+                                <rect key="frame" x="187.5" y="333.5" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your recipe box is loading" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9xc-ta-P97">
+                                <rect key="frame" x="47" y="253" width="281" height="161"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="281" id="nTC-s2-pom"/>
+                                    <constraint firstAttribute="height" constant="161" id="suD-62-Pmh"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="43"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -34,6 +44,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="pSc-Pk-4BH" firstAttribute="centerX" secondItem="O2w-xN-DD2" secondAttribute="centerX" id="27U-VB-nCC"/>
+                            <constraint firstItem="9xc-ta-P97" firstAttribute="centerY" secondItem="O2w-xN-DD2" secondAttribute="centerY" id="8eS-Uz-7cC"/>
+                            <constraint firstItem="9xc-ta-P97" firstAttribute="centerX" secondItem="O2w-xN-DD2" secondAttribute="centerX" id="tSv-ap-fzp"/>
                             <constraint firstItem="pSc-Pk-4BH" firstAttribute="centerY" secondItem="O2w-xN-DD2" secondAttribute="centerY" id="yAe-7d-bmi"/>
                         </constraints>
                     </view>
@@ -44,7 +56,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="drp-KN-Aay" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-116" y="-567"/>
+            <point key="canvasLocation" x="-116" y="-567.16641679160421"/>
         </scene>
         <!--Username View Controller-->
         <scene sceneID="35v-uO-11g">
@@ -1090,7 +1102,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I9H-PK-M5G" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-116" y="107"/>
+            <point key="canvasLocation" x="-116" y="158"/>
         </scene>
         <!--Title-->
         <scene sceneID="tAx-k3-hOv">

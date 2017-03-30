@@ -12,8 +12,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
     
     // MARK: - Properties
     let CKManager = CloudKitManager()
-    let userController = UserController()
-    let groupController = GroupController()
+    
     var recipes = [Recipe]()
     var userGroups = [Group]()
     
@@ -36,20 +35,22 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
                 self.nameLabel.text = user.username
                 self.profileImageView.image = user.profilePhoto
             }
-        }
-        userController.fetchRecipesForCurrentUser { (recipes) in
-            DispatchQueue.main.async {
-                self.recipesNumberLabel.text = "\(recipes.count)"
-                self.recipes = recipes
+            
+            UserController.shared.fetchRecipesForCurrent(user: user, completion: { (recipes) in
+                DispatchQueue.main.async {
+                    self.recipesNumberLabel.text = "\(recipes.count)"
+                    self.recipes = recipes
+                }
+            })
+            
+            GroupController.shared.fetchGroupsForCurrent(user: user) {
+                DispatchQueue.main.async {
+                    self.groupsNumberLabel.text = "\(GroupController.shared.userGroups.count)"
+                    self.userGroups = GroupController.shared.userGroups
+                }
             }
         }
-        guard let user = userController.currentUser else { return }
-        groupController.fetchGroupsForCurrent(user: user) { 
-            DispatchQueue.main.async {
-                self.groupsNumberLabel.text = "\(self.groupController.userGroups.count)"
-                self.userGroups = self.groupController.userGroups
-            }
-        }
+        
         
         profileImageDisplay()
         

@@ -66,17 +66,21 @@ class GroupController {
     
     func saveToCloudKit(group: Group, completion: @escaping((Error?) -> Void) = { _ in })  {
         self.groups.append(group)
+        self.userGroups.append(group)
+        guard let user = UserController.shared.currentUser else { return }
+        guard let userID = user.userRecordID else { return }
+        let userReference = CKReference(recordID: userID, action: .none)
         
         let record = group.cloudKitRecord
+        record.setValue([userReference], forKey: Constants.userReferencesKey)
+        group.userReferences?.append(userReference)
         group.groupRecordID = record.recordID
-        
         
         publicDB.save(record) { (_, error) in
             NSLog("Saving record for \(group.groupName)")
             if let error = error {
                 print("Error here")
                 completion(error)
-                
             }
             NSLog("Performing completion for \(group.groupName)")
             completion(nil)

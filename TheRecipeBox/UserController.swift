@@ -19,11 +19,7 @@ class UserController {
     
     var appleUserRecordID: CKRecordID?
     let CKManager = CloudKitManager()
-    var currentUser: User? {
-        didSet {
-            NotificationCenter.default.post(name: currentUserWasSetNotification, object: nil)
-        }
-    }
+    var currentUser: User?
     var currentRecipes: [Recipe] = []
     
     init() {
@@ -32,17 +28,18 @@ class UserController {
          self.appleUserRecordID = recordID
             self.CKManager.fetchCurrentUser { (currentUser) in
                 self.currentUser = currentUser
+                guard let currentUser = currentUser else { return }
+                self.fetchRecipesForCurrent(user: currentUser, completion: { (recipes) in
+                    self.currentRecipes = recipes
+                })
             }
         }
-        fetchRecipesForCurrentUser { (recipes) in
-            DispatchQueue.main.async {
-                self.currentRecipes = recipes
-            }
-        }
+        
+        
     }
-    func fetchRecipesForCurrentUser(completion: @escaping([Recipe]) -> Void) {
-        guard let currentUser = currentUser else { return }
-        guard let userID = currentUser.userRecordID else { return }
+    func fetchRecipesForCurrent(user: User, completion: @escaping([Recipe]) -> Void) {
+        
+        guard let userID = user.userRecordID else { return }
         let predicate = NSPredicate(format: "userReference == %@", userID)
         let query = CKQuery(recordType: Constants.recipeRecordType, predicate: predicate)
         CKManager.publicDatabase.perform(query, inZoneWith: nil) { (records, error) in
@@ -53,7 +50,7 @@ class UserController {
             } else {
                 guard let records = records else { return }
                 let recipes = records.flatMap { Recipe(cloudKitRecord: $0) }
-                currentUser.recipes = recipes
+                self.currentUser?.recipes = recipes
                 completion(recipes)
             }
             

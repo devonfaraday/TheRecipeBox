@@ -26,9 +26,7 @@ class AddRecipesToGroupTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        UserController.shared.fetchRecipesForCurrentUser { (recipes) in
-            self.recipes = recipes
-         }
+        recipes = UserController.shared.currentRecipes
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

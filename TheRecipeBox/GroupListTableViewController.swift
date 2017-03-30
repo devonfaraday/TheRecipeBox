@@ -13,40 +13,27 @@ class GroupListTableViewController: UITableViewController {
     
     var userGroups = [Group]()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let user = UserController.shared.currentUser else { return }
-        
-        GroupController.shared.fetchGroupsForCurrent(user: user) {
-            DispatchQueue.main.async {
-                NSLog("Reloading TableView data")
-                self.tableView.reloadData()
-            }
-            
-        }
         
     }
-    
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-            
-        }
         
-        
+        tableView.reloadData()
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return userGroups.count
+        return GroupController.shared.userGroups.count
     }
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.groupCellIdentifier, for: indexPath)
-        let group = userGroups[indexPath.row]
+        let group = GroupController.shared.userGroups[indexPath.row]
         cell.textLabel?.text = group.groupName
         return cell
     }
@@ -57,8 +44,6 @@ class GroupListTableViewController: UITableViewController {
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
-    
-    
     
     // MARK: - Navigation
     
@@ -75,15 +60,8 @@ class GroupListTableViewController: UITableViewController {
     
     @IBAction func addGroup(_ sender: Any) {
         
-        
-        
     }
     
     // MARK: - Add Group Alert Controller
-    
-    
-    
-    
-    
     
 }
