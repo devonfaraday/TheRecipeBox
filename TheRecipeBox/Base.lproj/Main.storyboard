@@ -97,13 +97,19 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FvR-Lw-SoQ">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FvR-Lw-SoQ">
                                 <rect key="frame" x="16" y="20" width="343" height="259"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="259" id="5tu-VR-Oge"/>
+                                    <constraint firstAttribute="width" constant="343" id="g2I-op-GVN"/>
+                                </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IJo-R3-41A">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IJo-R3-41A">
                                 <rect key="frame" x="16" y="20" width="343" height="259"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="343" id="1f8-FV-HSk"/>
+                                    <constraint firstAttribute="height" constant="259" id="bt3-f2-4IQ"/>
+                                </constraints>
                                 <state key="normal" title="Tap To Upload Photo"/>
                                 <connections>
                                     <action selector="tapToUploadButtonTapped:" destination="MQT-lK-lZc" eventType="touchUpInside" id="Ftu-OD-hTj"/>
@@ -113,15 +119,21 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="hwA-2f-eNP" secondAttribute="trailing" id="20s-5A-dlc"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="IJo-R3-41A" secondAttribute="leading" id="2PN-G9-rLN"/>
+                            <constraint firstItem="FvR-Lw-SoQ" firstAttribute="centerX" secondItem="hF7-tH-fQh" secondAttribute="centerX" id="6bQ-w0-RnY"/>
                             <constraint firstItem="hwA-2f-eNP" firstAttribute="centerY" secondItem="hF7-tH-fQh" secondAttribute="centerY" id="7Dh-LL-1Yk"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="IJo-R3-41A" secondAttribute="trailing" id="Ap7-Gt-itE"/>
                             <constraint firstItem="hwA-2f-eNP" firstAttribute="centerX" secondItem="hF7-tH-fQh" secondAttribute="centerX" id="CLR-Hc-7RE"/>
+                            <constraint firstItem="FvR-Lw-SoQ" firstAttribute="top" secondItem="IJo-R3-41A" secondAttribute="top" id="jMo-of-Ls1"/>
                             <constraint firstItem="hwA-2f-eNP" firstAttribute="leading" secondItem="hF7-tH-fQh" secondAttribute="leadingMargin" id="jRA-hv-JGF"/>
+                            <constraint firstItem="IJo-R3-41A" firstAttribute="top" secondItem="ezg-RJ-QMq" secondAttribute="bottom" id="w6l-gw-O08"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="profileImageView" destination="FvR-Lw-SoQ" id="WRZ-h1-3MU"/>
                         <outlet property="tapToUploadButton" destination="IJo-R3-41A" id="Oek-Yp-MaX"/>
                         <outlet property="usernameTextField" destination="T1h-ZF-ab8" id="Pug-Or-ZjT"/>
+                        <segue destination="lAl-4c-gAq" kind="show" identifier="toProfile" id="rrs-pP-yg9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fkJ-mj-Bf5" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -463,7 +475,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M6y-6J-v9s" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="693.60000000000002" y="106.59670164917542"/>
+            <point key="canvasLocation" x="694" y="206"/>
         </scene>
         <!--Groups-->
         <scene sceneID="AEd-dY-Bqk">
@@ -1300,6 +1312,7 @@
         <image name="ShortTextField" width="110" height="38"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="rrs-pP-yg9"/>
         <segue reference="cHP-Ke-Yt9"/>
     </inferredMetricsTieBreakers>
 </document>

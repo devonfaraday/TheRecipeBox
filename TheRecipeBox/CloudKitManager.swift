@@ -160,7 +160,7 @@ class CloudKitManager {
         // Fetch default Apple 'Users' recordID
         
         CKContainer.default().fetchUserRecordID { (appleUserRecordID, error) in
-            
+            DispatchQueue.main.async {
             if let error = error { print(error.localizedDescription) }
             
             guard let appleUserRecordID = appleUserRecordID else { return }
@@ -184,6 +184,7 @@ class CloudKitManager {
                 completion(user)
                 
             })
+            }
         }
     }
 

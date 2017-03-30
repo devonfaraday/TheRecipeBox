@@ -10,13 +10,12 @@ import UIKit
 import CloudKit
 
 class UsernameViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
-    let userController = UserController()
+    
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var tapToUploadButton: UIButton!
     
     let CKManager = CloudKitManager()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,12 +49,18 @@ class UsernameViewController: UIViewController, UIImagePickerControllerDelegate,
         guard let username = usernameTextField.text else { return }
         if let image = profileImageView.image {
             let imageData = UIImageJPEGRepresentation(image, 1.0)
-            userController.createUserWith(username: username, profilePhotoData: imageData, completion: { (_) in
+            UserController.shared.createUserWith(username: username, profilePhotoData: imageData, completion: { (_) in
                 print("saved with image")
+                DispatchQueue.main.async {
+                self.performSegue(withIdentifier: "toProfile", sender: self)
+                }
             })
         } else {
-            userController.createUserWith(username: username, profilePhotoData: nil, completion: { (_) in
+            UserController.shared.createUserWith(username: username, profilePhotoData: nil, completion: { (_) in
                 print("saved with no photo")
+                DispatchQueue.main.async {
+                self.performSegue(withIdentifier: "toProfile", sender: self)
+                }
             })
         }
     }

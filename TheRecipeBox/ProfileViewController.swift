@@ -12,7 +12,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
     
     // MARK: - Properties
     let CKManager = CloudKitManager()
-    
+    var currentUser: User?
     var recipes = [Recipe]()
     var userGroups = [Group]()
     
@@ -53,8 +53,20 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
         
         
         profileImageDisplay()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        currentUser = UserController.shared.currentUser
+        
+        self.nameLabel.text = currentUser?.username
+        self.profileImageView.image = currentUser?.profilePhoto
+        profileImageDisplay()
         
     }
+    
+        
+    
     
     // MARK: - Table view dataSource
     
