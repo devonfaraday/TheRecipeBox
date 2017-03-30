@@ -13,7 +13,9 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
     // MARK: - Properties
     let CKManager = CloudKitManager()
     let userController = UserController()
+    let groupController = GroupController()
     var recipes = [Recipe]()
+    var userGroups = [Group]()
     
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var addProfileImageButton: UIButton!
@@ -41,6 +43,14 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
                 self.recipes = recipes
             }
         }
+        guard let user = userController.currentUser else { return }
+        groupController.fetchGroupsForCurrent(user: user) { 
+            DispatchQueue.main.async {
+                self.groupsNumberLabel.text = "\(self.groupController.userGroups.count)"
+                self.userGroups = self.groupController.userGroups
+            }
+        }
+        
         profileImageDisplay()
         
     }
@@ -68,9 +78,15 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == Constants.toRecipeList {
         guard let destinationVC = segue.destination as? RecipeListTableViewController else { return }
         
         destinationVC.recipes = recipes
+        }
+        if segue.identifier == Constants.toGroupListSegue {
+            guard let destinationVC = segue.destination as? GroupListTableViewController else { return }
+            destinationVC.userGroups = userGroups
+        }
     }
     
     func profileImageDisplay() {

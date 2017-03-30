@@ -11,32 +11,42 @@ import UIKit
 class GroupListTableViewController: UITableViewController {
     
     
+    var userGroups = [Group]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        guard let user = UserController.shared.currentUser else { return }
         
-        GroupController.shared.fetchAllGroups {
+        GroupController.shared.fetchGroupsForCurrent(user: user) {
             DispatchQueue.main.async {
                 NSLog("Reloading TableView data")
                 self.tableView.reloadData()
             }
+            
         }
+        
     }
+    
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tableView.reloadData()
-
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+            
+        }
+        
         
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return GroupController.shared.groups.count
+        return userGroups.count
     }
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.groupCellIdentifier, for: indexPath)
-        let group = GroupController.shared.groups[indexPath.row]
+        let group = userGroups[indexPath.row]
         cell.textLabel?.text = group.groupName
         return cell
     }
@@ -54,9 +64,9 @@ class GroupListTableViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let indexPath = tableView.indexPathForSelectedRow,
-        let destinationVC = segue.destination  as? GroupDetailViewController else { return }
-
-        let group = GroupController.shared.groups[indexPath.row]
+            let destinationVC = segue.destination  as? GroupDetailViewController else { return }
+        
+        let group = userGroups[indexPath.row]
         
         GroupController.shared.currentGroup = group
         destinationVC.group = group

@@ -17,7 +17,27 @@ class GroupController {
     var groups = [Group]()
     var currentGroup: Group?
     var groupRecipes: [Recipe] = []
+    var userGroups: [Group] = []
     var users = [User]()
+    
+    func fetchGroupsForCurrent(user: User, completion: @escaping() -> Void = { _ in }) {
+        guard let userID = user.userRecordID else { return }
+        let predicate = NSPredicate(format: "userReferences CONTAINS %@", userID)
+        let query = CKQuery(recordType: Constants.groupRecordType, predicate: predicate)
+        publicDB.perform(query, inZoneWith: nil) { (records, error) in
+            if let error = error {
+                NSLog("\(error.localizedDescription)")
+                return
+            } else {
+                guard let records = records else { return }
+                let groups = records.flatMap { Group(cloudKitRecord: $0) }
+                
+                self.userGroups = groups
+                
+                completion()
+            }
+        }
+    }
     
     
     func fetchAllGroups(completion: @escaping() -> Void) {

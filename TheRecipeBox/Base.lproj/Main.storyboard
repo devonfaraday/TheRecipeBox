@@ -234,7 +234,7 @@
                                     <constraint firstAttribute="width" constant="81" id="T4A-Ue-Gv3"/>
                                 </constraints>
                                 <connections>
-                                    <segue destination="Ug9-dC-xI5" kind="show" id="WQ8-7k-gAd"/>
+                                    <segue destination="Ug9-dC-xI5" kind="show" identifier="toGroupList" id="WQ8-7k-gAd"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bFF-ch-q0p" userLabel="Following">
