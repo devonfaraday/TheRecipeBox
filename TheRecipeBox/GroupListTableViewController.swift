@@ -51,7 +51,7 @@ class GroupListTableViewController: UITableViewController {
         guard let indexPath = tableView.indexPathForSelectedRow,
             let destinationVC = segue.destination  as? GroupDetailViewController else { return }
         
-        let group = userGroups[indexPath.row]
+        let group = GroupController.shared.userGroups[indexPath.row]
         
         GroupController.shared.currentGroup = group
         destinationVC.group = group
