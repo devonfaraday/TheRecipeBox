@@ -13,8 +13,8 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
     // MARK: - Properties
     let CKManager = CloudKitManager()
     var currentUser: User?
-    var recipes = [Recipe]()
-    var userGroups = [Group]()
+    
+    
     
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var addProfileImageButton: UIButton!
@@ -39,14 +39,14 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
             UserController.shared.fetchRecipesForCurrent(user: user, completion: { (recipes) in
                 DispatchQueue.main.async {
                     self.recipesNumberLabel.text = "\(recipes.count)"
-                    self.recipes = recipes
+                    UserController.shared.currentRecipes = recipes
                 }
             })
             
             GroupController.shared.fetchGroupsForCurrent(user: user) {
                 DispatchQueue.main.async {
                     self.groupsNumberLabel.text = "\(GroupController.shared.userGroups.count)"
-                    self.userGroups = GroupController.shared.userGroups
+                    UserController.shared.userGroups = GroupController.shared.userGroups
                 }
             }
         }
@@ -94,11 +94,11 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
         if segue.identifier == Constants.toRecipeList {
         guard let destinationVC = segue.destination as? RecipeListTableViewController else { return }
         
-        destinationVC.recipes = recipes
+        destinationVC.recipes = UserController.shared.currentRecipes
         }
         if segue.identifier == Constants.toGroupListSegue {
             guard let destinationVC = segue.destination as? GroupListTableViewController else { return }
-            destinationVC.userGroups = userGroups
+            destinationVC.userGroups = UserController.shared.userGroups
         }
     }
     

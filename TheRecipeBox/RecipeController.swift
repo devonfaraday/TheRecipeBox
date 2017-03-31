@@ -16,11 +16,7 @@ class RecipeController {
     
     static let shared = RecipeController()
     private let cloudKitManager = CloudKitManager()
-    var recipes = [Recipe]() {
-        didSet {
-            NotificationCenter.default.post(name: Constants.recipesDidChangeNotificationName, object: self)
-        }
-    }
+    
     var currentUser: User?
     
     // MARK: - Recipe Functions
@@ -41,10 +37,8 @@ class RecipeController {
     
     func addRecipeToCloudKit(recipe: Recipe, ingredients: [Ingredient], instructions: [Instruction], completion: @escaping ((Error?) -> Void) = { _ in }) {
         
-        cloudKitManager.fetchCurrentUser { (user) in
-            guard let user = user else { return }
-            self.currentUser = user
-        }
+        self.currentUser = UserController.shared.currentUser
+        
         guard let image = recipe.recipeImage,
             let data = UIImageJPEGRepresentation(image, 1.0),
             let currentUser = currentUser
@@ -56,6 +50,7 @@ class RecipeController {
         newRecipe.instructions = instructions
         newRecipe.recipeImageData = data
         newRecipe.userReference = CKReference(recordID: userID, action: .deleteSelf)
+        UserController.shared.currentRecipes.append(newRecipe)
         
         let recipeRecord = CKRecord(recipe: newRecipe)
         newRecipe.recordID = recipeRecord.recordID
@@ -86,7 +81,9 @@ class RecipeController {
                 modifyOperation = CKModifyRecordsOperation(recordsToSave: objectsForModifing, recordIDsToDelete: nil)
                 
                 modifyOperation.completionBlock = {
-                    self.recipes.append(newRecipe)
+                    
+                        UserController.shared.currentRecipes.append(newRecipe)
+                    
                     completion(nil)
                 }
                 
@@ -98,20 +95,22 @@ class RecipeController {
     }
     
     
-    func fetchAllRecipes(completion: @escaping() -> Void) {
-        let predicate = NSPredicate(value: true)
-        let query = CKQuery(recordType: Constants.recipeRecordType, predicate: predicate)
-        Constants.publicDatabase.perform(query, inZoneWith: nil) { (records, error) in
-            if let error = error {
-                NSLog("Error: \(error.localizedDescription)\nCould not fetch recipe from cloudKit")
-            } else {
-                guard let records = records else { return }
-                let recipes = records.flatMap { Recipe(cloudKitRecord: $0) }
-                self.recipes = recipes
-                completion()
-            }
-        }
-    }
+//    func fetchAllRecipes(completion: @escaping() -> Void) {
+//        let predicate = NSPredicate(value: true)
+//        let query = CKQuery(recordType: Constants.recipeRecordType, predicate: predicate)
+//        Constants.publicDatabase.perform(query, inZoneWith: nil) { (records, error) in
+//            if let error = error {
+//                NSLog("Error: \(error.localizedDescription)\nCould not fetch recipe from cloudKit")
+//            } else {
+//                guard let records = records else { return }
+//                let recipes = records.flatMap { Recipe(cloudKitRecord: $0) }
+//                DispatchQueue.main.async {
+//                    UserController.shared.currentRecipes = recipes
+//                }
+//                completion()
+//            }
+//        }
+//    }
     
     func fetchIngredientsFor(recipe: Recipe, completion: @escaping([Ingredient]) -> Void) {
         guard let recipeRecordID = recipe.recordID else { return }

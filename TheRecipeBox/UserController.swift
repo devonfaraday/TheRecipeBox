@@ -21,19 +21,25 @@ class UserController {
     let CKManager = CloudKitManager()
     var currentUser: User?
     var currentRecipes: [Recipe] = []
+    var userGroups = [Group]()
     
     init() {
-        CKContainer.default().fetchUserRecordID { (recordID, error) in
-            guard let recordID = recordID else { return }
-         self.appleUserRecordID = recordID
-            self.CKManager.fetchCurrentUser { (currentUser) in
-                self.currentUser = currentUser
-                guard let currentUser = currentUser else { return }
-                self.fetchRecipesForCurrent(user: currentUser, completion: { (recipes) in
-                    self.currentRecipes = recipes
-                })
+        
+        CKManager.fetchCurrentUser { (user) in
+            guard let user = user else {  return  }
+            
+            self.currentUser = user
+            
+            UserController.shared.fetchRecipesForCurrent(user: user, completion: { (recipes) in
+                
+                self.currentRecipes = recipes
+            })
+            
+            GroupController.shared.fetchGroupsForCurrent(user: user) {
+                self.userGroups = GroupController.shared.userGroups
             }
         }
+        
         
         
     }
@@ -57,9 +63,7 @@ class UserController {
         }
     }
     
-    func fetchGroupsForCurrentUser() {
-        
-    }
+    
     
     func addUserToGroupRecord(user: User, group: Group, completion: @escaping(Error?) -> Void = { _ in }) {
         
@@ -92,7 +96,7 @@ class UserController {
             }
         }
     }
-
+    
     
     func checkForUser(username: String, completion: @escaping(User) -> Void = { _ in }) {
         
@@ -112,27 +116,12 @@ class UserController {
         }
     }
     
-    func fetchUsersIn(user: User, completion: @escaping([User]) -> Void = { _ in }) {
-        guard let userRecordID = user.userRecordID else { return }
-        
-        let predicate = NSPredicate(format: "userReferences ==  %@", userRecordID)
-        let query = CKQuery(recordType: "Group", predicate: predicate)
-        publicDatabase.perform(query, inZoneWith: nil) { (records, error) in
-            if let error = error {
-                NSLog("Error getting users \(error)")
-            } else {
-                guard let records = records else { return }
-                let users = records.flatMap { User.init(cloudKitRecord: $0) }
-                completion(users)
-            }
-        }
-    }
-
+    
     
     func createUserWith(username: String, profilePhotoData: Data?, completion: @escaping (User?) -> Void) {
         
         guard let appleUserRecordID = appleUserRecordID,
-              let profileImageData = profilePhotoData else { return }
+            let profileImageData = profilePhotoData else { return }
         let appleUserRef = CKReference(recordID: appleUserRecordID, action: .deleteSelf)
         
         let user = User(username: username, profilePhotoData: profileImageData, appleUserRef: appleUserRef)
