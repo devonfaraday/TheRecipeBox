@@ -58,14 +58,17 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         currentUser = UserController.shared.currentUser
-        
-        self.nameLabel.text = currentUser?.username
-        self.profileImageView.image = currentUser?.profilePhoto
-        profileImageDisplay()
+        DispatchQueue.main.async {
+            self.nameLabel.text = self.currentUser?.username
+            self.profileImageView.image = self.currentUser?.profilePhoto
+            self.recipesNumberLabel.text = "\(UserController.shared.currentRecipes.count)"
+            self.groupsNumberLabel.text = "\(UserController.shared.userGroups.count)"
+            self.profileImageDisplay()
+        }
         
     }
     
-        
+    
     
     
     // MARK: - Table view dataSource
@@ -92,9 +95,9 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Constants.toRecipeList {
-        guard let destinationVC = segue.destination as? RecipeListTableViewController else { return }
-        
-        destinationVC.recipes = UserController.shared.currentRecipes
+            //        guard let destinationVC = segue.destination as? RecipeListTableViewController else { return }
+            
+            //        destinationVC.recipes = UserController.shared.currentRecipes
         }
         if segue.identifier == Constants.toGroupListSegue {
             guard let destinationVC = segue.destination as? GroupListTableViewController else { return }

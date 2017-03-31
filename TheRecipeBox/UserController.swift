@@ -20,12 +20,18 @@ class UserController {
     var appleUserRecordID: CKRecordID?
     let CKManager = CloudKitManager()
     var currentUser: User?
+    
     var currentRecipes: [Recipe] = []
     var userGroups = [Group]()
     
     init() {
+    CKContainer.default().fetchUserRecordID { (recordID, _) in
+        guard let recordID = recordID else { return }
+        self.appleUserRecordID = recordID
         
-        CKManager.fetchCurrentUser { (user) in
+        }
+        
+        self.CKManager.fetchCurrentUser { (user) in
             guard let user = user else {  return  }
             
             self.currentUser = user
@@ -39,6 +45,7 @@ class UserController {
                 self.userGroups = GroupController.shared.userGroups
             }
         }
+        
         
         
         
@@ -120,11 +127,10 @@ class UserController {
     
     func createUserWith(username: String, profilePhotoData: Data?, completion: @escaping (User?) -> Void) {
         
-        guard let appleUserRecordID = appleUserRecordID,
-            let profileImageData = profilePhotoData else { return }
+        guard let appleUserRecordID = appleUserRecordID else { return }
         let appleUserRef = CKReference(recordID: appleUserRecordID, action: .deleteSelf)
         
-        let user = User(username: username, profilePhotoData: profileImageData, appleUserRef: appleUserRef)
+        let user = User(username: username, profilePhotoData: profilePhotoData, appleUserRef: appleUserRef)
         let userRecord = user.cloudKitRecord
         
         publicDatabase.save(userRecord) { (record, error) in

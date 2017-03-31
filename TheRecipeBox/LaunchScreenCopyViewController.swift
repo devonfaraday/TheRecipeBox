@@ -7,21 +7,28 @@
 //
 
 import UIKit
+import CloudKit
 
 class LaunchScreenCopyViewController: UIViewController {
-
+    
     var cloudKitManager = CloudKitManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         cloudKitManager.fetchCurrentUser { (user) in
-        if user != nil {
-            self.performSegue(withIdentifier: Constants.toProfileSegue, sender: self)
-        } else {
-            self.performSegue(withIdentifier: Constants.toUserCreationSegue, sender: self)
+            if user != nil {
+                DispatchQueue.main.async {
+                    self.performSegue(withIdentifier: Constants.toProfileSegue, sender: self)
+                }
+                
+            } else {
+                DispatchQueue.main.async {
+                    self.performSegue(withIdentifier: Constants.toUserCreationSegue, sender: self)
+                }
+            }
         }
-    }
         
         
     }

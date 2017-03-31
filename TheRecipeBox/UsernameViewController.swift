@@ -48,11 +48,11 @@ class UsernameViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBAction func submitButtonTapped(_ sender: Any) {
         guard let username = usernameTextField.text else { return }
         if let image = profileImageView.image {
-            let imageData = UIImageJPEGRepresentation(image, 1.0)
+            guard let imageData = UIImageJPEGRepresentation(image, 1.0) else { return }
             UserController.shared.createUserWith(username: username, profilePhotoData: imageData, completion: { (_) in
                 print("saved with image")
                 DispatchQueue.main.async {
-                self.performSegue(withIdentifier: "toProfile", sender: self)
+                    self.performSegue(withIdentifier: "toProfile", sender: self)
                 }
             })
         } else {

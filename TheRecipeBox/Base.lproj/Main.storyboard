@@ -772,7 +772,7 @@
                                                         </constraints>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                         <connections>
                                                             <outlet property="delegate" destination="ldY-Bg-hi3" id="DWM-Dz-YLC"/>
                                                         </connections>
@@ -1313,6 +1313,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="rrs-pP-yg9"/>
-        <segue reference="cHP-Ke-Yt9"/>
+        <segue reference="hmU-eq-caW"/>
     </inferredMetricsTieBreakers>
 </document>
