@@ -52,7 +52,11 @@ class GroupListTableViewController: UITableViewController {
             let destinationVC = segue.destination  as? GroupDetailViewController else { return }
         
         let group = GroupController.shared.userGroups[indexPath.row]
-        
+        GroupController.shared.fetchRecipesIn(group: group) { (recipes) in
+            DispatchQueue.main.async {
+                GroupController.shared.groupRecipes = recipes
+            }
+        }
         GroupController.shared.currentGroup = group
         destinationVC.group = group
         

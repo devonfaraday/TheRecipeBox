@@ -69,6 +69,7 @@ class GroupController {
     func saveToCloudKit(group: Group, completion: @escaping((Error?) -> Void) = { _ in })  {
         self.groups.append(group)
         self.userGroups.append(group)
+        UserController.shared.userGroups.append(group)
         guard let user = UserController.shared.currentUser else { return }
         guard let userID = user.userRecordID else { return }
         let userReference = CKReference(recordID: userID, action: .none)
