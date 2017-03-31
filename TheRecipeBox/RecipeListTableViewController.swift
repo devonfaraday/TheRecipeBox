@@ -15,12 +15,20 @@ class RecipeListTableViewController: UITableViewController {
             if !isViewLoaded {
                 loadViewIfNeeded()
             }
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
                
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.recipes = UserController.shared.currentRecipes
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

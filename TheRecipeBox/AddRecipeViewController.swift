@@ -137,11 +137,22 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
         if let image = recipeImageView.image {
             let imageData = UIImageJPEGRepresentation(image, 1.0)
             let recipe = Recipe(name: name, prepTime: prepTime, servingSize: servings, cookTime: cookTime, recipeImageData: imageData)
-            RecipeController.shared.addRecipeToCloudKit(recipe: recipe, ingredients: ingredients, instructions: instructions)
+
+            RecipeController.shared.addRecipeToCloudKit(recipe: recipe, ingredients: ingredients, instructions: instructions, completion: { (error) in
+                if let error = error {
+                    NSLog("\(error.localizedDescription)\nProblem saving recipe with photo")
+                }
+            })
         } else {
             let recipe = Recipe(name: name, prepTime: prepTime, servingSize: servings, cookTime: cookTime, recipeImageData: nil)
-            RecipeController.shared.addRecipeToCloudKit(recipe: recipe, ingredients: ingredients, instructions: instructions)
+
+            RecipeController.shared.addRecipeToCloudKit(recipe: recipe, ingredients: ingredients, instructions: instructions, completion: { (error) in
+                if let error = error {
+                    NSLog("\(error.localizedDescription)\nProblem saving recipe without photo")
+                }
+            })
         }
+        _ = navigationController?.popViewController(animated: true)
     }
     @IBAction func addPhotoButtonTapped(_ sender: UIButton) {
         addPhotoActionSheet()
