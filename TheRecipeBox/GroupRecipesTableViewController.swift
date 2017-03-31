@@ -10,7 +10,7 @@ import UIKit
 
 class GroupRecipesTableViewController: UITableViewController {
     
-    let userController = UserController()
+    
     
     var recipes: [Recipe]? {
         didSet {
@@ -22,6 +22,7 @@ class GroupRecipesTableViewController: UITableViewController {
         super.viewDidLoad()
         tableView.rowHeight = 370
         
+        self.recipes = GroupController.shared.groupRecipes
         guard let group = GroupController.shared.currentGroup else { return }
         GroupController.shared.fetchRecipesIn(group: group) { (recipes) in
             DispatchQueue.main.async {
@@ -29,6 +30,11 @@ class GroupRecipesTableViewController: UITableViewController {
                 
             }
         }
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.recipes = GroupController.shared.groupRecipes
+        tableView.reloadData()
     }
     
     
@@ -46,8 +52,8 @@ class GroupRecipesTableViewController: UITableViewController {
         cell.recipe = recipe
         
         return cell
+        
     }
-    
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
@@ -55,15 +61,12 @@ class GroupRecipesTableViewController: UITableViewController {
         }
     }
     
-    
-    
-    
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Constants.toAddRecipeToGroupSegue {
         let destinationVC = segue.destination as? AddRecipesToGroupTableViewController
-        destinationVC?.recipes = userController.currentRecipes
+        destinationVC?.recipes = UserController.shared.currentRecipes
         }
         if segue.identifier == Constants.toShowRecipeSegue {
             guard let indexPath = tableView.indexPathForSelectedRow else { return }

@@ -34,18 +34,17 @@ class GroupDetailViewController: UIViewController, UITableViewDataSource {
             }
         }
     }
-
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return users.count
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.userCellIdentifier, for: indexPath)
         let user = users[indexPath.row]
         
         cell.textLabel?.text = user.username
-        
         
         return cell
     }
@@ -56,8 +55,9 @@ class GroupDetailViewController: UIViewController, UITableViewDataSource {
         guard let username = usernameTextField.text,
             let group = group else { return }
         UserController.shared.checkForUser(username: username) { (user) in
-            self.users.append(user)
-
+            DispatchQueue.main.async {
+                self.users.append(user)
+            }
             UserController.shared.addUserToGroupRecord(user: user, group: group, completion: { (_) in
                 
             })
@@ -70,8 +70,17 @@ class GroupDetailViewController: UIViewController, UITableViewDataSource {
         guard let group = group else { return }
         groupNameTextLabel.text = group.groupName
         GroupController.shared.fetchUsersIn(group: group) { (users) in
-            self.users = users
+            DispatchQueue.main.async {
+                self.users = users
+            }
         }
     }
-
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        
+        
+    }
+    
+    
 }

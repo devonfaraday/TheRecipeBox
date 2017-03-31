@@ -81,9 +81,6 @@ class RecipeController {
                 modifyOperation = CKModifyRecordsOperation(recordsToSave: objectsForModifing, recordIDsToDelete: nil)
                 
                 modifyOperation.completionBlock = {
-                    
-                        UserController.shared.currentRecipes.append(newRecipe)
-                    
                     completion(nil)
                 }
                 

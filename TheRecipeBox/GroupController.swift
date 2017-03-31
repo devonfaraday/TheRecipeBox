@@ -20,6 +20,8 @@ class GroupController {
     var userGroups: [Group] = []
     var users = [User]()
     
+   
+    
     func fetchGroupsForCurrent(user: User, completion: @escaping() -> Void = { _ in }) {
         guard let userID = user.userRecordID else { return }
         let predicate = NSPredicate(format: "userReferences CONTAINS %@", userID)
@@ -131,33 +133,39 @@ class GroupController {
         }
         group.notify(queue: DispatchQueue.main) {
             self.groupRecipes = recipes
+            
             completion(recipes)
         }
     }
     
-    
     func add(recipe: Recipe, toGroup group: Group, completion: @escaping(Error?) -> Void) {
-        
+        GroupController.shared.groupRecipes.append(recipe)
         guard let recipeID = recipe.recordID,
             let groupID = group.groupRecordID else { return }
         publicDB.fetch(withRecordID: groupID) { (record, error) in
             if let error = error { NSLog("\(error.localizedDescription)"); completion(error) }
             if let record = record {
                 let recipeReference = CKReference(recordID: recipeID, action: .none)
+                
                 if group.recipeReferences == nil {
                     group.recipeReferences = [recipeReference]
                 } else {
                     group.recipeReferences?.append(recipeReference)
                 }
                 
-                
                 guard let recipeReferences = group.recipeReferences else { return }
+                
                 record.setValue(recipeReferences, forKey: Constants.recipeReferencesKey)
+                
                 self.publicDB.save(record, completionHandler: { (_, error) in
+                    
                     if let error = error {
+                        
                         print(error.localizedDescription)
                         completion(error)
+                        
                     } else {
+                        
                         print("saving recipe to group succeeded")
                         completion(nil)
                     }
