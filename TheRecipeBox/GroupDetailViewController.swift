@@ -55,11 +55,10 @@ class GroupDetailViewController: UIViewController, UITableViewDataSource {
         guard let username = usernameTextField.text,
             let group = group else { return }
         UserController.shared.checkForUser(username: username) { (user) in
-            DispatchQueue.main.async {
-                self.users.append(user)
-            }
             UserController.shared.addUserToGroupRecord(user: user, group: group, completion: { (_) in
-                
+                DispatchQueue.main.async {
+                    self.users.append(user)
+                }
             })
         }
     }

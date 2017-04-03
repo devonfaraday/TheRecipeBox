@@ -82,23 +82,28 @@ class UserController {
                 completion(error)
             } else if let record = record {
                 let reference = CKReference(recordID: userID, action: .none)
-                
-                if group.userReferences == nil {
-                    group.userReferences = [reference]
-                } else {
-                    group.userReferences?.append(reference)
-                }
-                
                 guard let userReferences = group.userReferences else { return }
-                record.setValue(userReferences, forKey: "userReferences")
-                self.publicDatabase.save(record, completionHandler: { (_, error) in
+                
+                if !userReferences.contains(reference) {
+                    group.userReferences?.append(reference)
+                } 
+                
+                record.setValue(group.userReferences, forKey: "userReferences")
+                self.publicDatabase.save(record, completionHandler: { (record, error) in
                     if let error = error {
                         print("\(error)")
                         completion(error)
-                    } else {
-                        print("saving succeeded")
-                        completion(nil)
                     }
+                    if let record = record,
+                        let group = Group(cloudKitRecord: record),
+                        let refs = group.userReferences {
+                        NSLog(group.groupName)
+                        for ref in refs {
+                            NSLog("\(ref)")
+                        }
+                    }
+                    print("saving succeeded")
+                    completion(nil)
                 })
             }
         }

@@ -22,7 +22,6 @@ class LaunchScreenCopyViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.performSegue(withIdentifier: Constants.toProfileSegue, sender: self)
                 }
-                
             } else {
                 DispatchQueue.main.async {
                     self.performSegue(withIdentifier: Constants.toUserCreationSegue, sender: self)
