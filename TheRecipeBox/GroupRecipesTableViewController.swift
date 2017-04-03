@@ -10,8 +10,6 @@ import UIKit
 
 class GroupRecipesTableViewController: UITableViewController {
     
-    
-    
     var recipes: [Recipe]? {
         didSet {
             tableView.reloadData()
@@ -20,14 +18,14 @@ class GroupRecipesTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.rowHeight = 370
+        tableView.rowHeight = 198
         
         self.recipes = GroupController.shared.groupRecipes
         guard let group = GroupController.shared.currentGroup else { return }
         GroupController.shared.fetchRecipesIn(group: group) { (recipes) in
             DispatchQueue.main.async {
                 self.recipes = recipes
-                
+                self.tableView.reloadData()
             }
         }
     }
@@ -57,7 +55,16 @@ class GroupRecipesTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            
+            guard let recipe = recipes?[indexPath.row],
+                let group = GroupController.shared.currentGroup else { return }
+            guard let index = recipes?.index(of: recipe) else { return }
+            
+            GroupController.shared.remove(recipe: recipe, fromGroup: group, completion: { (_) in
+                DispatchQueue.main.async {
+                    self.recipes?.remove(at: index)
+                }
+            })
         }
     }
     
@@ -65,8 +72,8 @@ class GroupRecipesTableViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Constants.toAddRecipeToGroupSegue {
-        let destinationVC = segue.destination as? AddRecipesToGroupTableViewController
-        destinationVC?.recipes = UserController.shared.currentRecipes
+            let destinationVC = segue.destination as? AddRecipesToGroupTableViewController
+            destinationVC?.recipes = UserController.shared.currentRecipes
         }
         if segue.identifier == Constants.toShowRecipeSegue {
             guard let indexPath = tableView.indexPathForSelectedRow else { return }

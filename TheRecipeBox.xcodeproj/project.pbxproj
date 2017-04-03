@@ -40,6 +40,7 @@
 		FDD7D9761E7A58C400B19F21 /* User+CloudKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD7D9751E7A58C400B19F21 /* User+CloudKit.swift */; };
 		FDD7D9791E7AE02F00B19F21 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD7D9781E7AE02F00B19F21 /* Group.swift */; };
 		FDD7D97D1E7AFB7D00B19F21 /* UsernameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD7D97C1E7AFB7C00B19F21 /* UsernameViewController.swift */; };
+		FDE6BED81E92F7A30045C865 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE6BED71E92F7A30045C865 /* LoadingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,6 +80,7 @@
 		FDD7D9751E7A58C400B19F21 /* User+CloudKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = "User+CloudKit.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		FDD7D9781E7AE02F00B19F21 /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		FDD7D97C1E7AFB7C00B19F21 /* UsernameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsernameViewController.swift; sourceTree = "<group>"; };
+		FDE6BED71E92F7A30045C865 /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +164,7 @@
 			children = (
 				FDD7D9421E77395900B19F21 /* ProfileFeedTableViewCell.swift */,
 				FDD7D96E1E78C20400B19F21 /* RecipeTableViewCell.swift */,
+				FDE6BED71E92F7A30045C865 /* LoadingView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -351,6 +354,7 @@
 				FDD7D9691E785AF100B19F21 /* AddRecipeViewController.swift in Sources */,
 				FDA531321E7BB97300DC3DB3 /* GroupController.swift in Sources */,
 				FDD7D9711E79B0C400B19F21 /* UIImage+CKAsset.swift in Sources */,
+				FDE6BED81E92F7A30045C865 /* LoadingView.swift in Sources */,
 				FD7561FC1E75361B0059DE3D /* AppDelegate.swift in Sources */,
 				FDD7D96B1E78A3D500B19F21 /* RecipeListTableViewController.swift in Sources */,
 				FDD7D94A1E773BE000B19F21 /* Constants.swift in Sources */,

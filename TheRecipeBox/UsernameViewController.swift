@@ -14,12 +14,14 @@ class UsernameViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var tapToUploadButton: UIButton!
+    @IBOutlet weak var submitButton: UIButton!
+    @IBOutlet weak var loadingView: UIView!
     
     let CKManager = CloudKitManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        loadingView.isHidden = true
         profileImageView.layer.masksToBounds = true
     }
     
@@ -46,22 +48,22 @@ class UsernameViewController: UIViewController, UIImagePickerControllerDelegate,
     
     // MARK: - UI Functions
     @IBAction func submitButtonTapped(_ sender: Any) {
+        
         guard let username = usernameTextField.text else { return }
         if let image = profileImageView.image {
             guard let imageData = UIImageJPEGRepresentation(image, 1.0) else { return }
+            submitButton.isEnabled = false
+            loadingView.isHidden = false
+            LoadingIndicatorView.show(loadingView, loadingText: "Creating Your Account")
             UserController.shared.createUserWith(username: username, profilePhotoData: imageData, completion: { (_) in
                 print("saved with image")
                 DispatchQueue.main.async {
                     self.performSegue(withIdentifier: "toProfile", sender: self)
+                    LoadingIndicatorView.hide()
                 }
             })
         } else {
-            UserController.shared.createUserWith(username: username, profilePhotoData: nil, completion: { (_) in
-                print("saved with no photo")
-                DispatchQueue.main.async {
-                self.performSegue(withIdentifier: "toProfile", sender: self)
-                }
-            })
+            addPhotoAlert()
         }
     }
     
@@ -123,7 +125,17 @@ class UsernameViewController: UIViewController, UIImagePickerControllerDelegate,
         
     }
 
+    func addPhotoAlert() {
+        let alertController = UIAlertController(title: "WARNING!", message: "Must add photo", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .cancel) { (_) in
+            
+        }
+        alertController.addAction(okAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
 }
+
 
 
 // MARK: - Push funciton

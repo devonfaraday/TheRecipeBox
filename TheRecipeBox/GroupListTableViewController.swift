@@ -41,6 +41,11 @@ class GroupListTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            let group = GroupController.shared.userGroups[indexPath.row]
+            guard let recordID = group.groupRecordID,
+                let index = GroupController.shared.userGroups.index(of: group) else { return }
+            GroupController.shared.deleteGroup(recordID: recordID)
+            GroupController.shared.userGroups.remove(at: index)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }

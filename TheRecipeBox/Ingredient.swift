@@ -9,11 +9,15 @@
 import Foundation
 import CloudKit
 
-class Ingredient {
+class Ingredient: Equatable {
     var nameAndAmount: String
     var recipeReference: CKReference?
     
     init(nameAndAmount: String) {
         self.nameAndAmount = nameAndAmount
     }
+}
+
+func ==(lhs: Ingredient, rhs: Ingredient) -> Bool {
+    return lhs === rhs
 }

@@ -139,6 +139,14 @@ class GroupController {
         }
     }
     
+    func deleteGroup(recordID: CKRecordID, completion: @escaping((Error?) -> Void) = { _ in }) {
+        publicDB.delete(withRecordID: recordID) { (_, error) in
+            if let error = error {
+                NSLog("Error deleting \(recordID)\n\(error.localizedDescription)")
+            }
+        }
+    }
+    
     func add(recipe: Recipe, toGroup group: Group, completion: @escaping(Error?) -> Void) {
         GroupController.shared.groupRecipes.append(recipe)
         guard let recipeID = recipe.recordID,
@@ -148,9 +156,10 @@ class GroupController {
             if let record = record {
                 let recipeReference = CKReference(recordID: recipeID, action: .none)
                 
-                if group.recipeReferences == nil {
-                    group.recipeReferences = [recipeReference]
-                } else {
+                guard let gRecipeReferences = group.recipeReferences else { return }
+                
+                if !gRecipeReferences.contains(recipeReference) {
+                
                     group.recipeReferences?.append(recipeReference)
                 }
                 
@@ -173,6 +182,29 @@ class GroupController {
                     
                 })
             }
+        }
+    }
+    
+    func remove(recipe: Recipe, fromGroup group: Group, completion: @escaping ((Error?) -> Void) = { _ in }) {
+        
+        guard let recipeID = recipe.recordID,
+              let groupID = group.groupRecordID else { return }
+        let reference = CKReference(recordID: recipeID, action: .none)
+        guard let refIndex = group.recipeReferences?.index(of: reference) else { return }
+        group.recipeReferences?.remove(at: refIndex)
+        publicDB.fetch(withRecordID: groupID) { (record, error) in
+            guard let record = record else { return }
+            record.setValue(group.recipeReferences, forKey: Constants.recipeReferencesKey)
+            self.publicDB.save(record) { (record, error) in
+                if let error = error {
+                    print(error.localizedDescription)
+                    completion(error)
+                } else {
+                    print("group record saved")
+                    completion(nil)
+                }
+        }
+            
         }
     }
 }

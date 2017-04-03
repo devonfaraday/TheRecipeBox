@@ -62,34 +62,27 @@ class RecipeController {
                 completion(error)
                 return
             } else {
-                guard let recipeRecordID = newRecipe.recordID else { return }
-                for ingredient in newRecipe.ingredients {
-                    
-                    ingredient.recipeReference = CKReference(recordID: recipeRecordID, action: .deleteSelf)
+                guard let recordID = newRecipe.recordID else { return }
+                for ingredient in ingredients {
+                    ingredient.recipeReference = CKReference(recordID: recordID, action: .deleteSelf)
+                    let ingredientRecord = CKRecord(ingredient: ingredient)
+                    Constants.publicDatabase.save(ingredientRecord, completionHandler: { (_, _) in
+                        print("ingredient saved")
+                    })
                 }
-                for instruction in newRecipe.instructions {
-                    instruction.recipeReference = CKReference(recordID: recipeRecordID, action: .deleteSelf)
+                for instruction in instructions {
+                    instruction.recipeReference = CKReference(recordID: recordID, action: .deleteSelf)
+                    let record = CKRecord(instruction: instruction)
+                    Constants.publicDatabase.save(record, completionHandler: { (_, _) in
+                        print("instruction saved")
+                    })
                 }
-                
-                
-                let ingredientRecords = newRecipe.ingredients.flatMap { CKRecord(ingredient:  $0) }
-                let instructionRecords = newRecipe.instructions.flatMap { CKRecord(instruction:  $0) }
-                let ingredientsAndInstructions = [ingredientRecords, instructionRecords]
-                let objectsForModifing = ingredientsAndInstructions.flatMap { $0 }
-                
-                var modifyOperation = CKModifyRecordsOperation()
-                modifyOperation = CKModifyRecordsOperation(recordsToSave: objectsForModifing, recordIDsToDelete: nil)
-                
-                modifyOperation.completionBlock = {
-                    completion(nil)
-                }
-                
-                modifyOperation.savePolicy = .changedKeys
-                Constants.publicDatabase.add(modifyOperation)
+
                 print("Saving success")
             }
         }
     }
+    
     
     
 //    func fetchAllRecipes(completion: @escaping() -> Void) {
@@ -108,6 +101,22 @@ class RecipeController {
 //            }
 //        }
 //    }
+    
+    func deleteRecipeRecord(recipeID: CKRecordID, completion: @escaping ((Error?) -> Void) = { _ in }) {
+        cloudKitManager.publicDatabase.delete(withRecordID: recipeID) { (_, error) in
+            if let error = error {
+                NSLog("Error deleting \(recipeID)\n\(error.localizedDescription)")
+                completion(error)
+            }
+            
+        }
+    }
+    
+    func fectchIngredientsAndInstructionsFor(recipe: Recipe, completion: @escaping([Ingredient], [Instruction]) -> Void) {
+        guard let recipeID = recipe.recordID else { return }
+        
+        let sortDescriptors = NSSortDescriptor(key: , ascending: <#T##Bool#>)
+    }
     
     func fetchIngredientsFor(recipe: Recipe, completion: @escaping([Ingredient]) -> Void) {
         guard let recipeRecordID = recipe.recordID else { return }

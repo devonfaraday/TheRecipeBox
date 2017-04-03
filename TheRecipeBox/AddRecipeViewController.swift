@@ -9,11 +9,14 @@
 import UIKit
 import CloudKit
 
-class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         recipeImageView.layer.masksToBounds = true
+        
+        self.tableView.estimatedRowHeight = 40
+        self.tableView.rowHeight = UITableViewAutomaticDimension
         
     }
     
@@ -68,7 +71,7 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.addRecipeCellIdentifier, for: indexPath)
-        
+        cell.textLabel?.numberOfLines = 0
         if indexPath.section == 0 {
             let ingredient = ingredients[indexPath.row]
             cell.textLabel?.text = ingredient.nameAndAmount
@@ -80,6 +83,43 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
         }
         
         return cell
+    }
+    
+    
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if indexPath.section == 0 {
+            if recipe == nil && !ingredients.isEmpty && editingStyle == .delete  {
+                let ingredient = ingredients[indexPath.row]
+                
+                guard let ingredientIndex = ingredients.index(of: ingredient)
+                    else { return }
+                ingredients.remove(at: ingredientIndex)
+                print("Removing \(ingredient) from index \(ingredientIndex)")
+            }
+         }
+        if indexPath.section == 1 {
+            if recipe == nil && !instructions.isEmpty && editingStyle == .delete {
+                
+                let instruction = instructions[indexPath.row]
+                
+                guard let instructionIndex = instructions.index(of: instruction) else { return }
+                print("Removing \(instruction) from index \(instructionIndex)")
+                instructions.remove(at: instructionIndex)
+            }
+        }
+        tableView.deleteRows(at: [indexPath], with: .fade)
+        
+        
+    }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        if recipe == nil {
+            return .delete
+        } else {
+            return .none
+        }
     }
     
     
@@ -113,7 +153,7 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
         ingredients.append(newIngredient)
         ingredientTextField.text = ""
         DispatchQueue.main.async {
-        self.tableView.reloadData()
+            self.tableView.reloadData()
         }
     }
     
@@ -124,7 +164,7 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
         instructions.append(newInstruction)
         instructionTextField.text = ""
         DispatchQueue.main.async {
-        self.tableView.reloadData()
+            self.tableView.reloadData()
         }
     }
     
@@ -137,7 +177,7 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
         if let image = recipeImageView.image {
             let imageData = UIImageJPEGRepresentation(image, 1.0)
             let recipe = Recipe(name: name, prepTime: prepTime, servingSize: servings, cookTime: cookTime, recipeImageData: imageData)
-
+            
             RecipeController.shared.addRecipeToCloudKit(recipe: recipe, ingredients: ingredients, instructions: instructions, completion: { (error) in
                 if let error = error {
                     NSLog("\(error.localizedDescription)\nProblem saving recipe with photo")
@@ -145,7 +185,7 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
             })
         } else {
             let recipe = Recipe(name: name, prepTime: prepTime, servingSize: servings, cookTime: cookTime, recipeImageData: nil)
-
+            
             RecipeController.shared.addRecipeToCloudKit(recipe: recipe, ingredients: ingredients, instructions: instructions, completion: { (error) in
                 if let error = error {
                     NSLog("\(error.localizedDescription)\nProblem saving recipe without photo")
@@ -237,13 +277,13 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
         RecipeController.shared.fetchIngredientsFor(recipe: recipe) { (ingredients) in
             self.ingredients = ingredients
             DispatchQueue.main.async {
-            self.tableView.reloadData()
+                self.tableView.reloadData()
             }
         }
         RecipeController.shared.fetchInstructionsFor(recipe: recipe) { (instructions) in
             self.instructions = instructions
             DispatchQueue.main.async {
-            self.tableView.reloadData()
+                self.tableView.reloadData()
             }
             
         }

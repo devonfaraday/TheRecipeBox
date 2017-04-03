@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import CloudKit
 
-class Recipe {
+class Recipe: Equatable {
     
     var name: String
     var prepTime: String
@@ -41,5 +41,7 @@ class Recipe {
     
 }
     
-   
+func ==(lhs: Recipe, rhs: Recipe) -> Bool {
+    return lhs === rhs
+}
 
