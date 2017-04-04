@@ -34,7 +34,13 @@ class GroupListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.groupCellIdentifier, for: indexPath)
         let group = GroupController.shared.userGroups[indexPath.row]
+        
         cell.textLabel?.text = group.groupName
+        if let userReferences = group.userReferences {
+            cell.detailTextLabel?.text = "\(userReferences.count) Members"
+        } else {
+            cell.detailTextLabel?.isHidden = true
+        }
         return cell
     }
     

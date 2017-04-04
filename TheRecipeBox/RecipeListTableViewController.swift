@@ -53,6 +53,7 @@ class RecipeListTableViewController: UITableViewController {
             let index = recipes.index(of: recipe) else { return }
             RecipeController.shared.deleteRecipeRecord(recipeID: recordID)
             recipes.remove(at: index)
+            UserController.shared.currentRecipes.remove(at: index)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }

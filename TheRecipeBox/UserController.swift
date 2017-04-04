@@ -136,6 +136,10 @@ class UserController {
         let appleUserRef = CKReference(recordID: appleUserRecordID, action: .deleteSelf)
         
         let user = User(username: username, profilePhotoData: profilePhotoData, appleUserRef: appleUserRef)
+        if user.username.contains(" ") {
+            let username = user.username.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+            user.username = username
+        }
         let userRecord = user.cloudKitRecord
         
         publicDatabase.save(userRecord) { (record, error) in

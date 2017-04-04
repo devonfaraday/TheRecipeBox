@@ -11,19 +11,16 @@ import CloudKit
 
 class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDelegate {
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        recipeImageView.layer.masksToBounds = true
-        
-        self.tableView.estimatedRowHeight = 40
-        self.tableView.rowHeight = UITableViewAutomaticDimension
-        
-    }
+    @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
     
+    
+    
+    @IBOutlet weak var textFieldStack: UIStackView!
     var ingredients = [Ingredient]()
     var instructions = [Instruction]()
+    var isEditingTextfields  = false
     
-    var recipe: Recipe?   {
+    var recipe: Recipe? {
         didSet {
             if !isViewLoaded {
                 loadViewIfNeeded()
@@ -31,6 +28,7 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
             updateViews()
         }
     }
+    
     // MARK: - Properties
     let sections = ["Ingredients", "Instructions"]
     
@@ -48,14 +46,48 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
     
     @IBOutlet weak var saveButton: UIBarButtonItem!
     
+    // MARK: - Life Cycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        recipeImageView.layer.masksToBounds = true
+        
+        self.tableView.estimatedRowHeight = 40
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        
+    }
+    
+    // MARK: - Scroll View Function
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+
+        if tableViewTopConstraint.constant == -(view.frame.height / 2) - 10 {
+            tableViewTopConstraint.constant -= scrollView.contentOffset.y
+
+        }
+        // Scrolls up
+        if tableViewTopConstraint.constant <= 8 && tableViewTopConstraint.constant >= -recipeImageView.frame.height {
+            tableViewTopConstraint.constant -= scrollView.contentOffset.y
+        }
+        
+        if tableViewTopConstraint.constant > 8  {
+            tableViewTopConstraint.constant = 8
+        }
+        
+        if tableViewTopConstraint.constant < -recipeImageView.frame.height {
+            tableViewTopConstraint.constant = -recipeImageView.frame.height
+        }
+    }
+    
     // MARK: - Table view data source
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
-            return "\(sections[0])"
+            return "\(sections[0])" 
         } else {
             return "\(sections[1])"
         }
@@ -141,9 +173,21 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        isEditingTextfields = false
         return true
     }
     
+//    func textFieldDidBeginEditing(_ textField: UITextField) {
+//        isEditingTextfields = true
+//        updateTextFieldStacksConstraint()
+//        
+//    }
+//    
+//    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
+//        isEditingTextfields = false
+//        updateTextFieldStacksConstraint()
+//    }
+//    
     // MARK: - UI Functions
     
     
@@ -262,6 +306,8 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
     
     // MARK: - Helper Functions
     
+    
+    
     func updateViews() {
         guard let recipe = recipe else { return }
         recipeNameTextField.text = recipe.name
@@ -274,6 +320,7 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
         ingredientTextField.isHidden = true
         addInstructionButton.isHidden = true
         addIngredientButton.isHidden = true
+        navigationItem.rightBarButtonItem?.isEnabled = false
         RecipeController.shared.fetchIngredientsFor(recipe: recipe) { (ingredients) in
             self.ingredients = ingredients
             DispatchQueue.main.async {
@@ -287,13 +334,12 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
             }
             
         }
-        let tableViewTopContraint = NSLayoutConstraint(item: tableView, attribute: .top, relatedBy: .equal, toItem: recipeNameTextField, attribute: .bottom, multiplier: 1.0, constant: 8.0)
-//        let servingSizeHeight = NSLayoutConstraint(item: servingsTextField, attribute: .height, relatedBy: .equal, toItem: prepTimeTextField, attribute: .height, multiplier: 1.0, constant: 0)
-//        let servingSizeTopConstraint = NSLayoutConstraint(item: servingsTextField, attribute: .top, relatedBy: .equal, toItem: prepTimeTextField, attribute: .top, multiplier: 1.0, constant: 0)
-        view.addConstraints([tableViewTopContraint])
-        
-    }
     
+    
+    
+}
+    
+
     func updateIngredients() {
         guard let recipe = recipe else { return }
         ingredients = recipe.ingredients
@@ -303,5 +349,37 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
         guard let recipe = recipe else { return }
         instructions = recipe.instructions
     }
+    // MARK: - Constraints
+    
+    func constraintsForRecipeDetail() {
+        let tableViewTopContraint = NSLayoutConstraint(item: tableView, attribute: .top, relatedBy: .equal, toItem: servingsTextField, attribute: .bottom, multiplier: 1.0, constant: 8.0)
+        let servingSizeHeight = NSLayoutConstraint(item: servingsTextField, attribute: .height, relatedBy: .equal, toItem: prepTimeTextField, attribute: .height, multiplier: 1.0, constant: 0)
+        let servingSizeTopConstraint = NSLayoutConstraint(item: servingsTextField, attribute: .top, relatedBy: .equal, toItem: prepTimeTextField, attribute: .top, multiplier: 1.0, constant: 0)
+        let cookTimeTopConstraint = NSLayoutConstraint(item: cookTimeTextField, attribute: .top, relatedBy: .equal, toItem: servingsTextField, attribute: .top, multiplier: 1.0, constant: 0)
+        let cookTimeHeight = NSLayoutConstraint(item: cookTimeTextField, attribute: .height, relatedBy: .equal, toItem: servingsTextField, attribute: .height, multiplier: 1.0, constant: 0)
+        view.addConstraints([tableViewTopContraint, servingSizeHeight, servingSizeTopConstraint, cookTimeTopConstraint, cookTimeHeight])
+    }
+//    
+//    func updateTextFieldStacksConstraint() {
+//        
+//        let stackViewTopConstraint = NSLayoutConstraint(item: textFieldStack, attribute: .top, relatedBy: .equal, toItem: recipeImageView, attribute: .top, multiplier: 1.0, constant: 0)
+//        let defaultStackConstraint = NSLayoutConstraint(item: textFieldStack, attribute: .top, relatedBy: .equal, toItem: recipeImageView, attribute: .bottom, multiplier: 1.0, constant: 8.0)
+//
+//        if isEditingTextfields {
+//            recipeImageView.isHidden = true
+//            addPhotoButton.isHidden = true
+//            addPhotoButton.isEnabled = false
+//            
+//            NSLayoutConstraint.activate([stackViewTopConstraint])
+//            
+//        } else if !isEditingTextfields {
+//            recipeImageView.isHidden = false
+//            addPhotoButton.isHidden = false
+//            addPhotoButton.isEnabled = true
+//            NSLayoutConstraint.deactivate([stackViewTopConstraint])
+//            NSLayoutConstraint.activate([defaultStackConstraint])
+//        }
+//    }
     
 }
+

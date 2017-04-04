@@ -35,7 +35,6 @@ class GroupDetailViewController: UIViewController, UITableViewDataSource, UIText
         }
     }
     
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return users.count
     }
@@ -83,13 +82,6 @@ class GroupDetailViewController: UIViewController, UITableViewDataSource, UIText
                 self.users = users
             }
         }
-    }
-
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        
-        
     }
     
     // MARK: - Alert Controllers
