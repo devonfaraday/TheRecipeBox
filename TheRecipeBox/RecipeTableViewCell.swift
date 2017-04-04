@@ -30,6 +30,7 @@ class RecipeTableViewCell: UITableViewCell {
         cookTimeLabel.text = recipe.cookTime
         DispatchQueue.main.async {
             self.recipeImageView.image = recipe.recipeImage
+            self.recipeImageView.layer.masksToBounds = true
         }
     }
 }

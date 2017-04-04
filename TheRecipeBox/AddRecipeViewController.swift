@@ -287,10 +287,10 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
             }
             
         }
-        let tableViewTopContraint = NSLayoutConstraint(item: tableView, attribute: .top, relatedBy: .equal, toItem: servingsTextField, attribute: .bottom, multiplier: 1.0, constant: 8.0)
-        let servingSizeHeight = NSLayoutConstraint(item: servingsTextField, attribute: .height, relatedBy: .equal, toItem: prepTimeTextField, attribute: .height, multiplier: 1.0, constant: 0)
-        let servingSizeTopConstraint = NSLayoutConstraint(item: servingsTextField, attribute: .top, relatedBy: .equal, toItem: prepTimeTextField, attribute: .top, multiplier: 1.0, constant: 0)
-        view.addConstraints([tableViewTopContraint, servingSizeHeight, servingSizeTopConstraint])
+        let tableViewTopContraint = NSLayoutConstraint(item: tableView, attribute: .top, relatedBy: .equal, toItem: recipeNameTextField, attribute: .bottom, multiplier: 1.0, constant: 8.0)
+//        let servingSizeHeight = NSLayoutConstraint(item: servingsTextField, attribute: .height, relatedBy: .equal, toItem: prepTimeTextField, attribute: .height, multiplier: 1.0, constant: 0)
+//        let servingSizeTopConstraint = NSLayoutConstraint(item: servingsTextField, attribute: .top, relatedBy: .equal, toItem: prepTimeTextField, attribute: .top, multiplier: 1.0, constant: 0)
+        view.addConstraints([tableViewTopContraint])
         
     }
     

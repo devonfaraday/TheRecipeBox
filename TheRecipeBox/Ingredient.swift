@@ -12,9 +12,11 @@ import CloudKit
 class Ingredient: Equatable {
     var nameAndAmount: String
     var recipeReference: CKReference?
+    var index: Int
     
-    init(nameAndAmount: String) {
+    init(nameAndAmount: String, index: Int = 0) {
         self.nameAndAmount = nameAndAmount
+        self.index = index
     }
 }
 

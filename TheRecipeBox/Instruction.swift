@@ -12,9 +12,11 @@ import CloudKit
 class Instruction: Equatable {
     var instruction: String
     var recipeReference: CKReference?
+    var index: Int
     
-    init(instruction: String) {
+    init(instruction: String, index: Int = 0) {
         self.instruction = instruction
+        self.index = index
     }
 }
 

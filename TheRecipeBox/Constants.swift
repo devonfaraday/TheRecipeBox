@@ -36,6 +36,7 @@ struct Constants {
     static let userReferencesKey = "userReferences"
     static let recipeReferencesKey = "recipeReferences"
     static let defaultUserReferenceKey = "appleUserRef"
+    static let creationDateKey = "creationDate"
     
     // MARK: - Segues
     

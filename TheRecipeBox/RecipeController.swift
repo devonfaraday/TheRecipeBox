@@ -65,6 +65,8 @@ class RecipeController {
                 guard let recordID = newRecipe.recordID else { return }
                 for ingredient in ingredients {
                     ingredient.recipeReference = CKReference(recordID: recordID, action: .deleteSelf)
+                    guard let index =  ingredients.index(of: ingredient) else { return }
+                    ingredient.index = index
                     let ingredientRecord = CKRecord(ingredient: ingredient)
                     Constants.publicDatabase.save(ingredientRecord, completionHandler: { (_, _) in
                         print("ingredient saved")
@@ -72,6 +74,8 @@ class RecipeController {
                 }
                 for instruction in instructions {
                     instruction.recipeReference = CKReference(recordID: recordID, action: .deleteSelf)
+                    guard let index = instructions.index(of: instruction) else { return }
+                    instruction.index = index
                     let record = CKRecord(instruction: instruction)
                     Constants.publicDatabase.save(record, completionHandler: { (_, _) in
                         print("instruction saved")
@@ -128,7 +132,11 @@ class RecipeController {
                 NSLog("Error: \(error.localizedDescription)\nCould not fetch ingredients from cloudKit")
             } else {
                 guard let records = records else { return }
-                let ingredients = records.flatMap { Ingredient(cloudKitRecord: $0) }
+                let unSortedIngredients = records.flatMap { Ingredient(cloudKitRecord: $0) }
+                print(unSortedIngredients)
+                let ingredients = unSortedIngredients.sorted(by: { $0.index < $1.index  })
+                print(ingredients)
+                
                 
                 completion(ingredients)
             }
@@ -144,7 +152,8 @@ class RecipeController {
                 NSLog("Error: \(error.localizedDescription)\nCould not fetch instructions from cloudKit")
             } else {
                 guard let records = records else { return }
-                let instructions = records.flatMap { Instruction(cloudKitRecord: $0) }
+                let unSortedInstructions = records.flatMap { Instruction(cloudKitRecord: $0) }
+                let instructions = unSortedInstructions.sorted(by: { $0.index < $1.index })
                 
                 completion(instructions)
             }
