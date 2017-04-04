@@ -61,12 +61,8 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
 
-        if tableViewTopConstraint.constant == -(view.frame.height / 2) - 10 {
-            tableViewTopConstraint.constant -= scrollView.contentOffset.y
-
-        }
-        // Scrolls up
-        if tableViewTopConstraint.constant <= 8 && tableViewTopConstraint.constant >= -recipeImageView.frame.height {
+        
+        if tableViewTopConstraint.constant <= 8 && tableViewTopConstraint.constant >= -recipeImageView.frame.height - 50 {
             tableViewTopConstraint.constant -= scrollView.contentOffset.y
         }
         
@@ -74,8 +70,8 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
             tableViewTopConstraint.constant = 8
         }
         
-        if tableViewTopConstraint.constant < -recipeImageView.frame.height {
-            tableViewTopConstraint.constant = -recipeImageView.frame.height
+        if tableViewTopConstraint.constant < -recipeImageView.frame.height - 50 {
+            tableViewTopConstraint.constant = -recipeImageView.frame.height - 50
         }
     }
     

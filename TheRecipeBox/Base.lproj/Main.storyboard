@@ -198,10 +198,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6zk-um-xeX">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="198"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="198"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Line Seperator White" translatesAutoresizingMaskIntoConstraints="NO" id="Bns-Fn-nFq">
-                                                    <rect key="frame" x="53.5" y="143.5" width="307" height="54"/>
+                                                    <rect key="frame" x="6.5" y="143.5" width="307" height="54"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Steak Flank and Potatoes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="nPi-ma-MaS">
                                                     <rect key="frame" x="18" y="18" width="178" height="27"/>
@@ -222,7 +222,7 @@
                                                     </connections>
                                                 </button>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="iMM-QF-Nxe">
-                                                    <rect key="frame" x="62.5" y="143" width="289" height="54"/>
+                                                    <rect key="frame" x="15.5" y="143" width="289" height="54"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="4CU-8v-l65" userLabel="PrepStack">
                                                             <rect key="frame" x="0.0" y="0.0" width="83" height="54"/>
@@ -293,7 +293,7 @@
                                                     </constraints>
                                                 </stackView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ke4-OF-RC7">
-                                                    <rect key="frame" x="334" y="18" width="62" height="62"/>
+                                                    <rect key="frame" x="240" y="18" width="62" height="62"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="62" id="73b-rc-un7"/>
                                                         <constraint firstAttribute="width" secondItem="Ke4-OF-RC7" secondAttribute="height" multiplier="1:1" id="8Xg-pV-loj"/>
@@ -1072,7 +1072,7 @@
             </objects>
             <point key="canvasLocation" x="-116" y="206"/>
         </scene>
-        <!--Title-->
+        <!--Recipes-->
         <scene sceneID="tAx-k3-hOv">
             <objects>
                 <tableViewController id="TsS-cn-FSy" customClass="GroupRecipesTableViewController" customModule="TheRecipeBox" customModuleProvider="target" sceneMemberID="viewController">
@@ -1204,7 +1204,7 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Item" id="E6i-6Y-D7E"/>
-                    <navigationItem key="navigationItem" title="Title" id="eAt-KO-WTl">
+                    <navigationItem key="navigationItem" title="Recipes" id="eAt-KO-WTl">
                         <barButtonItem key="rightBarButtonItem" title="Add Recipes" id="dyL-5r-J7h">
                             <connections>
                                 <segue destination="Yri-X9-QLJ" kind="show" identifier="toAddRecipeToGroup" id="sb0-kT-GFD"/>
@@ -1253,6 +1253,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="rrs-pP-yg9"/>
-        <segue reference="hmU-eq-caW"/>
+        <segue reference="cHP-Ke-Yt9"/>
     </inferredMetricsTieBreakers>
 </document>

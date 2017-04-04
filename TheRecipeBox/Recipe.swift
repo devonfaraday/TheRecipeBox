@@ -42,6 +42,6 @@ class Recipe: Equatable {
 }
     
 func ==(lhs: Recipe, rhs: Recipe) -> Bool {
-    return lhs === rhs
+    return lhs.ingredients == rhs.ingredients
 }
 

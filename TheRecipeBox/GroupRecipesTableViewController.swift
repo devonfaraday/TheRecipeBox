@@ -12,7 +12,9 @@ class GroupRecipesTableViewController: UITableViewController {
     
     var recipes: [Recipe]? {
         didSet {
-            tableView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
     }
     
@@ -20,6 +22,11 @@ class GroupRecipesTableViewController: UITableViewController {
         super.viewDidLoad()
         tableView.rowHeight = 198
         
+        
+        
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         self.recipes = GroupController.shared.groupRecipes
         guard let group = GroupController.shared.currentGroup else { return }
         GroupController.shared.fetchRecipesIn(group: group) { (recipes) in
@@ -28,13 +35,7 @@ class GroupRecipesTableViewController: UITableViewController {
                 self.tableView.reloadData()
             }
         }
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.recipes = GroupController.shared.groupRecipes
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
+        
     }
     
     
@@ -65,6 +66,7 @@ class GroupRecipesTableViewController: UITableViewController {
             GroupController.shared.remove(recipe: recipe, fromGroup: group, completion: { (_) in
                 DispatchQueue.main.async {
                     self.recipes?.remove(at: index)
+                    GroupController.shared.groupRecipes.remove(at: index)
                 }
             })
         }

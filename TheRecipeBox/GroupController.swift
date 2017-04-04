@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 import CloudKit
 
 class GroupController {
@@ -20,7 +21,7 @@ class GroupController {
     var userGroups: [Group] = []
     var users = [User]()
     
-   
+    
     
     func fetchGroupsForCurrent(user: User, completion: @escaping() -> Void = { _ in }) {
         guard let userID = user.userRecordID else { return }
@@ -175,7 +176,7 @@ class GroupController {
     }
     
     func add(recipe: Recipe, toGroup group: Group, completion: @escaping(Error?) -> Void) {
-        GroupController.shared.groupRecipes.append(recipe)
+        
         guard let recipeID = recipe.recordID,
             let groupID = group.groupRecordID else { return }
         publicDB.fetch(withRecordID: groupID) { (record, error) in
@@ -183,11 +184,17 @@ class GroupController {
             if let record = record {
                 let recipeReference = CKReference(recordID: recipeID, action: .none)
                 
-                guard let gRecipeReferences = group.recipeReferences else { return }
+                if group.recipeReferences != nil {
+                    guard let gRecipeReferences = group.recipeReferences else { return }
+                    
+                    if !gRecipeReferences.contains(recipeReference) {
+                        
+                        group.recipeReferences?.append(recipeReference)
+                        
+                    } 
                 
-                if !gRecipeReferences.contains(recipeReference) {
-                
-                    group.recipeReferences?.append(recipeReference)
+                } else {
+                    group.recipeReferences = [recipeReference]
                 }
                 
                 guard let recipeReferences = group.recipeReferences else { return }
@@ -215,7 +222,7 @@ class GroupController {
     func remove(recipe: Recipe, fromGroup group: Group, completion: @escaping ((Error?) -> Void) = { _ in }) {
         
         guard let recipeID = recipe.recordID,
-              let groupID = group.groupRecordID else { return }
+            let groupID = group.groupRecordID else { return }
         let reference = CKReference(recordID: recipeID, action: .none)
         guard let refIndex = group.recipeReferences?.index(of: reference) else { return }
         group.recipeReferences?.remove(at: refIndex)
@@ -230,8 +237,12 @@ class GroupController {
                     print("group record saved")
                     completion(nil)
                 }
-        }
+            }
             
         }
     }
+    
+    
+   
+
 }

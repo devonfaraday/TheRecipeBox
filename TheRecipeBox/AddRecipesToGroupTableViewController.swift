@@ -18,7 +18,7 @@ class AddRecipesToGroupTableViewController: UITableViewController {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
-
+            
         }
     }
     
@@ -40,26 +40,29 @@ class AddRecipesToGroupTableViewController: UITableViewController {
         guard let recipes = recipes else { return UITableViewCell() }
         let recipe = recipes[indexPath.row]
         
-        
-        cell.imageView?.image = recipe.recipeImage
-        cell.textLabel?.text = recipe.name
+        DispatchQueue.main.async {
+            cell.imageView?.image = recipe.recipeImage
+            cell.textLabel?.text = recipe.name
+        }
         
         return cell
     }
     
     
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        }
-    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let recipe = recipes?[indexPath.row] else { return }
-        guard let currentGroup = GroupController.shared.currentGroup else { return }
+                guard let currentGroup = GroupController.shared.currentGroup else { return }
+        
         GroupController.shared.add(recipe: recipe, toGroup: currentGroup) { (_) in
             print("recipe added to group")
-            self.alertController()
+            if GroupController.shared.groupRecipes.contains(recipe) {
+                self.allReadyAddedAlert()
+            } else {
+                self.alertController()
+            }
         }
+        
     }
     
     func alertController() {
@@ -71,6 +74,15 @@ class AddRecipesToGroupTableViewController: UITableViewController {
         present(alertController, animated: true, completion: nil)
     }
     
+    func allReadyAddedAlert()  {
+        let alertController = UIAlertController(title: nil, message: "Recipe already added", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .cancel) { (_) in
+            
+        }
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: nil)
+    }
+    
     
     // MARK: - Navigation
     
@@ -79,4 +91,4 @@ class AddRecipesToGroupTableViewController: UITableViewController {
     }
     
     
-    }
+}
