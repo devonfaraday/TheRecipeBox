@@ -147,6 +147,33 @@ class GroupController {
         }
     }
     
+    func remove(user: User, fromGroup group: Group, completion: @escaping((Error?) -> Void) = { _ in }) {
+        guard let userID = user.userRecordID,
+            let groupID = group.groupRecordID else { return }
+        publicDB.fetch(withRecordID: groupID) { (record, error) in
+            if let error = error { NSLog("\(error.localizedDescription)"); completion(error) }
+            if let record = record {
+                let userReference = CKReference(recordID: userID, action: .none)
+                guard let index = group.userReferences?.index(of: userReference) else { return }
+                group.userReferences?.remove(at: index)
+                record.setValue(group.userReferences, forKey: Constants.userReferencesKey)
+                
+                self.publicDB.save(record, completionHandler: { (_, error) in
+                    if let error = error {
+                        
+                        print(error.localizedDescription)
+                        completion(error)
+                        
+                    } else {
+                        
+                        print("saving recipe to group succeeded")
+                        completion(nil)
+                    }
+                })
+            }
+        }
+    }
+    
     func add(recipe: Recipe, toGroup group: Group, completion: @escaping(Error?) -> Void) {
         GroupController.shared.groupRecipes.append(recipe)
         guard let recipeID = recipe.recordID,

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GroupDetailViewController: UIViewController, UITableViewDataSource {
+class GroupDetailViewController: UIViewController, UITableViewDataSource, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,6 +62,16 @@ class GroupDetailViewController: UIViewController, UITableViewDataSource {
             })
         }
     }
+    @IBAction func leaveGroupButtonTapped(_ sender: Any) {
+        leavingGroupAlert()
+    }
+    
+    // MARK: - Text Field Delegate Functions
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
     
     // MARK: - Helper Function
     
@@ -74,11 +84,31 @@ class GroupDetailViewController: UIViewController, UITableViewDataSource {
             }
         }
     }
+
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         
         
+    }
+    
+    // MARK: - Alert Controllers
+    
+    func leavingGroupAlert() {
+        let alertController = UIAlertController(title: "WARNING!", message: "You are about to leave this group.\nAre you sure?", preferredStyle: .alert)
+        let yesAction = UIAlertAction(title: "Yes", style: .default) { (_) in
+            guard let user = UserController.shared.currentUser,
+                let group = GroupController.shared.currentGroup else { return }
+            GroupController.shared.remove(user: user, fromGroup: group)
+            
+            _ = self.navigationController?.popViewController(animated: true)
+        }
+        let noAction = UIAlertAction(title: "No", style: .cancel) { (_) in
+            
+        }
+        alertController.addAction(yesAction)
+        alertController.addAction(noAction)
+        present(alertController, animated: true, completion: nil)
     }
     
     

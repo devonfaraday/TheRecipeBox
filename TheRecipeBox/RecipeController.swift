@@ -112,11 +112,11 @@ class RecipeController {
         }
     }
     
-    func fectchIngredientsAndInstructionsFor(recipe: Recipe, completion: @escaping([Ingredient], [Instruction]) -> Void) {
-        guard let recipeID = recipe.recordID else { return }
-        
-        let sortDescriptors = NSSortDescriptor(key: , ascending: <#T##Bool#>)
-    }
+//    func fectchIngredientsAndInstructionsFor(recipe: Recipe, completion: @escaping([Ingredient], [Instruction]) -> Void) {
+//        guard let recipeID = recipe.recordID else { return }
+//        
+//        let sortDescriptors = NSSortDescriptor(key: , ascending: <#T##Bool#>)
+//    }
     
     func fetchIngredientsFor(recipe: Recipe, completion: @escaping([Ingredient]) -> Void) {
         guard let recipeRecordID = recipe.recordID else { return }
