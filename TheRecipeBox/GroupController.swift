@@ -15,13 +15,27 @@ class GroupController {
     static let shared = GroupController()
     let publicDB = CKContainer.default().publicCloudDatabase
     
-    var groups = [Group]()
+    var allGroups = [Group]()
     var currentGroup: Group?
     var groupRecipes: [Recipe] = []
-    var userGroups: [Group] = []
+    var userGroups = [Group]()
     var users = [User]()
+    var allGroupsRecipes = [Recipe]()
     
-    
+    init() {
+        guard let user = UserController.shared.currentUser else { return }
+        fetchGroupsForCurrent(user: user) {
+            for group in self.userGroups {
+                self.fetchRecipesIn(group: group, completion: { (recipes) in
+                    for recipe in recipes {
+                        DispatchQueue.main.async {
+                            self.allGroupsRecipes.append(recipe)
+                        }
+                    }
+                })
+            }
+        }
+    }
     
     func fetchGroupsForCurrent(user: User, completion: @escaping() -> Void = { _ in }) {
         guard let userID = user.userRecordID else { return }
@@ -54,7 +68,8 @@ class GroupController {
             } else {
                 guard let records = records else { return }
                 let groups = records.flatMap { Group(cloudKitRecord: $0) }
-                self.groups = groups
+                self.allGroups = groups
+                
                 completion()
                 
             }
@@ -68,7 +83,7 @@ class GroupController {
     
     
     func saveToCloudKit(group: Group, completion: @escaping((Error?) -> Void) = { _ in })  {
-        self.groups.append(group)
+        self.allGroups.append(group)
         self.userGroups.append(group)
         UserController.shared.userGroups.append(group)
         guard let user = UserController.shared.currentUser else { return }
@@ -191,8 +206,8 @@ class GroupController {
                         
                         group.recipeReferences?.append(recipeReference)
                         
-                    } 
-                
+                    }
+                    
                 } else {
                     group.recipeReferences = [recipeReference]
                 }
@@ -241,8 +256,4 @@ class GroupController {
             
         }
     }
-    
-    
-   
-
 }

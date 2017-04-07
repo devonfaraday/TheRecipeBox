@@ -18,6 +18,7 @@ class RecipeController {
     private let cloudKitManager = CloudKitManager()
     
     var currentUser: User?
+    var recipeOwnerProfileImage: UIImage?
     
     // MARK: - Recipe Functions
     
@@ -156,6 +157,19 @@ class RecipeController {
                 let instructions = unSortedInstructions.sorted(by: { $0.index < $1.index })
                 
                 completion(instructions)
+            }
+        }
+    }
+    
+    // Could be fine tuned to get only users from the groups the user is a part of.
+    func fetchProfileImageOfRecipeOwner(recipe: Recipe, completion: @escaping(UIImage) -> Void) {
+        guard let userReference = recipe.userReference else { return }
+        for user in UserController.shared.allUsers {
+            guard let userID = user.userRecordID else { return }
+            let reference = CKReference(recordID: userID, action: .none)
+            if reference == userReference  {
+                self.recipeOwnerProfileImage = user.profilePhoto
+                completion(user.profilePhoto)
             }
         }
     }

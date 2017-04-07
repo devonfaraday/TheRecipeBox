@@ -30,6 +30,17 @@ class ProfileFeedTableViewCell: UITableViewCell {
     // MARK: - Helper Functions
     
     func updateViews() {
+        guard let recipe = recipe else { return }
+        recipePhotoImageView.image = recipe.recipeImage
+        recipeNameLabel.text = recipe.name
+        prepTimeLabel.text = recipe.prepTime
+        servingSizeLabel.text = recipe.servingSize
+        cookTimeLabel.text = recipe.cookTime
+        RecipeController.shared.fetchProfileImageOfRecipeOwner(recipe: recipe) { (image) in
+            DispatchQueue.main.async {
+                self.profileImageView.image = image
+            }
+        }
         
     }
     

@@ -20,9 +20,10 @@ class UserController {
     var appleUserRecordID: CKRecordID?
     let CKManager = CloudKitManager()
     var currentUser: User?
-    
+    var allUsers = [User]()
     var currentRecipes: [Recipe] = []
     var userGroups = [Group]()
+    var userGroupsRecipes = [Recipe]()
     
     init() {
     CKContainer.default().fetchUserRecordID { (recordID, _) in
@@ -44,12 +45,14 @@ class UserController {
             GroupController.shared.fetchGroupsForCurrent(user: user) {
                 self.userGroups = GroupController.shared.userGroups
             }
+            
         }
         
-        
-        
-        
+        fetchAllUsers { 
+            print("Users Fetched")
+        }
     }
+    
     func fetchRecipesForCurrent(user: User, completion: @escaping([Recipe]) -> Void) {
         
         guard let userID = user.userRecordID else { return }
@@ -69,8 +72,6 @@ class UserController {
             
         }
     }
-    
-    
     
     func addUserToGroupRecord(user: User, group: Group, completion: @escaping(Error?) -> Void = { _ in }) {
         
@@ -103,6 +104,7 @@ class UserController {
                         }
                     }
                     print("saving succeeded")
+                    
                     completion(nil)
                 })
             }
@@ -128,8 +130,6 @@ class UserController {
         }
     }
     
-    
-    
     func createUserWith(username: String, profilePhotoData: Data?, completion: @escaping (User?) -> Void) {
         
         guard let appleUserRecordID = appleUserRecordID else { return }
@@ -152,6 +152,59 @@ class UserController {
             completion(currentUser)
         }
         
+    }
+    
+    
+    
+    func fetchAllUsers(completion: @escaping() -> Void) {
+        let predicate = NSPredicate(value: true)
+        let query = CKQuery(recordType: Constants.userRecordType, predicate: predicate)
+        publicDatabase.perform(query, inZoneWith: nil) { (records, error) in
+            if let error = error {
+                print("an error accured \(error)")
+                completion()
+                return
+            } else {
+                guard let records = records else { return }
+                let users = records.flatMap { User(cloudKitRecord: $0) }
+                self.allUsers = users
+                
+                completion()
+                
+            }
+        }
+    }
+    
+    func fetchGroupsRecipes(completion: @escaping([Recipe]) -> Void) {
+        
+    }
+    
+    
+    
+    // MARK: - Subscription
+    
+    
+    func subscribeToBeingAddedToNewGroup() {
+        
+        guard let currentUser = currentUser, let userRecordID = currentUser.userRecordID else { return }
+        
+        let userReference = CKReference(recordID: userRecordID, action: .none)
+        
+        let predicate = NSPredicate(format: "userReferences CONTAINS %@", userReference)
+        let notificationInfo = CKNotificationInfo()
+        notificationInfo.alertLocalizationKey = "You've Been Added to a new group"
+        notificationInfo.shouldBadge = true
+        
+        
+        let subscription = CKQuerySubscription(recordType: "Group", predicate: predicate, options: .firesOnRecordUpdate)
+        
+        subscription.notificationInfo = notificationInfo
+        
+        CKContainer.default().publicCloudDatabase.save(subscription) { (subscription, error) in
+            if let error = error {
+                NSLog("\(error.localizedDescription)")
+            }
+        }
     }
 }
 

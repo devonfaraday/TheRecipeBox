@@ -41,6 +41,7 @@
 		FDD7D9791E7AE02F00B19F21 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD7D9781E7AE02F00B19F21 /* Group.swift */; };
 		FDD7D97D1E7AFB7D00B19F21 /* UsernameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD7D97C1E7AFB7C00B19F21 /* UsernameViewController.swift */; };
 		FDE6BED81E92F7A30045C865 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE6BED71E92F7A30045C865 /* LoadingView.swift */; };
+		FDE6BEDA1E946EDA0045C865 /* sampleCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE6BED91E946EDA0045C865 /* sampleCode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -81,6 +82,7 @@
 		FDD7D9781E7AE02F00B19F21 /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		FDD7D97C1E7AFB7C00B19F21 /* UsernameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsernameViewController.swift; sourceTree = "<group>"; };
 		FDE6BED71E92F7A30045C865 /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		FDE6BED91E946EDA0045C865 /* sampleCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sampleCode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,7 +118,6 @@
 			isa = PBXGroup;
 			children = (
 				FDD7D94B1E773D3B00B19F21 /* TheRecipeBox.entitlements */,
-				FD7561FB1E75361B0059DE3D /* AppDelegate.swift */,
 				FDD7D9401E77390C00B19F21 /* Models */,
 				FDD7D93F1E77390A00B19F21 /* ModelControllers */,
 				FDD7D93E1E77390500B19F21 /* ViewControllers */,
@@ -142,7 +143,6 @@
 		FDC0FA2E1E8C058400D32052 /* RecipeViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				FDD7D93A1E7738B600B19F21 /* ProfileViewController.swift */,
 				FDD7D9681E785AF100B19F21 /* AddRecipeViewController.swift */,
 				FDD7D96A1E78A3D500B19F21 /* RecipeListTableViewController.swift */,
 			);
@@ -172,6 +172,7 @@
 		FDD7D93E1E77390500B19F21 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				FDD7D93A1E7738B600B19F21 /* ProfileViewController.swift */,
 				FDC0FA2E1E8C058400D32052 /* RecipeViewControllers */,
 				FDC0FA2D1E8C057800D32052 /* GroupViewControllers */,
 				FD7561FF1E75361B0059DE3D /* Main.storyboard */,
@@ -194,6 +195,7 @@
 		FDD7D9401E77390C00B19F21 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				FD7561FB1E75361B0059DE3D /* AppDelegate.swift */,
 				FDD7D9771E7AE01D00B19F21 /* Group */,
 				FDD7D9721E7A58AD00B19F21 /* Users */,
 				FDD7D9551E77441C00B19F21 /* Recipe */,
@@ -207,6 +209,7 @@
 				FD7562021E75361B0059DE3D /* Assets.xcassets */,
 				FD7562041E75361B0059DE3D /* LaunchScreen.storyboard */,
 				FD7562071E75361B0059DE3D /* Info.plist */,
+				FDE6BED91E946EDA0045C865 /* sampleCode.swift */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -355,6 +358,7 @@
 				FDA531321E7BB97300DC3DB3 /* GroupController.swift in Sources */,
 				FDD7D9711E79B0C400B19F21 /* UIImage+CKAsset.swift in Sources */,
 				FDE6BED81E92F7A30045C865 /* LoadingView.swift in Sources */,
+				FDE6BEDA1E946EDA0045C865 /* sampleCode.swift in Sources */,
 				FD7561FC1E75361B0059DE3D /* AppDelegate.swift in Sources */,
 				FDD7D96B1E78A3D500B19F21 /* RecipeListTableViewController.swift in Sources */,
 				FDD7D94A1E773BE000B19F21 /* Constants.swift in Sources */,
@@ -482,7 +486,7 @@
 		FD75620B1E75361B0059DE3D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				CODE_SIGN_ENTITLEMENTS = TheRecipeBox/TheRecipeBox.entitlements;
 				DEVELOPMENT_TEAM = 9Q8KVW72F5;
 				INFOPLIST_FILE = TheRecipeBox/Info.plist;
@@ -490,13 +494,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.christianmcmullin.TheRecipeBox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		FD75620C1E75361B0059DE3D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				CODE_SIGN_ENTITLEMENTS = TheRecipeBox/TheRecipeBox.entitlements;
 				DEVELOPMENT_TEAM = 9Q8KVW72F5;
 				INFOPLIST_FILE = TheRecipeBox/Info.plist;
@@ -504,6 +509,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.christianmcmullin.TheRecipeBox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

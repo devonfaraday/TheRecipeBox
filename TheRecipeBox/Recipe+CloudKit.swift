@@ -52,13 +52,6 @@ extension CKRecord {
         self.setValue(recipe.cookTime, forKey: Constants.cookTimeKey)
         self.setValue(recipe.userReference, forKey: Constants.userReferenceKey)
         self[Constants.recipeImageKey] = CKAsset(fileURL: recipe.temporaryPhotoURL)
-        
-        /* 
-         let recordID = CKRecordID(recordName: UUID().uuidString)
-         self.init(recordType: post.recordType, recordID: recordID)
-         
-         self[Post.timestampKey] = post.timestamp as CKRecordValue?
-         self[Post.photoDataKey] = CKAsset(fileURL: post.temporaryPhotoURL)
-         */
+   
     }
 }

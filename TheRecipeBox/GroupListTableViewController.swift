@@ -7,16 +7,22 @@
 //
 
 import UIKit
+import NotificationCenter
 
 class GroupListTableViewController: UITableViewController {
     
+    // MARK: - Properties
     
-    var userGroups = [Group]()
     
+    
+    
+    // MARK: - View Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        tableView.refreshControl = refreshControl
+        refreshControl?.addTarget(self, action: #selector(performUpdate), for: .valueChanged)
+        NotificationCenter.default.addObserver(self, selector: #selector(performUpdate), name: Constants.groupDidChangeNotificationName, object: nil)
     }
     
     
@@ -25,6 +31,8 @@ class GroupListTableViewController: UITableViewController {
         
         tableView.reloadData()
     }
+    
+    // MARK: - Data Source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return GroupController.shared.userGroups.count
@@ -77,6 +85,17 @@ class GroupListTableViewController: UITableViewController {
         
     }
     
-    // MARK: - Add Group Alert Controller
+    // MARK: - Notification Update Function
+    
+    func performUpdate() {
+        guard let currentUser = UserController.shared.currentUser else { return }
+        GroupController.shared.fetchGroupsForCurrent(user: currentUser) {
+            
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+                self.view.layoutSubviews()
+            }
+        }
+    }
     
 }

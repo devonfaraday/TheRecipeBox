@@ -60,7 +60,7 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
     // MARK: - Scroll View Function
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-
+        
         
         if tableViewTopConstraint.constant <= 8 && tableViewTopConstraint.constant >= -recipeImageView.frame.height - 50 {
             tableViewTopConstraint.constant -= scrollView.contentOffset.y
@@ -83,7 +83,7 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
-            return "\(sections[0])" 
+            return "\(sections[0])"
         } else {
             return "\(sections[1])"
         }
@@ -126,7 +126,7 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
                 ingredients.remove(at: ingredientIndex)
                 print("Removing \(ingredient) from index \(ingredientIndex)")
             }
-         }
+        }
         if indexPath.section == 1 {
             if recipe == nil && !instructions.isEmpty && editingStyle == .delete {
                 
@@ -173,17 +173,17 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
         return true
     }
     
-//    func textFieldDidBeginEditing(_ textField: UITextField) {
-//        isEditingTextfields = true
-//        updateTextFieldStacksConstraint()
-//        
-//    }
-//    
-//    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
-//        isEditingTextfields = false
-//        updateTextFieldStacksConstraint()
-//    }
-//    
+    //    func textFieldDidBeginEditing(_ textField: UITextField) {
+    //        isEditingTextfields = true
+    //        updateTextFieldStacksConstraint()
+    //
+    //    }
+    //
+    //    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
+    //        isEditingTextfields = false
+    //        updateTextFieldStacksConstraint()
+    //    }
+    //
     // MARK: - UI Functions
     
     
@@ -224,13 +224,7 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
                 }
             })
         } else {
-            let recipe = Recipe(name: name, prepTime: prepTime, servingSize: servings, cookTime: cookTime, recipeImageData: nil)
-            
-            RecipeController.shared.addRecipeToCloudKit(recipe: recipe, ingredients: ingredients, instructions: instructions, completion: { (error) in
-                if let error = error {
-                    NSLog("\(error.localizedDescription)\nProblem saving recipe without photo")
-                }
-            })
+            noRecipePhotoAlert()
         }
         _ = navigationController?.popViewController(animated: true)
     }
@@ -330,12 +324,9 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
             }
             
         }
+    }
     
     
-    
-}
-    
-
     func updateIngredients() {
         guard let recipe = recipe else { return }
         ingredients = recipe.ingredients
@@ -355,27 +346,43 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
         let cookTimeHeight = NSLayoutConstraint(item: cookTimeTextField, attribute: .height, relatedBy: .equal, toItem: servingsTextField, attribute: .height, multiplier: 1.0, constant: 0)
         view.addConstraints([tableViewTopContraint, servingSizeHeight, servingSizeTopConstraint, cookTimeTopConstraint, cookTimeHeight])
     }
-//    
-//    func updateTextFieldStacksConstraint() {
-//        
-//        let stackViewTopConstraint = NSLayoutConstraint(item: textFieldStack, attribute: .top, relatedBy: .equal, toItem: recipeImageView, attribute: .top, multiplier: 1.0, constant: 0)
-//        let defaultStackConstraint = NSLayoutConstraint(item: textFieldStack, attribute: .top, relatedBy: .equal, toItem: recipeImageView, attribute: .bottom, multiplier: 1.0, constant: 8.0)
-//
-//        if isEditingTextfields {
-//            recipeImageView.isHidden = true
-//            addPhotoButton.isHidden = true
-//            addPhotoButton.isEnabled = false
-//            
-//            NSLayoutConstraint.activate([stackViewTopConstraint])
-//            
-//        } else if !isEditingTextfields {
-//            recipeImageView.isHidden = false
-//            addPhotoButton.isHidden = false
-//            addPhotoButton.isEnabled = true
-//            NSLayoutConstraint.deactivate([stackViewTopConstraint])
-//            NSLayoutConstraint.activate([defaultStackConstraint])
-//        }
-//    }
+    
+    
+    //
+    //    func updateTextFieldStacksConstraint() {
+    //
+    //        let stackViewTopConstraint = NSLayoutConstraint(item: textFieldStack, attribute: .top, relatedBy: .equal, toItem: recipeImageView, attribute: .top, multiplier: 1.0, constant: 0)
+    //        let defaultStackConstraint = NSLayoutConstraint(item: textFieldStack, attribute: .top, relatedBy: .equal, toItem: recipeImageView, attribute: .bottom, multiplier: 1.0, constant: 8.0)
+    //
+    //        if isEditingTextfields {
+    //            recipeImageView.isHidden = true
+    //            addPhotoButton.isHidden = true
+    //            addPhotoButton.isEnabled = false
+    //
+    //            NSLayoutConstraint.activate([stackViewTopConstraint])
+    //
+    //        } else if !isEditingTextfields {
+    //            recipeImageView.isHidden = false
+    //            addPhotoButton.isHidden = false
+    //            addPhotoButton.isEnabled = true
+    //            NSLayoutConstraint.deactivate([stackViewTopConstraint])
+    //            NSLayoutConstraint.activate([defaultStackConstraint])
+    //        }
+    //    }
+    
+    // MARK: - Alert Controllers
+    
+    func noRecipePhotoAlert() {
+        let alertController = UIAlertController(title: nil, message: "Please add photo", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let uploadAction = UIAlertAction(title: "Upload Photo", style: .default) { (_) in
+            self.addPhotoActionSheet()
+        }
+        alertController.addAction(cancelAction)
+        alertController.addAction(uploadAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
     
 }
 

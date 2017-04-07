@@ -8,16 +8,16 @@
 
 import UIKit
 
-class GroupDetailViewController: UIViewController, UITableViewDataSource, UITextFieldDelegate {
+class GroupDetailViewController: UIViewController, UITableViewDataSource, UITextFieldDelegate, UISearchBarDelegate, UITableViewDelegate {
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-    }
     
     @IBOutlet weak var groupNameTextLabel: UILabel!
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
+    
+    var searchActive: Bool = false
+    var searchResults = [User]()
     
     var group: Group? {
         didSet {
@@ -27,6 +27,7 @@ class GroupDetailViewController: UIViewController, UITableViewDataSource, UIText
             updateViews()
         }
     }
+    
     var users: [User] = [] {
         didSet {
             DispatchQueue.main.async {
@@ -34,33 +35,61 @@ class GroupDetailViewController: UIViewController, UITableViewDataSource, UIText
             }
         }
     }
+    var usernames: [String] {
+        return users.map { $0.username }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return users.count
+        if searchActive {
+            return searchResults.count
+        } else {
+            return users.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.userCellIdentifier, for: indexPath)
-        let user = users[indexPath.row]
         
-        cell.textLabel?.text = user.username
         
+        if searchActive {
+            let searchedUser = searchResults[indexPath.row]
+            cell.textLabel?.text = searchedUser.username
+        } else {
+            let user = users[indexPath.row]
+            cell.textLabel?.text = user.username
+        }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if searchActive {
+        guard let group = group else { return }
+        let user = searchResults[indexPath.row]
+        let username = user.username
+        if !usernames.contains(username) {
+            
+            UserController.shared.checkForUser(username: username) { (user) in
+                UserController.shared.addUserToGroupRecord(user: user, group: group, completion: { (_) in
+                    DispatchQueue.main.async {
+                        self.users.append(user)
+                    }
+                })
+            }
+        }
+        
+        searchBar.text = nil
+        searchActive = false
+        tableView.reloadData()
+        }
     }
     
     // MARK: - UI Functions
     
-    @IBAction func addUserButtonTapped(_ sender: Any) {
-        guard let username = usernameTextField.text,
-            let group = group else { return }
-        UserController.shared.checkForUser(username: username) { (user) in
-            UserController.shared.addUserToGroupRecord(user: user, group: group, completion: { (_) in
-                DispatchQueue.main.async {
-                    self.users.append(user)
-                }
-            })
-        }
-    }
     @IBAction func leaveGroupButtonTapped(_ sender: Any) {
         leavingGroupAlert()
     }
@@ -72,6 +101,45 @@ class GroupDetailViewController: UIViewController, UITableViewDataSource, UIText
         return true
     }
     
+    
+    
+    // MARK: - Search Bar Functions
+    
+
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchActive = false
+        searchBar.text = nil
+        searchBar.resignFirstResponder()
+        tableView.reloadData()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchActive = true
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchActive = false
+        searchBar.resignFirstResponder()
+    }
+    
+    
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        searchResults = UserController.shared.allUsers.filter({ (user) -> Bool in
+            let username = user.username
+            let range = username.contains(searchText)
+            return range
+        })
+        if (searchResults.count == 0) {
+            searchActive = false
+        } else {
+            searchActive = true
+        }
+        self.tableView.reloadData()
+        
+    }
     // MARK: - Helper Function
     
     func updateViews() {

@@ -51,6 +51,7 @@ struct Constants {
     // MARK: - Notification Names
     
     static let recipesDidChangeNotificationName = Notification.Name("recipesDidChange")
+    static let groupDidChangeNotificationName = Notification.Name("groupDidChange")
     
      // MARK: - Cloud Kit Databases
     

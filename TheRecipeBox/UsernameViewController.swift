@@ -62,6 +62,7 @@ class UsernameViewController: UIViewController, UIImagePickerControllerDelegate,
                     LoadingIndicatorView.hide()
                 }
             })
+//            UserController.shared.subscribeToBeingAddedToNewGroup()
         } else {
             addPhotoAlert()
         }
