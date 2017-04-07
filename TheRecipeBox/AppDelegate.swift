@@ -40,6 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if cloudKitNotification.notificationType == CKNotificationType.query {
             DispatchQueue.main.async {
                 NotificationCenter.default.post(name: Constants.groupDidChangeNotificationName, object: nil)
+                
             }
         }
         

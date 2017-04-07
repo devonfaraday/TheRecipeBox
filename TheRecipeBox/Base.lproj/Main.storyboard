@@ -190,11 +190,11 @@
                                 <rect key="frame" x="0.0" y="178" width="414" height="558"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="profileFeedCell" rowHeight="198" id="Y80-9G-wG1" customClass="ProfileFeedTableViewCell" customModule="TheRecipeBox" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="profileFeedCell" rowHeight="198" id="Y80-9G-wG1" customClass="ProfileFeedTableViewCell" customModule="TheRecipeBox" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="198"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Y80-9G-wG1" id="Yvh-e5-rZg">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="197.66666666666666"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="197.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6zk-um-xeX">
@@ -222,7 +222,7 @@
                                                     </connections>
                                                 </button>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="iMM-QF-Nxe">
-                                                    <rect key="frame" x="62.666666666666657" y="143" width="289" height="54"/>
+                                                    <rect key="frame" x="63" y="143" width="289" height="54"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="4CU-8v-l65" userLabel="PrepStack">
                                                             <rect key="frame" x="0.0" y="0.0" width="83" height="54"/>
@@ -256,7 +256,7 @@
                                                                     <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.25503411091549294" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <size key="shadowOffset" width="0.5" height="-0.5"/>
                                                                 </label>
-                                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZnG-vN-1Ze">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZnG-vN-1Ze">
                                                                     <rect key="frame" x="0.0" y="33" width="83" height="21"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -267,9 +267,9 @@
                                                             </subviews>
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="EFI-uR-DWk" userLabel="CookStack">
-                                                            <rect key="frame" x="206.00000000000003" y="0.0" width="82.999999999999972" height="54"/>
+                                                            <rect key="frame" x="206" y="0.0" width="83" height="54"/>
                                                             <subviews>
-                                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cook Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Cji-dw-69P">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cook Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Cji-dw-69P">
                                                                     <rect key="frame" x="0.0" y="0.0" width="83" height="21"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -277,7 +277,7 @@
                                                                     <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.25503411091549294" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <size key="shadowOffset" width="0.5" height="-0.5"/>
                                                                 </label>
-                                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zOG-9o-4vc">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zOG-9o-4vc">
                                                                     <rect key="frame" x="0.0" y="33" width="83" height="21"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -324,6 +324,7 @@
                                             <outlet property="recipeNameLabel" destination="nPi-ma-MaS" id="EdH-7Y-t8l"/>
                                             <outlet property="recipePhotoImageView" destination="6zk-um-xeX" id="Fh1-uR-CJK"/>
                                             <outlet property="servingSizeLabel" destination="ZnG-vN-1Ze" id="iEI-nY-5JE"/>
+                                            <segue destination="ldY-Bg-hi3" kind="show" identifier="toRecipeFromProfile" id="7Eo-qD-yky"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -417,6 +418,7 @@
                         <outlet property="nameLabel" destination="UUF-OZ-4Uh" id="mCZ-0o-BVu"/>
                         <outlet property="profileImageView" destination="Wfm-Lp-2Fp" id="hII-bD-06R"/>
                         <outlet property="recipesNumberLabel" destination="l0M-Qc-lHv" id="YvP-UM-woq"/>
+                        <outlet property="tableView" destination="HTl-sE-bPM" id="kHh-9f-sWZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M6y-6J-v9s" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1257,6 +1259,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="rrs-pP-yg9"/>
-        <segue reference="cHP-Ke-Yt9"/>
+        <segue reference="7Eo-qD-yky"/>
     </inferredMetricsTieBreakers>
 </document>

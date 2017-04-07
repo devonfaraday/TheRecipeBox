@@ -166,8 +166,7 @@ class RecipeController {
         guard let userReference = recipe.userReference else { return }
         for user in UserController.shared.allUsers {
             guard let userID = user.userRecordID else { return }
-            let reference = CKReference(recordID: userID, action: .none)
-            if reference == userReference  {
+            if userID == userReference.recordID  {
                 self.recipeOwnerProfileImage = user.profilePhoto
                 completion(user.profilePhoto)
             }

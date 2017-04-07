@@ -23,7 +23,7 @@ class UserController {
     var allUsers = [User]()
     var currentRecipes: [Recipe] = []
     var userGroups = [Group]()
-    var userGroupsRecipes = [Recipe]()
+    var allGroupsRecipes = [Recipe]()
     
     init() {
     CKContainer.default().fetchUserRecordID { (recordID, _) in
@@ -175,10 +175,68 @@ class UserController {
         }
     }
     
-    func fetchGroupsRecipes(completion: @escaping([Recipe]) -> Void) {
+    func fetchGroupsRecipesFor(user: User, completion: @escaping([Recipe]) -> Void) {
+        var recipeRecordIDs = [CKRecordID]()
+        var recipes = [Recipe]()
         
+        guard let userID = user.userRecordID else { return }
+        let groupPredicate = NSPredicate(format: "userReferences CONTAINS %@", userID)
+        let groupQuery = CKQuery(recordType: Constants.groupRecordType, predicate: groupPredicate)
+        publicDatabase.perform(groupQuery, inZoneWith: nil) { (records, error) in
+            if let error = error {
+                NSLog(error.localizedDescription)
+                completion([])
+                return
+            } else {
+                guard let records = records else { return }
+                let groups = records.flatMap { Group(cloudKitRecord: $0) }
+                for group in groups {
+                    guard let recipeReferences = group.recipeReferences else { return }
+                    for recipe in recipeReferences {
+                        let recordID = recipe.recordID
+                        recipeRecordIDs.append(recordID)
+                    }
+                }
+                let group = DispatchGroup()
+                for id in recipeRecordIDs {
+                    group.enter()
+                    self.publicDatabase.fetch(withRecordID: id, completionHandler: { (record, _) in
+                        guard let record = record else { return }
+                        guard let recipe = Recipe(cloudKitRecord: record) else { return }
+                        recipes.append(recipe)
+                        group.leave()
+                    })
+                }
+                group.notify(queue: DispatchQueue.main, execute: { 
+                    self.allGroupsRecipes = recipes
+                    completion(recipes)
+                })
+        }
+        }
     }
     
+    
+    /*
+     
+     func fetchMessages() {
+     
+     let sortDescriptor = NSSortDescriptor(key: "timestamp", ascending: false)
+     
+     cloudKitManager.fetchRecords(ofType: "Message", sortDescriptors: [sortDescriptor]) { (records, error) in
+     
+     if let error = error { print(error.localizedDescription) }
+     
+     guard let records = records else { print("No records returned"); return }
+     
+     let messages = records.flatMap({ Message(cloudKitRecord: $0) })
+     
+     self.messages = messages
+     
+     }
+     
+     }
+     
+     */
     
     
     // MARK: - Subscription
@@ -193,7 +251,7 @@ class UserController {
         let predicate = NSPredicate(format: "userReferences CONTAINS %@", userReference)
         let notificationInfo = CKNotificationInfo()
         notificationInfo.alertLocalizationKey = "You've Been Added to a new group"
-        notificationInfo.shouldBadge = true
+        notificationInfo.shouldBadge = false
         
         
         let subscription = CKQuerySubscription(recordType: "Group", predicate: predicate, options: .firesOnRecordUpdate)

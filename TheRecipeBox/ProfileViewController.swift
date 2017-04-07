@@ -14,6 +14,8 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
     // MARK: - Properties
     let CKManager = CloudKitManager()
     var currentUser: User?
+    var allGroupsRecipes = [Recipe]()
+    
     
     
     @IBOutlet weak var profileImageView: UIImageView!
@@ -51,9 +53,15 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
                     UserController.shared.userGroups = GroupController.shared.userGroups
                 }
             }
-            
+            UserController.shared.fetchGroupsRecipesFor(user: user, completion: { (recipes) in
+                DispatchQueue.main.async {
+                    self.allGroupsRecipes = recipes
+                    self.tableView.reloadData()
+                }
+            })
         }
         
+       
         NotificationCenter.default.addObserver(self, selector: #selector(performUpdate), name: Constants.groupDidChangeNotificationName, object: nil)
         
         profileImageDisplay()
@@ -72,19 +80,21 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
             self.profileImageDisplay()
         }
     }
-
+    
     // MARK: - Table view dataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return UserController.shared.allGroupsRecipes.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.profileFeedIdentifier, for: indexPath) as? ProfileFeedTableViewCell else { return ProfileFeedTableViewCell() }
         
-        let recipe = GroupController.shared.allGroupsRecipes[indexPath.row]
+        let recipe = UserController.shared.allGroupsRecipes[indexPath.row]
         
         cell.recipe = recipe
+        
+        
         
         
         
@@ -106,9 +116,11 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
             
             //        destinationVC.recipes = UserController.shared.currentRecipes
         }
-        if segue.identifier == Constants.toGroupListSegue {
-//            guard let destinationVC = segue.destination as? GroupListTableViewController else { return }
-//            destinationVC.userGroups = UserController.shared.userGroups
+        if segue.identifier == "toRecipeFromProfile" {
+            guard let indexPath = tableView.indexPathForSelectedRow else { return }
+           guard let destinationVC = segue.destination as? AddRecipeViewController else { return }
+            let recipe = allGroupsRecipes[indexPath.row]
+             destinationVC.recipe = recipe
         }
     }
     

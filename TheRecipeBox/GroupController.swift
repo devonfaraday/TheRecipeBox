@@ -20,22 +20,9 @@ class GroupController {
     var groupRecipes: [Recipe] = []
     var userGroups = [Group]()
     var users = [User]()
-    var allGroupsRecipes = [Recipe]()
     
-    init() {
-        guard let user = UserController.shared.currentUser else { return }
-        fetchGroupsForCurrent(user: user) {
-            for group in self.userGroups {
-                self.fetchRecipesIn(group: group, completion: { (recipes) in
-                    for recipe in recipes {
-                        DispatchQueue.main.async {
-                            self.allGroupsRecipes.append(recipe)
-                        }
-                    }
-                })
-            }
-        }
-    }
+    
+    
     
     func fetchGroupsForCurrent(user: User, completion: @escaping() -> Void = { _ in }) {
         guard let userID = user.userRecordID else { return }
