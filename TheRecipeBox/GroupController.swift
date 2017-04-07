@@ -22,8 +22,6 @@ class GroupController {
     var users = [User]()
     
     
-    
-    
     func fetchGroupsForCurrent(user: User, completion: @escaping() -> Void = { _ in }) {
         guard let userID = user.userRecordID else { return }
         let predicate = NSPredicate(format: "userReferences CONTAINS %@", userID)
@@ -240,7 +238,6 @@ class GroupController {
                     completion(nil)
                 }
             }
-            
         }
     }
 }

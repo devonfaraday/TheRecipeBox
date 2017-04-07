@@ -35,6 +35,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
             
             DispatchQueue.main.async {
                 UserController.shared.currentUser = user
+                self.currentUser = user
                 self.nameLabel.text = user.username
                 self.profileImageView.image = user.profilePhoto
             }
@@ -78,6 +79,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
             self.recipesNumberLabel.text = "\(UserController.shared.currentRecipes.count)"
             self.groupsNumberLabel.text = "\(GroupController.shared.userGroups.count)"
             self.profileImageDisplay()
+            self.tableView.reloadData()
         }
     }
     
@@ -93,10 +95,6 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
         let recipe = UserController.shared.allGroupsRecipes[indexPath.row]
         
         cell.recipe = recipe
-        
-        
-        
-        
         
         return cell
     }
@@ -143,5 +141,11 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
                 self.tableView.reloadData()
             }
         }
+        UserController.shared.fetchGroupsRecipesFor(user: user, completion: { (recipes) in
+            DispatchQueue.main.async {
+                self.allGroupsRecipes = recipes
+                self.tableView.reloadData()
+            }
+        })
     }
 }

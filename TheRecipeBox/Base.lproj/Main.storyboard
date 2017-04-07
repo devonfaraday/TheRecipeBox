@@ -200,8 +200,12 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6zk-um-xeX">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="198"/>
                                                 </imageView>
+                                                <imageView userInteractionEnabled="NO" alpha="0.25" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="F9L-UG-bdY">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="198"/>
+                                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Line Seperator White" translatesAutoresizingMaskIntoConstraints="NO" id="Bns-Fn-nFq">
-                                                    <rect key="frame" x="53.666666666666657" y="143.66666666666666" width="307" height="54"/>
+                                                    <rect key="frame" x="53" y="143" width="307" height="54"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Steak Flank and Potatoes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="nPi-ma-MaS">
                                                     <rect key="frame" x="18" y="18" width="178" height="27"/>
@@ -214,13 +218,6 @@
                                                     <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.25503411091549294" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <size key="shadowOffset" width="0.5" height="-0.5"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iwd-Ss-ooN">
-                                                    <rect key="frame" x="241" y="19" width="62" height="62"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <connections>
-                                                        <action selector="profileImageButtonTapped:" destination="Y80-9G-wG1" eventType="touchUpInside" id="ftv-C1-kKp"/>
-                                                    </connections>
-                                                </button>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="iMM-QF-Nxe">
                                                     <rect key="frame" x="63" y="143" width="289" height="54"/>
                                                     <subviews>
@@ -303,11 +300,15 @@
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="Bns-Fn-nFq" secondAttribute="bottom" id="3Rs-mb-A1m"/>
                                                 <constraint firstAttribute="bottom" secondItem="6zk-um-xeX" secondAttribute="bottom" id="4a0-Mo-7Wq"/>
+                                                <constraint firstItem="F9L-UG-bdY" firstAttribute="width" secondItem="6zk-um-xeX" secondAttribute="width" id="Esc-5b-ZyM"/>
+                                                <constraint firstItem="F9L-UG-bdY" firstAttribute="centerX" secondItem="6zk-um-xeX" secondAttribute="centerX" id="HfS-YH-yFE"/>
                                                 <constraint firstAttribute="bottom" secondItem="iMM-QF-Nxe" secondAttribute="bottom" id="Je7-O4-dvJ"/>
                                                 <constraint firstItem="nPi-ma-MaS" firstAttribute="leading" secondItem="Yvh-e5-rZg" secondAttribute="leadingMargin" constant="10" id="KBj-kQ-FsH"/>
                                                 <constraint firstAttribute="bottom" secondItem="6zk-um-xeX" secondAttribute="bottom" id="KWL-s9-BmT"/>
+                                                <constraint firstItem="F9L-UG-bdY" firstAttribute="centerY" secondItem="6zk-um-xeX" secondAttribute="centerY" id="Me3-G0-nLX"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="Ke4-OF-RC7" secondAttribute="trailing" constant="10" id="Ncd-Uo-DfA"/>
                                                 <constraint firstItem="Bns-Fn-nFq" firstAttribute="centerX" secondItem="Yvh-e5-rZg" secondAttribute="centerX" id="aO7-nD-oRL"/>
+                                                <constraint firstItem="F9L-UG-bdY" firstAttribute="height" secondItem="6zk-um-xeX" secondAttribute="height" id="apV-wZ-w1Y"/>
                                                 <constraint firstItem="iMM-QF-Nxe" firstAttribute="centerX" secondItem="Yvh-e5-rZg" secondAttribute="centerX" id="dMx-9I-PCW"/>
                                                 <constraint firstItem="6zk-um-xeX" firstAttribute="leading" secondItem="Yvh-e5-rZg" secondAttribute="leading" id="jpA-Oa-zFc"/>
                                                 <constraint firstItem="Ke4-OF-RC7" firstAttribute="top" secondItem="Yvh-e5-rZg" secondAttribute="topMargin" constant="10" id="rIn-yK-3uY"/>
@@ -423,7 +424,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M6y-6J-v9s" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="690" y="203.87323943661971"/>
+            <point key="canvasLocation" x="688.40579710144937" y="203.80434782608697"/>
         </scene>
         <!--Groups-->
         <scene sceneID="AEd-dY-Bqk">
@@ -529,7 +530,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="els-1F-cI1">
                                 <rect key="frame" x="0.0" y="64" width="414" height="104.66666666666666"/>
                                 <subviews>
-                                    <searchBar contentMode="redraw" placeholder="Search" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OXy-GU-934">
+                                    <searchBar contentMode="redraw" placeholder="Search To Add User" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OXy-GU-934">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <scopeButtonTitles>
@@ -931,6 +932,11 @@
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Had-ue-4HQ">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="208"/>
                                         </imageView>
+                                        <imageView userInteractionEnabled="NO" alpha="0.25" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wie-I1-6q7">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="209"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Steak Flank and Potatoes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="BKl-8A-Fuh">
                                             <rect key="frame" x="18" y="18" width="249" height="35"/>
                                             <constraints>
@@ -1058,7 +1064,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xjB-iP-pm3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1470" y="205.98591549295776"/>
+            <point key="canvasLocation" x="1469.5652173913045" y="205.43478260869566"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="RsJ-hQ-a85">
@@ -1096,6 +1102,9 @@
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fqZ-jQ-j7o">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="198"/>
+                                        </imageView>
+                                        <imageView userInteractionEnabled="NO" alpha="0.25" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9EN-bP-IFj">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="198"/>
                                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Steak Flank and Potatoes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="nkH-Bu-Wrw">
@@ -1108,10 +1117,10 @@
                                             <size key="shadowOffset" width="0.5" height="-0.5"/>
                                         </label>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Line Seperator White" translatesAutoresizingMaskIntoConstraints="NO" id="ryq-LP-3Xl">
-                                            <rect key="frame" x="53.666666666666657" y="136.66666666666666" width="307" height="54"/>
+                                            <rect key="frame" x="53" y="136" width="307" height="54"/>
                                         </imageView>
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="yxK-qb-Vjo">
-                                            <rect key="frame" x="62.666666666666657" y="136.66666666666666" width="289" height="54"/>
+                                            <rect key="frame" x="62" y="136" width="289" height="54"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="dgt-Yz-2wq" userLabel="PrepStack">
                                                     <rect key="frame" x="0.0" y="0.0" width="83" height="54"/>
@@ -1156,7 +1165,7 @@
                                                     </subviews>
                                                 </stackView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="qeu-ZY-CaN" userLabel="CookStack">
-                                                    <rect key="frame" x="206.00000000000003" y="0.0" width="82.999999999999972" height="54"/>
+                                                    <rect key="frame" x="206" y="0.0" width="83" height="54"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cook Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dV6-Z0-rzt">
                                                             <rect key="frame" x="0.0" y="0.0" width="83" height="21"/>
@@ -1183,9 +1192,13 @@
                                         </stackView>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="9EN-bP-IFj" firstAttribute="width" secondItem="fqZ-jQ-j7o" secondAttribute="width" id="33c-kv-K1T"/>
                                         <constraint firstItem="ryq-LP-3Xl" firstAttribute="centerX" secondItem="A0Z-2B-dmf" secondAttribute="centerX" id="3Az-i0-uQM"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="ryq-LP-3Xl" secondAttribute="bottom" id="C8U-te-pRu"/>
+                                        <constraint firstItem="9EN-bP-IFj" firstAttribute="height" secondItem="fqZ-jQ-j7o" secondAttribute="height" id="Lgi-oO-GLt"/>
+                                        <constraint firstItem="9EN-bP-IFj" firstAttribute="centerY" secondItem="fqZ-jQ-j7o" secondAttribute="centerY" id="NPf-aX-ArS"/>
                                         <constraint firstItem="yxK-qb-Vjo" firstAttribute="centerX" secondItem="A0Z-2B-dmf" secondAttribute="centerX" id="OG8-JZ-3Nr"/>
+                                        <constraint firstItem="9EN-bP-IFj" firstAttribute="centerX" secondItem="fqZ-jQ-j7o" secondAttribute="centerX" id="azu-b4-opi"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="yxK-qb-Vjo" secondAttribute="bottom" id="cBm-ig-qqX"/>
                                         <constraint firstItem="fqZ-jQ-j7o" firstAttribute="leading" secondItem="A0Z-2B-dmf" secondAttribute="leading" id="kYv-bQ-B6f"/>
                                         <constraint firstItem="ryq-LP-3Xl" firstAttribute="height" secondItem="yxK-qb-Vjo" secondAttribute="height" id="p7i-Qh-2OY"/>
@@ -1220,7 +1233,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vjf-9G-f7h" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1470" y="1696"/>
+            <point key="canvasLocation" x="1469.5652173913045" y="1695.6521739130435"/>
         </scene>
         <!--Add Recipes To Group Table View Controller-->
         <scene sceneID="rYH-6O-ZmY">
@@ -1259,6 +1272,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="rrs-pP-yg9"/>
-        <segue reference="7Eo-qD-yky"/>
+        <segue reference="cHP-Ke-Yt9"/>
     </inferredMetricsTieBreakers>
 </document>

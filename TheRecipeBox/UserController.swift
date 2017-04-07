@@ -192,6 +192,7 @@ class UserController {
                 let groups = records.flatMap { Group(cloudKitRecord: $0) }
                 for group in groups {
                     guard let recipeReferences = group.recipeReferences else { return }
+                    print(group.groupName)
                     for recipe in recipeReferences {
                         let recordID = recipe.recordID
                         recipeRecordIDs.append(recordID)
