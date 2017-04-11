@@ -65,7 +65,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
        
         NotificationCenter.default.addObserver(self, selector: #selector(performUpdate), name: Constants.groupDidChangeNotificationName, object: nil)
         
-        profileImageDisplay()
+        UserController.shared.profileImageDisplay(imageView: profileImageView)
         
         
     }
@@ -78,7 +78,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
             self.profileImageView.image = self.currentUser?.profilePhoto
             self.recipesNumberLabel.text = "\(UserController.shared.currentRecipes.count)"
             self.groupsNumberLabel.text = "\(GroupController.shared.userGroups.count)"
-            self.profileImageDisplay()
+            UserController.shared.profileImageDisplay(imageView: self.profileImageView)
             self.tableView.reloadData()
         }
     }
@@ -122,13 +122,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
         }
     }
     
-    func profileImageDisplay() {
-        profileImageView.layer.borderWidth = 1.0
-        profileImageView.layer.masksToBounds = false
-        profileImageView.layer.borderColor = UIColor.white.cgColor
-        profileImageView.layer.cornerRadius = profileImageView.frame.width / 2
-        profileImageView.clipsToBounds = true
-    }
+    
     
     // MARK: - Helpers
     

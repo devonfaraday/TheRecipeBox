@@ -551,11 +551,12 @@
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MdB-af-xka">
                                 <rect key="frame" x="0.0" y="693" width="414" height="43"/>
-                                <color key="backgroundColor" red="0.91072953729101824" green="1" blue="0.99323191535691469" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.39736357600319439" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="43" id="9Pe-z1-Zeh"/>
                                 </constraints>
                                 <state key="normal" title="Leave Group">
+                                    <color key="titleColor" red="1" green="0.99431333006258094" blue="0.98929610478681163" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>

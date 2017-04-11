@@ -217,29 +217,6 @@ class UserController {
     }
     
     
-    /*
-     
-     func fetchMessages() {
-     
-     let sortDescriptor = NSSortDescriptor(key: "timestamp", ascending: false)
-     
-     cloudKitManager.fetchRecords(ofType: "Message", sortDescriptors: [sortDescriptor]) { (records, error) in
-     
-     if let error = error { print(error.localizedDescription) }
-     
-     guard let records = records else { print("No records returned"); return }
-     
-     let messages = records.flatMap({ Message(cloudKitRecord: $0) })
-     
-     self.messages = messages
-     
-     }
-     
-     }
-     
-     */
-    
-    
     // MARK: - Subscription
     
     
@@ -264,6 +241,16 @@ class UserController {
                 NSLog("\(error.localizedDescription)")
             }
         }
+    }
+    
+    // MARK: - Profile Image Function
+    
+    func profileImageDisplay(imageView: UIImageView) {
+        imageView.layer.borderWidth = 1.0
+        imageView.layer.masksToBounds = false
+        imageView.layer.borderColor = UIColor.white.cgColor
+        imageView.layer.cornerRadius = imageView.frame.width / 2
+        imageView.clipsToBounds = true
     }
 }
 

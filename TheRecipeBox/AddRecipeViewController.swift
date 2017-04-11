@@ -173,17 +173,7 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
         return true
     }
     
-    //    func textFieldDidBeginEditing(_ textField: UITextField) {
-    //        isEditingTextfields = true
-    //        updateTextFieldStacksConstraint()
-    //
-    //    }
-    //
-    //    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
-    //        isEditingTextfields = false
-    //        updateTextFieldStacksConstraint()
-    //    }
-    //
+    
     // MARK: - UI Functions
     
     
@@ -346,29 +336,6 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
         let cookTimeHeight = NSLayoutConstraint(item: cookTimeTextField, attribute: .height, relatedBy: .equal, toItem: servingsTextField, attribute: .height, multiplier: 1.0, constant: 0)
         view.addConstraints([tableViewTopContraint, servingSizeHeight, servingSizeTopConstraint, cookTimeTopConstraint, cookTimeHeight])
     }
-    
-    
-    //
-    //    func updateTextFieldStacksConstraint() {
-    //
-    //        let stackViewTopConstraint = NSLayoutConstraint(item: textFieldStack, attribute: .top, relatedBy: .equal, toItem: recipeImageView, attribute: .top, multiplier: 1.0, constant: 0)
-    //        let defaultStackConstraint = NSLayoutConstraint(item: textFieldStack, attribute: .top, relatedBy: .equal, toItem: recipeImageView, attribute: .bottom, multiplier: 1.0, constant: 8.0)
-    //
-    //        if isEditingTextfields {
-    //            recipeImageView.isHidden = true
-    //            addPhotoButton.isHidden = true
-    //            addPhotoButton.isEnabled = false
-    //
-    //            NSLayoutConstraint.activate([stackViewTopConstraint])
-    //
-    //        } else if !isEditingTextfields {
-    //            recipeImageView.isHidden = false
-    //            addPhotoButton.isHidden = false
-    //            addPhotoButton.isEnabled = true
-    //            NSLayoutConstraint.deactivate([stackViewTopConstraint])
-    //            NSLayoutConstraint.activate([defaultStackConstraint])
-    //        }
-    //    }
     
     // MARK: - Alert Controllers
     

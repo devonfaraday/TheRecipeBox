@@ -118,6 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				FDD7D94B1E773D3B00B19F21 /* TheRecipeBox.entitlements */,
+				FD7561FB1E75361B0059DE3D /* AppDelegate.swift */,
 				FDD7D9401E77390C00B19F21 /* Models */,
 				FDD7D93F1E77390A00B19F21 /* ModelControllers */,
 				FDD7D93E1E77390500B19F21 /* ViewControllers */,
@@ -195,7 +196,6 @@
 		FDD7D9401E77390C00B19F21 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				FD7561FB1E75361B0059DE3D /* AppDelegate.swift */,
 				FDD7D9771E7AE01D00B19F21 /* Group */,
 				FDD7D9721E7A58AD00B19F21 /* Users */,
 				FDD7D9551E77441C00B19F21 /* Recipe */,

@@ -54,14 +54,28 @@ class GroupDetailViewController: UIViewController, UITableViewDataSource, UIText
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.userCellIdentifier, for: indexPath)
-        
+        if let imageView = cell.imageView {
+            UserController.shared.profileImageDisplay(imageView: imageView)
+        }
         
         if searchActive {
             let searchedUser = searchResults[indexPath.row]
+            
+                cell.imageView?.image = searchedUser.profilePhoto
+                
+            
             cell.textLabel?.text = searchedUser.username
+            
+            if let recipes = searchedUser.recipes {
+                cell.detailTextLabel?.text = "\(recipes.count) Recipes"
+            }
         } else {
             let user = users[indexPath.row]
             cell.textLabel?.text = user.username
+            cell.imageView?.image = user.profilePhoto
+            if let recipes = user.recipes {
+                cell.detailTextLabel?.text = "\(recipes.count) Recipes"
+            }
         }
         return cell
     }

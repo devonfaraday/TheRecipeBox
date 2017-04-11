@@ -39,19 +39,13 @@ class ProfileFeedTableViewCell: UITableViewCell {
         RecipeController.shared.fetchProfileImageOfRecipeOwner(recipe: recipe) { (image) in
             DispatchQueue.main.async {
                 self.profileImageView.image = image
-                self.profileImageDisplay()
+                UserController.shared.profileImageDisplay(imageView: self.profileImageView)
             }
         }
         
     }
     
-    func profileImageDisplay() {
-        profileImageView.layer.borderWidth = 1.0
-        profileImageView.layer.masksToBounds = false
-        profileImageView.layer.borderColor = UIColor.white.cgColor
-        profileImageView.layer.cornerRadius = profileImageView.frame.width / 2
-        profileImageView.clipsToBounds = true
-    }
+    
     // MARK: - UI Functions
     
     @IBAction func profileImageButtonTapped(_ sender: UIButton) {
