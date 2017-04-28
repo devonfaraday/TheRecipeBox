@@ -61,20 +61,20 @@ class GroupDetailViewController: UIViewController, UITableViewDataSource, UIText
         if searchActive {
             let searchedUser = searchResults[indexPath.row]
             
-                cell.imageView?.image = searchedUser.profilePhoto
-                
+//                cell.imageView?.image = searchedUser.profilePhoto
+            
             
             cell.textLabel?.text = searchedUser.username
             
-            if let recipes = searchedUser.recipes {
-                cell.detailTextLabel?.text = "\(recipes.count) Recipes"
+            if searchedUser.recipes != nil {
+                cell.detailTextLabel?.text = ""
             }
         } else {
             let user = users[indexPath.row]
             cell.textLabel?.text = user.username
-            cell.imageView?.image = user.profilePhoto
-            if let recipes = user.recipes {
-                cell.detailTextLabel?.text = "\(recipes.count) Recipes"
+//            cell.imageView?.image = user.profilePhoto
+            if user.recipes != nil {
+                cell.detailTextLabel?.text = ""
             }
         }
         return cell
@@ -172,8 +172,12 @@ class GroupDetailViewController: UIViewController, UITableViewDataSource, UIText
         let alertController = UIAlertController(title: "WARNING!", message: "You are about to leave this group.\nAre you sure?", preferredStyle: .alert)
         let yesAction = UIAlertAction(title: "Yes", style: .default) { (_) in
             guard let user = UserController.shared.currentUser,
-                let group = GroupController.shared.currentGroup else { return }
+                let group = GroupController.shared.currentGroup,
+                let index = GroupController.shared.userGroups.index(of: group)
+            else { return }
+            GroupController.shared.userGroups.remove(at: index)
             GroupController.shared.remove(user: user, fromGroup: group)
+            
             
             _ = self.navigationController?.popViewController(animated: true)
         }

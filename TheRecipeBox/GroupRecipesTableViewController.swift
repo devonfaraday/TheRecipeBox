@@ -21,10 +21,8 @@ class GroupRecipesTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.rowHeight = 198
-        
-        
-        
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.recipes = GroupController.shared.groupRecipes
@@ -35,7 +33,6 @@ class GroupRecipesTableViewController: UITableViewController {
                 self.tableView.reloadData()
             }
         }
-        
     }
     
     
@@ -85,6 +82,4 @@ class GroupRecipesTableViewController: UITableViewController {
             destinationVC?.recipe = recipes?[indexPath.row]
         }
     }
-    
-    
 }

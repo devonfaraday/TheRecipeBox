@@ -12,10 +12,8 @@ import CloudKit
 class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDelegate {
     
     @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
-    
-    
-    
     @IBOutlet weak var textFieldStack: UIStackView!
+    
     var ingredients = [Ingredient]()
     var instructions = [Instruction]()
     var isEditingTextfields  = false
@@ -114,7 +112,6 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
     }
     
     
-    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
         if indexPath.section == 0 {
@@ -127,6 +124,7 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
                 print("Removing \(ingredient) from index \(ingredientIndex)")
             }
         }
+        
         if indexPath.section == 1 {
             if recipe == nil && !instructions.isEmpty && editingStyle == .delete {
                 
@@ -138,8 +136,6 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
             }
         }
         tableView.deleteRows(at: [indexPath], with: .fade)
-        
-        
     }
     
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
@@ -303,19 +299,15 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
         navigationItem.rightBarButtonItem?.isEnabled = false
         RecipeController.shared.fetchIngredientsFor(recipe: recipe) { (ingredients) in
             self.ingredients = ingredients
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        }
-        RecipeController.shared.fetchInstructionsFor(recipe: recipe) { (instructions) in
-            self.instructions = instructions
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
             
+            RecipeController.shared.fetchInstructionsFor(recipe: recipe) { (instructions) in
+                self.instructions = instructions
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }
         }
     }
-    
     
     func updateIngredients() {
         guard let recipe = recipe else { return }

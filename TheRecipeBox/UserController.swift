@@ -23,14 +23,15 @@ class UserController {
     var allUsers = [User]()
     var currentRecipes: [Recipe] = []
     var userGroups = [Group]()
-    var allGroupsRecipes = [Recipe]()
+//    var allGroupsRecipes = [Recipe]()
     
     init() {
-    CKContainer.default().fetchUserRecordID { (recordID, _) in
-        guard let recordID = recordID else { return }
-        self.appleUserRecordID = recordID
+        // switch fetching default user record id to app delegate
+   // CKContainer.default().fetchUserRecordID { (recordID, _) in
+   //     guard let recordID = recordID else { return }
+   //     self.appleUserRecordID = recordID
         
-        }
+   //     }
         
         self.CKManager.fetchCurrentUser { (user) in
             guard let user = user else {  return  }
@@ -65,7 +66,7 @@ class UserController {
                 return
             } else {
                 guard let records = records else { return }
-                let recipes = records.flatMap { Recipe(cloudKitRecord: $0) }
+                let recipes = records.flatMap { Recipe(cloudKitRecord: $0) }.sorted(by: {$0.creationDate > $1.creationDate })
                 self.currentUser?.recipes = recipes
                 completion(recipes)
             }
@@ -193,7 +194,7 @@ class UserController {
                 for group in groups {
                     guard let recipeReferences = group.recipeReferences else { return }
                     print(group.groupName)
-                    for recipe in recipeReferences {
+                    for recipe in  recipeReferences {
                         let recordID = recipe.recordID
                         recipeRecordIDs.append(recordID)
                     }
@@ -208,8 +209,9 @@ class UserController {
                         group.leave()
                     })
                 }
-                group.notify(queue: DispatchQueue.main, execute: { 
-                    self.allGroupsRecipes = recipes
+                group.notify(queue: DispatchQueue.main, execute: {
+                    let sorted = recipes.sorted(by: {$0.creationDate > $1.creationDate })
+                    RecipeController.shared.allGroupsRecipes = sorted
                     completion(recipes)
                 })
         }
@@ -228,8 +230,9 @@ class UserController {
         
         let predicate = NSPredicate(format: "userReferences CONTAINS %@", userReference)
         let notificationInfo = CKNotificationInfo()
-        notificationInfo.alertLocalizationKey = "You've Been Added to a new group"
-        notificationInfo.shouldBadge = false
+//        notificationInfo.alertLocalizationKey = "You've Been Added to a new group"
+//        notificationInfo.shouldBadge = false
+        notificationInfo.shouldSendContentAvailable = true
         
         
         let subscription = CKQuerySubscription(recordType: "Group", predicate: predicate, options: .firesOnRecordUpdate)

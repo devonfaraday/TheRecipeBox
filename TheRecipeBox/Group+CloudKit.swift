@@ -17,6 +17,7 @@ extension Group {
         self.groupRecordID = cloudKitRecord.recordID
         self.userReferences = cloudKitRecord[Constants.userReferencesKey] as? [CKReference]
         self.recipeReferences = cloudKitRecord[Constants.recipeReferencesKey] as? [CKReference]
+        self.groupOwnerRef = cloudKitRecord[Constants.groupOwnerRefKey] as? CKReference
     }
     
     var cloudKitRecord: CKRecord {
@@ -25,6 +26,7 @@ extension Group {
         record[Constants.groupNameKey] = groupName as CKRecordValue
         record[Constants.userReferencesKey] = userReferences as CKRecordValue?
         record[Constants.recipeReferencesKey] = recipeReferences as CKRecordValue?
+        record[Constants.groupOwnerRefKey] = groupOwnerRef as CKRecordValue?
         return record
     }
 }

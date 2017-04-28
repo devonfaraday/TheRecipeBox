@@ -15,6 +15,7 @@ class Group: Equatable {
     var groupRecordID: CKRecordID?
     var userReferences: [CKReference]?
     var recipeReferences: [CKReference]?
+    var groupOwnerRef: CKReference?
     
     init(groupName: String) {
         self.groupName = groupName

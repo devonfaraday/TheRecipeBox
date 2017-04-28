@@ -37,6 +37,8 @@ struct Constants {
     static let recipeReferencesKey = "recipeReferences"
     static let defaultUserReferenceKey = "appleUserRef"
     static let creationDateKey = "creationDate"
+    static let groupOwnerRefKey = "Owner"
+    
     
     // MARK: - Segues
     
@@ -64,5 +66,6 @@ struct Constants {
     static let recipeCellIdentifier = "recipeCell"
     static let groupCellIdentifier = "groupCell"
     static let userCellIdentifier = "userCell"
+    static let memberImageIdentifier = "memberImage"
     
 }

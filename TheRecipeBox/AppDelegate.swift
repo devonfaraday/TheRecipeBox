@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         
+        
         let unc = UNUserNotificationCenter.current()
         unc.requestAuthorization(options: [.alert, .badge, .sound]) { (success, error) in
             if let error = error {
@@ -29,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         UIApplication.shared.registerForRemoteNotifications()
-        
+        UIApplication.shared.applicationIconBadgeNumber = 0
         return true
     }
     
@@ -44,8 +45,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
-        
         print("Notification received")
+        completionHandler(.newData)
     }
 
     

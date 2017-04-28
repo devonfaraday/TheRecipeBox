@@ -19,6 +19,7 @@ class RecipeController {
     
     var currentUser: User?
     var recipeOwnerProfileImage: UIImage?
+    var allGroupsRecipes = [Recipe]()
     
     // MARK: - Recipe Functions
     
@@ -167,5 +168,13 @@ class RecipeController {
                 completion(user.profilePhoto)
             }
         }
+    }
+    
+    func modify(recipe: Recipe, completion: @escaping() -> Void) {
+        let record = CKRecord(recipe: recipe)
+        let operation = CKModifyRecordsOperation(recordsToSave: [record], recordIDsToDelete: nil)
+        operation.savePolicy = .ifServerRecordUnchanged
+        self.cloudKitManager.publicDatabase.add(operation)
+        completion()
     }
 }

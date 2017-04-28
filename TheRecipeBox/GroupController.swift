@@ -77,6 +77,7 @@ class GroupController {
         
         let record = group.cloudKitRecord
         record.setValue([userReference], forKey: Constants.userReferencesKey)
+        record.setValue(userReference, forKey: Constants.groupOwnerRefKey)
         group.userReferences?.append(userReference)
         group.groupRecordID = record.recordID
         

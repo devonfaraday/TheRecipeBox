@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FD6E1F661EABCF18005D1C5A /* MemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6E1F651EABCF18005D1C5A /* MemberCollectionViewCell.swift */; };
 		FD7561FC1E75361B0059DE3D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7561FB1E75361B0059DE3D /* AppDelegate.swift */; };
 		FD7562011E75361B0059DE3D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD7561FF1E75361B0059DE3D /* Main.storyboard */; };
 		FD7562031E75361B0059DE3D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD7562021E75361B0059DE3D /* Assets.xcassets */; };
@@ -45,6 +46,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FD6E1F651EABCF18005D1C5A /* MemberCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberCollectionViewCell.swift; sourceTree = "<group>"; };
 		FD7561F81E75361B0059DE3D /* TheRecipeBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheRecipeBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD7561FB1E75361B0059DE3D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FD7562001E75361B0059DE3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 				FDD7D9421E77395900B19F21 /* ProfileFeedTableViewCell.swift */,
 				FDD7D96E1E78C20400B19F21 /* RecipeTableViewCell.swift */,
 				FDE6BED71E92F7A30045C865 /* LoadingView.swift */,
+				FD6E1F651EABCF18005D1C5A /* MemberCollectionViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -358,6 +361,7 @@
 				FDA531321E7BB97300DC3DB3 /* GroupController.swift in Sources */,
 				FDD7D9711E79B0C400B19F21 /* UIImage+CKAsset.swift in Sources */,
 				FDE6BED81E92F7A30045C865 /* LoadingView.swift in Sources */,
+				FD6E1F661EABCF18005D1C5A /* MemberCollectionViewCell.swift in Sources */,
 				FDE6BEDA1E946EDA0045C865 /* sampleCode.swift in Sources */,
 				FD7561FC1E75361B0059DE3D /* AppDelegate.swift in Sources */,
 				FDD7D96B1E78A3D500B19F21 /* RecipeListTableViewController.swift in Sources */,

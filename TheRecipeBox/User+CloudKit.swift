@@ -35,6 +35,8 @@ extension User {
     
     var cloudKitRecord: CKRecord {
         let record = CKRecord(recordType: Constants.userRecordType)
+//        let recordID = userRecordID ?? CKRecordID(recordName: UUID().uuidString)
+//        let record = CKRecord(recordType: Constants.userRecordType, recordID: recordID)
         record[Constants.defaultUserReferenceKey] = appleUserRef as CKRecordValue
         record[Constants.userusernameKey] = username as CKRecordValue
         record[Constants.profileImageKey] = CKAsset(fileURL: temporaryPhotoURL)

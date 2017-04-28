@@ -20,9 +20,10 @@ class GroupListTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.refreshControl = refreshControl
-        refreshControl?.addTarget(self, action: #selector(performUpdate), for: .valueChanged)
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(performUpdate), for: .valueChanged)
         NotificationCenter.default.addObserver(self, selector: #selector(performUpdate), name: Constants.groupDidChangeNotificationName, object: nil)
+        tableView.refreshControl = refreshControl
     }
     
     
@@ -64,6 +65,15 @@ class GroupListTableViewController: UITableViewController {
         }
     }
     
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        let group = GroupController.shared.userGroups[indexPath.row]
+        if UserController.shared.currentUser?.userRecordID == group.groupOwnerRef?.recordID {
+            return .delete
+        } else {
+            return .none
+        }
+    }
+    
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -72,9 +82,7 @@ class GroupListTableViewController: UITableViewController {
         
         let group = GroupController.shared.userGroups[indexPath.row]
         GroupController.shared.fetchRecipesIn(group: group) { (recipes) in
-            DispatchQueue.main.async {
                 GroupController.shared.groupRecipes = recipes
-            }
         }
         GroupController.shared.currentGroup = group
         destinationVC.group = group
@@ -94,6 +102,7 @@ class GroupListTableViewController: UITableViewController {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
                 self.view.layoutSubviews()
+                self.tableView.refreshControl?.endRefreshing()
             }
         }
     }

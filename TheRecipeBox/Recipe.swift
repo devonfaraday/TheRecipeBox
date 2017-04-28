@@ -21,6 +21,7 @@ class Recipe: Equatable {
     var instructions: [Instruction]
     var recordID: CKRecordID?
     var userReference: CKReference?
+    var creationDate: Date
     
     var recipeImage: UIImage? {
         guard let data = recipeImageData,
@@ -28,7 +29,7 @@ class Recipe: Equatable {
         return image
     }
     
-    init(name: String, prepTime: String, servingSize: String, cookTime: String, recipeImageData: Data?, ingredients: [Ingredient] = [], instructions: [Instruction] = []) {
+    init(name: String, prepTime: String, servingSize: String, cookTime: String, recipeImageData: Data?, ingredients: [Ingredient] = [], instructions: [Instruction] = [], creationDate: Date = Date()) {
         self.name = name
         self.prepTime = prepTime
         self.servingSize = servingSize
@@ -36,6 +37,8 @@ class Recipe: Equatable {
         self.recipeImageData = recipeImageData
         self.ingredients = ingredients
         self.instructions = instructions
+        self.creationDate = creationDate
+        
     }
 
     

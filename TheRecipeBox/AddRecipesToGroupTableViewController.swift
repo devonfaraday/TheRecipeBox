@@ -22,8 +22,6 @@ class AddRecipesToGroupTableViewController: UITableViewController {
         }
     }
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         recipes = UserController.shared.currentRecipes
@@ -47,8 +45,6 @@ class AddRecipesToGroupTableViewController: UITableViewController {
         
         return cell
     }
-    
-    
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let recipe = recipes?[indexPath.row] else { return }
