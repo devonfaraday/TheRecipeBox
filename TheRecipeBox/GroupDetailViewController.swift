@@ -60,10 +60,6 @@ class GroupDetailViewController: UIViewController, UITableViewDataSource, UIText
         
         if searchActive {
             let searchedUser = searchResults[indexPath.row]
-            
-//                cell.imageView?.image = searchedUser.profilePhoto
-            
-            
             cell.textLabel?.text = searchedUser.username
             
             if searchedUser.recipes != nil {
@@ -72,7 +68,6 @@ class GroupDetailViewController: UIViewController, UITableViewDataSource, UIText
         } else {
             let user = users[indexPath.row]
             cell.textLabel?.text = user.username
-//            cell.imageView?.image = user.profilePhoto
             if user.recipes != nil {
                 cell.detailTextLabel?.text = ""
             }

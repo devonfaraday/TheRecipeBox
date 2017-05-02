@@ -8,10 +8,32 @@
 
 import UIKit
 
-class AddGroupViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, MemberCollectionViewCellDelegate {
+class AddGroupViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate, MemberCollectionViewCellDelegate {
+    
+    // MARK: - Properties
     
     @IBOutlet weak var groupNameTextField: UITextField!
     var usersToAdd = [User]()
+    var searchActive: Bool = false
+    var searchResults = [User]()
+    @IBOutlet weak var collectionView: UICollectionView!
+
+    
+    @IBOutlet weak var backgroundImageView: UIImageView!
+    
+    // MARK: - View Life Cycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.regular)
+        let blurView = UIVisualEffectView(effect: blurEffect)
+        blurView.frame = self.view.bounds
+        blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        backgroundImageView.addSubview(blurView)
+        
+    }
+    
+    // MARK: - IBActions
     
     @IBAction func save(_ sender: Any) {
         guard let groupName = groupNameTextField.text else { return }
@@ -27,15 +49,28 @@ class AddGroupViewController: UIViewController, UICollectionViewDataSource, UICo
     // MARK: - Collection View Data Source
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return UserController.shared.allUsers.count
+        if searchActive {
+            return searchResults.count
+        } else {
+            return UserController.shared.allUsers.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.memberImageIdentifier, for: indexPath) as? MemberCollectionViewCell else { return MemberCollectionViewCell() }
-        let user = UserController.shared.allUsers[indexPath.row]
+        
+        if searchActive {
+            
+            let user = searchResults[indexPath.row]
+            cell.user = user
+            
+        } else {
+            
+            let user = UserController.shared.allUsers[indexPath.row]
+            cell.user = user
+        }
         
         cell.delegate = self
-        cell.user = user
         
         return cell
     }
@@ -54,4 +89,57 @@ class AddGroupViewController: UIViewController, UICollectionViewDataSource, UICo
         }
         
     }
+    
+    // MARK: - Search Bar Delegate Methods
+    
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchActive = false
+        searchBar.text = nil
+        searchBar.resignFirstResponder()
+        DispatchQueue.main.async {
+        self.collectionView.reloadData()
+        }
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchActive = true
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchActive = false
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        searchResults = UserController.shared.allUsers.filter({ (user) -> Bool in
+            let username = user.username
+            let range = username.contains(searchText)
+            return range
+        })
+        if (searchResults.count == 0) {
+            searchActive = false
+        } else {
+            searchActive = true
+        }
+        DispatchQueue.main.async {
+        self.collectionView.reloadData()
+        }
+        
+    }
+    
+    // MARK: - CALayer Filter
+    
+    func bluryFilter() {
+        let layer = CALayer()
+        
+        if let filter = CIFilter(name: "CIGaussianBlur") {
+            filter.name = "blur"
+            layer.backgroundFilters = [filter]
+            layer.setValue(1, forKey: "backgroundFilters.myFilter.inputRadius")
+        }
+    }
+
 }
