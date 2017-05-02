@@ -134,8 +134,7 @@ class GroupController {
             })
         }
         group.notify(queue: DispatchQueue.main) {
-            self.groupRecipes = recipes
-            
+            self.groupRecipes = recipes.sorted(by: {$0.creationDate > $1.creationDate })
             completion(recipes)
         }
     }

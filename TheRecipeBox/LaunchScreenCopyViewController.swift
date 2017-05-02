@@ -22,7 +22,7 @@ class LaunchScreenCopyViewController: UIViewController {
                 guard let user = user else { return }
                 print("Fetching recipes in launch screen")
                 UserController.shared.fetchGroupsRecipesFor(user: user, completion: { () in
-                    
+                
                     print("Recipes fetched")
                     DispatchQueue.main.async {
                         self.performSegue(withIdentifier: Constants.toProfileSegue, sender: self)

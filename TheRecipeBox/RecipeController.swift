@@ -53,7 +53,7 @@ class RecipeController {
         newRecipe.instructions = instructions
         newRecipe.recipeImageData = data
         newRecipe.userReference = CKReference(recordID: userID, action: .deleteSelf)
-        RecipeController.shared.currentRecipes.append(newRecipe)
+        RecipeController.shared.currentRecipes.insert(newRecipe, at: 0)
         
         let recipeRecord = CKRecord(recipe: newRecipe)
         newRecipe.recordID = recipeRecord.recordID
@@ -90,36 +90,17 @@ class RecipeController {
         }
     }
     
-    
-    
-//    func fetchAllRecipes(completion: @escaping() -> Void) {
-//        let predicate = NSPredicate(value: true)
-//        let query = CKQuery(recordType: Constants.recipeRecordType, predicate: predicate)
-//        Constants.publicDatabase.perform(query, inZoneWith: nil) { (records, error) in
-//            if let error = error {
-//                NSLog("Error: \(error.localizedDescription)\nCould not fetch recipe from cloudKit")
-//            } else {
-//                guard let records = records else { return }
-//                let recipes = records.flatMap { Recipe(cloudKitRecord: $0) }
-//                DispatchQueue.main.async {
-//                    RecipeController.shared.currentRecipes = recipes
-//                }
-//                completion()
-//            }
-//        }
-//    }
-    
     func deleteRecipeRecord(recipeID: CKRecordID, completion: @escaping ((Error?) -> Void) = { _ in }) {
         cloudKitManager.publicDatabase.delete(withRecordID: recipeID) { (_, error) in
             if let error = error {
                 NSLog("Error deleting \(recipeID)\n\(error.localizedDescription)")
                 completion(error)
+            } else {
+                completion(nil)
             }
             
         }
     }
-    
-
     
     func fetchIngredientsFor(recipe: Recipe, completion: @escaping([Ingredient]) -> Void) {
         guard let recipeRecordID = recipe.recordID else { return }

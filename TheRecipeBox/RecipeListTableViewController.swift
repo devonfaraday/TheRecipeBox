@@ -28,7 +28,9 @@ class RecipeListTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.recipes = RecipeController.shared.currentRecipes
+        if self.recipes.count < RecipeController.shared.currentRecipes.count {
+            self.recipes = RecipeController.shared.currentRecipes
+        }
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

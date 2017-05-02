@@ -12,7 +12,6 @@ import CloudKit
 
 extension Recipe {
 
-    
     convenience init?(cloudKitRecord: CKRecord) {
         guard let name = cloudKitRecord[Constants.recipeNameKey] as? String,
             let prepTime = cloudKitRecord[Constants.prepTimeKey] as? String,

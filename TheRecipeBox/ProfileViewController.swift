@@ -108,9 +108,9 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Constants.toRecipeList {
-            //        guard let destinationVC = segue.destination as? RecipeListTableViewController else { return }
+                    guard let destinationVC = segue.destination as? RecipeListTableViewController else { return }
             
-            //        destinationVC.recipes = RecipeController.shared.currentRecipes
+                    destinationVC.recipes = RecipeController.shared.currentRecipes
         }
         if segue.identifier == "toRecipeFromProfile" {
             guard let indexPath = tableView.indexPathForSelectedRow else { return }

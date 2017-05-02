@@ -25,11 +25,10 @@ class GroupRecipesTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.recipes = GroupController.shared.groupRecipes
         guard let group = GroupController.shared.currentGroup else { return }
         GroupController.shared.fetchRecipesIn(group: group) { (recipes) in
+            self.recipes = GroupController.shared.groupRecipes
             DispatchQueue.main.async {
-                self.recipes = recipes
                 self.tableView.reloadData()
             }
         }
