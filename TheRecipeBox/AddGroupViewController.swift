@@ -11,15 +11,16 @@ import UIKit
 class AddGroupViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, MemberCollectionViewCellDelegate {
     
     @IBOutlet weak var groupNameTextField: UITextField!
+    var usersToAdd = [User]()
     
     @IBAction func save(_ sender: Any) {
         guard let groupName = groupNameTextField.text else { return }
         if !groupName.isEmpty {
             let group = GroupController.shared.createGroupWith(name: groupName)
-            GroupController.shared.saveToCloudKit(group: group, completion: { (_) in
-                NSLog("Popping view controller")
+            GroupController.shared.saveToCloudKit(group: group, withUsers: usersToAdd, completion: { (_) in
             })
         }
+        NSLog("Popping view controller")
         _ = self.navigationController?.popViewController(animated: true)
     }
     
@@ -33,6 +34,7 @@ class AddGroupViewController: UIViewController, UICollectionViewDataSource, UICo
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.memberImageIdentifier, for: indexPath) as? MemberCollectionViewCell else { return MemberCollectionViewCell() }
         let user = UserController.shared.allUsers[indexPath.row]
         
+        cell.delegate = self
         cell.user = user
         
         return cell
@@ -41,6 +43,15 @@ class AddGroupViewController: UIViewController, UICollectionViewDataSource, UICo
     // MARK: - Member Collection View Delegate Function
     
     func checkMarkButtonTapped(_ sender: MemberCollectionViewCell) {
+        guard let user = sender.user else { return }
+        if sender.isChecked {
+            usersToAdd.append(user)
+        } else {
+            if usersToAdd.contains(user) {
+                guard let index = usersToAdd.index(of: user) else { return }
+                usersToAdd.remove(at: index)
+            }
+        }
         
     }
 }

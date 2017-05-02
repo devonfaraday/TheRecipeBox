@@ -44,15 +44,14 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
             
             UserController.shared.fetchRecipesForCurrent(user: user, completion: { (recipes) in
                 DispatchQueue.main.async {
-                    UserController.shared.currentRecipes = recipes
-                    self.recipesNumberLabel.text = "\(UserController.shared.currentRecipes.count)"
+                    RecipeController.shared.currentRecipes = recipes
+                    self.recipesNumberLabel.text = "\(RecipeController.shared.currentRecipes.count)"
                 }
             })
             
             GroupController.shared.fetchGroupsForCurrent(user: user) {
                 DispatchQueue.main.async {
                     self.groupsNumberLabel.text = "\(GroupController.shared.userGroups.count)"
-                    UserController.shared.userGroups = GroupController.shared.userGroups
                 }
             }
             
@@ -72,16 +71,11 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
         DispatchQueue.main.async {
             self.nameLabel.text =  currentUser.username
             self.profileImageView.image = currentUser.profilePhoto
-            self.recipesNumberLabel.text = "\(UserController.shared.currentRecipes.count)"
+            self.recipesNumberLabel.text = "\(RecipeController.shared.currentRecipes.count)"
             self.groupsNumberLabel.text = "\(GroupController.shared.userGroups.count)"
             UserController.shared.profileImageDisplay(imageView: self.profileImageView)
+            self.tableView.reloadData()
         }
-//        UserController.shared.fetchGroupsRecipesFor(user: currentUser, completion: { (recipes) in
-//            DispatchQueue.main.async {
-//                self.allGroupsRecipes = recipes
-//                self.tableView.reloadData()
-//            }
-//        })
 
     }
     
@@ -96,6 +90,8 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
         
         let recipe = RecipeController.shared.allGroupsRecipes[indexPath.row]
         
+        cell.layer.borderWidth = 1
+        cell.layer.borderColor = UIColor.white.cgColor
         cell.recipe = recipe
         
         return cell
@@ -114,7 +110,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
         if segue.identifier == Constants.toRecipeList {
             //        guard let destinationVC = segue.destination as? RecipeListTableViewController else { return }
             
-            //        destinationVC.recipes = UserController.shared.currentRecipes
+            //        destinationVC.recipes = RecipeController.shared.currentRecipes
         }
         if segue.identifier == "toRecipeFromProfile" {
             guard let indexPath = tableView.indexPathForSelectedRow else { return }
@@ -133,10 +129,8 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
         GroupController.shared.fetchGroupsForCurrent(user: user) {
             DispatchQueue.main.async {
                 self.groupsNumberLabel.text = "\(GroupController.shared.userGroups.count)"
-                UserController.shared.userGroups = GroupController.shared.userGroups
-                UserController.shared.fetchGroupsRecipesFor(user: user, completion: { (recipes) in
+                UserController.shared.fetchGroupsRecipesFor(user: user, completion: { () in
                     DispatchQueue.main.async {
-                        RecipeController.shared.allGroupsRecipes = recipes
                         self.tableView.reloadData()
                         self.tableView.refreshControl?.endRefreshing()
                     }

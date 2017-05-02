@@ -21,15 +21,22 @@ class MemberCollectionViewCell: UICollectionViewCell {
             updateView()
         }
     }
+    var isChecked: Bool = false
     
     @IBAction func checkButtonTapped(_ sender: Any) {
         delegate?.checkMarkButtonTapped(self)
+        isChecked = !isChecked
+        if isChecked {
+            checkMarkImageView.image = #imageLiteral(resourceName: "CheckMark")
+        } else {
+            checkMarkImageView.image = nil
+        }
     }
     
     func updateView() {
         guard let user = user else { return }
         DispatchQueue.main.async {
-        self.userImageView.image = user.profilePhoto
+            self.userImageView.image = user.profilePhoto
             self.usernameLabel.text = user.username
             UserController.shared.profileImageDisplay(imageView: self.userImageView)
         }

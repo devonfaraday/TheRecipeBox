@@ -19,14 +19,17 @@ extension Group {
         self.recipeReferences = cloudKitRecord[Constants.recipeReferencesKey] as? [CKReference]
         self.groupOwnerRef = cloudKitRecord[Constants.groupOwnerRefKey] as? CKReference
     }
+}
+
+extension CKRecord {
     
-    var cloudKitRecord: CKRecord {
-        
-        let record = CKRecord(recordType: Constants.groupRecordType)
-        record[Constants.groupNameKey] = groupName as CKRecordValue
-        record[Constants.userReferencesKey] = userReferences as CKRecordValue?
-        record[Constants.recipeReferencesKey] = recipeReferences as CKRecordValue?
-        record[Constants.groupOwnerRefKey] = groupOwnerRef as CKRecordValue?
-        return record
+    convenience init(group: Group) {
+        let recordID = group.groupRecordID ?? CKRecordID(recordName: UUID().uuidString)
+        self.init(recordType: Constants.groupRecordType, recordID: recordID)
+        self.setValue(group.groupName, forKey: Constants.groupNameKey)
+        self.setValue(group.groupOwnerRef, forKey: Constants.groupOwnerRefKey)
+        self.setValue(group.recipeReferences, forKey: Constants.recipeReferencesKey)
+        self.setValue(group.userReferences, forKey: Constants.userReferencesKey)
+        group.groupRecordID = recordID
     }
 }

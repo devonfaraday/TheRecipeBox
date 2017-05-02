@@ -21,9 +21,7 @@ class UserController {
     let CKManager = CloudKitManager()
     var currentUser: User?
     var allUsers = [User]()
-    var currentRecipes: [Recipe] = []
-    var userGroups = [Group]()
-//    var allGroupsRecipes = [Recipe]()
+    
     
     init() {
         // switch fetching default user record id to app delegate
@@ -40,11 +38,11 @@ class UserController {
             
             UserController.shared.fetchRecipesForCurrent(user: user, completion: { (recipes) in
                 
-                self.currentRecipes = recipes
+                RecipeController.shared.currentRecipes = recipes
             })
             
             GroupController.shared.fetchGroupsForCurrent(user: user) {
-                self.userGroups = GroupController.shared.userGroups
+
             }
             
         }
@@ -176,7 +174,7 @@ class UserController {
         }
     }
     
-    func fetchGroupsRecipesFor(user: User, completion: @escaping([Recipe]) -> Void) {
+    func fetchGroupsRecipesFor(user: User, completion: @escaping() -> Void) {
         var recipeRecordIDs = [CKRecordID]()
         var recipes = [Recipe]()
         
@@ -186,35 +184,49 @@ class UserController {
         publicDatabase.perform(groupQuery, inZoneWith: nil) { (records, error) in
             if let error = error {
                 NSLog(error.localizedDescription)
-                completion([])
+                completion()
                 return
-            } else {
+            }
                 guard let records = records else { return }
+                print("Found recipes")
                 let groups = records.flatMap { Group(cloudKitRecord: $0) }
                 for group in groups {
-                    guard let recipeReferences = group.recipeReferences else { return }
+                    if let recipeReferences = group.recipeReferences {
+                        
                     print(group.groupName)
                     for recipe in  recipeReferences {
+                        print("appending Recipe record IDs)")
                         let recordID = recipe.recordID
                         recipeRecordIDs.append(recordID)
                     }
                 }
+            }
                 let group = DispatchGroup()
                 for id in recipeRecordIDs {
+                    print("Entering Group")
                     group.enter()
                     self.publicDatabase.fetch(withRecordID: id, completionHandler: { (record, _) in
-                        guard let record = record else { return }
-                        guard let recipe = Recipe(cloudKitRecord: record) else { return }
+                        if let record = record {
+                            if let recipe = Recipe(cloudKitRecord: record) {
                         recipes.append(recipe)
+                        }
+                        }
+                        print("Leaving group")
                         group.leave()
                     })
                 }
                 group.notify(queue: DispatchQueue.main, execute: {
-                    let sorted = recipes.sorted(by: {$0.creationDate > $1.creationDate })
+                    var sorted = recipes.sorted(by: {$0.creationDate > $1.creationDate })
+                    print("Completing")
+                    if sorted.count > 9 {
+                        let numberToRemove = sorted.count - 9
+                        for _ in 1...numberToRemove {
+                            sorted.removeLast()
+                        }
+                    }
                     RecipeController.shared.allGroupsRecipes = sorted
-                    completion(recipes)
+                    completion()
                 })
-        }
         }
     }
     

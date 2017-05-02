@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CloudKit
 
 class AddRecipesToGroupTableViewController: UITableViewController {
     
@@ -24,7 +25,7 @@ class AddRecipesToGroupTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        recipes = UserController.shared.currentRecipes
+        recipes = RecipeController.shared.currentRecipes
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -47,15 +48,19 @@ class AddRecipesToGroupTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let recipe = recipes?[indexPath.row] else { return }
-                guard let currentGroup = GroupController.shared.currentGroup else { return }
+        guard let recipe = recipes?[indexPath.row], let recipeID = recipe.recordID else { return }
+        guard let currentGroup = GroupController.shared.currentGroup, let recipeRefs = currentGroup.recipeReferences else { return }
+        let recipeRef = CKReference(recordID: recipeID, action: .none)
         
-        GroupController.shared.add(recipe: recipe, toGroup: currentGroup) { (_) in
-            print("recipe added to group")
-            if GroupController.shared.groupRecipes.contains(recipe) {
-                self.allReadyAddedAlert()
-            } else {
-                self.alertController()
+        if recipeRefs.contains(recipeRef) {
+            self.allReadyAddedAlert()
+        } else {
+            GroupController.shared.add(recipe: recipe, toGroup: currentGroup) { (_) in
+                print("recipe added to group")
+                DispatchQueue.main.async {
+                    self.alertController()
+                }
+                RecipeController.shared.allGroupsRecipes.append(recipe)
             }
         }
         

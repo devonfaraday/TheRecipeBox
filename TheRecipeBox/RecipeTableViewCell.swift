@@ -9,13 +9,13 @@
 import UIKit
 
 class RecipeTableViewCell: UITableViewCell {
-
+    
     @IBOutlet weak var recipeNameLabel: UILabel!
     @IBOutlet weak var recipeImageView: UIImageView!
     @IBOutlet weak var prepTimeLabel: UILabel!
     @IBOutlet weak var servingsLabel: UILabel!
     @IBOutlet weak var cookTimeLabel: UILabel!
-   
+    
     var recipe: Recipe? {
         didSet{
             updateViews()
@@ -24,11 +24,11 @@ class RecipeTableViewCell: UITableViewCell {
     
     func updateViews() {
         guard let recipe = recipe else { return }
-        recipeNameLabel.text = recipe.name
-        prepTimeLabel.text = recipe.prepTime
-        servingsLabel.text = recipe.servingSize
-        cookTimeLabel.text = recipe.cookTime
         DispatchQueue.main.async {
+            self.recipeNameLabel.text = recipe.name
+            self.prepTimeLabel.text = recipe.prepTime
+            self.servingsLabel.text = recipe.servingSize
+            self.cookTimeLabel.text = recipe.cookTime
             self.recipeImageView.image = recipe.recipeImage
             self.recipeImageView.layer.masksToBounds = true
         }

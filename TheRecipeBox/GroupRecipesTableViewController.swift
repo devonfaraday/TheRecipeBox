@@ -46,7 +46,8 @@ class GroupRecipesTableViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.recipeCellIdentifier, for: indexPath) as? RecipeTableViewCell else { return RecipeTableViewCell() }
         
         let recipe = recipes?[indexPath.row]
-        
+        cell.layer.borderWidth = 1
+        cell.layer.borderColor = UIColor.white.cgColor
         cell.recipe = recipe
         
         return cell
@@ -74,7 +75,7 @@ class GroupRecipesTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Constants.toAddRecipeToGroupSegue {
             let destinationVC = segue.destination as? AddRecipesToGroupTableViewController
-            destinationVC?.recipes = UserController.shared.currentRecipes
+            destinationVC?.recipes = RecipeController.shared.currentRecipes
         }
         if segue.identifier == Constants.toShowRecipeSegue {
             guard let indexPath = tableView.indexPathForSelectedRow else { return }

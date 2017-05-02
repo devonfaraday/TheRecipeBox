@@ -19,7 +19,7 @@ class GroupController {
     var currentGroup: Group?
     var groupRecipes: [Recipe] = []
     var userGroups = [Group]()
-    var users = [User]()
+    var groupUsers = [User]()
     
     
     func fetchGroupsForCurrent(user: User, completion: @escaping() -> Void = { _ in }) {
@@ -63,23 +63,22 @@ class GroupController {
     
     func createGroupWith(name: String) -> Group {
         return Group(groupName: name)
-        
     }
     
-    
-    func saveToCloudKit(group: Group, completion: @escaping((Error?) -> Void) = { _ in })  {
+    func saveToCloudKit(group: Group, withUsers users: [User], completion: @escaping((Error?) -> Void) = { _ in })  {
         self.allGroups.append(group)
         self.userGroups.append(group)
-        UserController.shared.userGroups.append(group)
+        GroupController.shared.userGroups.append(group)
         guard let user = UserController.shared.currentUser else { return }
         guard let userID = user.userRecordID else { return }
-        let userReference = CKReference(recordID: userID, action: .none)
-        
-        let record = group.cloudKitRecord
-        record.setValue([userReference], forKey: Constants.userReferencesKey)
-        record.setValue(userReference, forKey: Constants.groupOwnerRefKey)
-        group.userReferences?.append(userReference)
-        group.groupRecordID = record.recordID
+        let ownerReference = CKReference(recordID: userID, action: .none)
+        var userIDs = users.flatMap { $0.userRecordID }
+        userIDs.append(userID)
+        let userReferences = userIDs.flatMap { CKReference(recordID: $0, action: .none) }
+        let record = CKRecord(group: group)
+        record.setValue(userReferences, forKey: Constants.userReferencesKey)
+        record.setValue(ownerReference, forKey: Constants.groupOwnerRefKey)
+        group.userReferences = userReferences
         
         publicDB.save(record) { (_, error) in
             NSLog("Saving record for \(group.groupName)")
@@ -111,7 +110,7 @@ class GroupController {
             })
         }
         group.notify(queue: DispatchQueue.main) {
-            self.users = users
+            self.groupUsers = users
             completion(users)
         }
     }

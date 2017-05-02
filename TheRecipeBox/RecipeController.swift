@@ -17,9 +17,10 @@ class RecipeController {
     static let shared = RecipeController()
     private let cloudKitManager = CloudKitManager()
     
-    var currentUser: User?
+//    var currentUser: User?
     var recipeOwnerProfileImage: UIImage?
     var allGroupsRecipes = [Recipe]()
+    var currentRecipes = [Recipe]()
     
     // MARK: - Recipe Functions
     
@@ -39,11 +40,11 @@ class RecipeController {
     
     func addRecipeToCloudKit(recipe: Recipe, ingredients: [Ingredient], instructions: [Instruction], completion: @escaping ((Error?) -> Void) = { _ in }) {
         
-        self.currentUser = UserController.shared.currentUser
+        
         
         guard let image = recipe.recipeImage,
             let data = UIImageJPEGRepresentation(image, 1.0),
-            let currentUser = currentUser
+            let currentUser = UserController.shared.currentUser
             else { return }
         guard let userID = currentUser.userRecordID else { return }
         
@@ -52,7 +53,7 @@ class RecipeController {
         newRecipe.instructions = instructions
         newRecipe.recipeImageData = data
         newRecipe.userReference = CKReference(recordID: userID, action: .deleteSelf)
-        UserController.shared.currentRecipes.append(newRecipe)
+        RecipeController.shared.currentRecipes.append(newRecipe)
         
         let recipeRecord = CKRecord(recipe: newRecipe)
         newRecipe.recordID = recipeRecord.recordID
@@ -101,7 +102,7 @@ class RecipeController {
 //                guard let records = records else { return }
 //                let recipes = records.flatMap { Recipe(cloudKitRecord: $0) }
 //                DispatchQueue.main.async {
-//                    UserController.shared.currentRecipes = recipes
+//                    RecipeController.shared.currentRecipes = recipes
 //                }
 //                completion()
 //            }

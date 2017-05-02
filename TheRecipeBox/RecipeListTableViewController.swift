@@ -28,7 +28,7 @@ class RecipeListTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.recipes = UserController.shared.currentRecipes
+        self.recipes = RecipeController.shared.currentRecipes
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -39,7 +39,8 @@ class RecipeListTableViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.recipeCellIdentifier, for: indexPath) as? RecipeTableViewCell else { return RecipeTableViewCell() }
         
         let recipe = recipes[indexPath.row]
-        
+        cell.layer.borderWidth = 1
+        cell.layer.borderColor = UIColor.white.cgColor
         cell.recipe = recipe
         
         return cell
@@ -53,7 +54,7 @@ class RecipeListTableViewController: UITableViewController {
             let index = recipes.index(of: recipe) else { return }
             RecipeController.shared.deleteRecipeRecord(recipeID: recordID)
             recipes.remove(at: index)
-            UserController.shared.currentRecipes.remove(at: index)
+            RecipeController.shared.currentRecipes.remove(at: index)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
