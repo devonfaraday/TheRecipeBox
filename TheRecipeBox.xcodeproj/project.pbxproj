@@ -14,7 +14,7 @@
 		FD7562061E75361B0059DE3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD7562041E75361B0059DE3D /* LaunchScreen.storyboard */; };
 		FD7A5CC71EB4EC930070ADEC /* WhatsNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7A5CC61EB4EC930070ADEC /* WhatsNew.swift */; };
 		FD7A5CE91EB85A0B0070ADEC /* GroupRecipeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7A5CE81EB85A0B0070ADEC /* GroupRecipeCollectionViewCell.swift */; };
-		FD7A5CEB1EB85A430070ADEC /* GroupRecipeCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7A5CEA1EB85A430070ADEC /* GroupRecipeCollectionViewController.swift */; };
+		FD91EDB61EBAA1A40001F898 /* GroupRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD91EDB51EBAA1A40001F898 /* GroupRecipeViewController.swift */; };
 		FDA5312E1E7B904C00DC3DB3 /* Group+CloudKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA5312D1E7B904C00DC3DB3 /* Group+CloudKit.swift */; };
 		FDA531301E7BB96A00DC3DB3 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA5312F1E7BB96A00DC3DB3 /* UserController.swift */; };
 		FDA531321E7BB97300DC3DB3 /* GroupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA531311E7BB97300DC3DB3 /* GroupController.swift */; };
@@ -56,7 +56,7 @@
 		FD7562071E75361B0059DE3D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FD7A5CC61EB4EC930070ADEC /* WhatsNew.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhatsNew.swift; sourceTree = "<group>"; };
 		FD7A5CE81EB85A0B0070ADEC /* GroupRecipeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupRecipeCollectionViewCell.swift; sourceTree = "<group>"; };
-		FD7A5CEA1EB85A430070ADEC /* GroupRecipeCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupRecipeCollectionViewController.swift; sourceTree = "<group>"; };
+		FD91EDB51EBAA1A40001F898 /* GroupRecipeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupRecipeViewController.swift; sourceTree = "<group>"; };
 		FDA5312D1E7B904C00DC3DB3 /* Group+CloudKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Group+CloudKit.swift"; sourceTree = "<group>"; };
 		FDA5312F1E7BB96A00DC3DB3 /* UserController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = UserController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		FDA531311E7BB97300DC3DB3 /* GroupController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupController.swift; sourceTree = "<group>"; };
@@ -141,7 +141,7 @@
 				FDC0FA331E8C0F8000D32052 /* GroupDetailViewController.swift */,
 				FDC0FA371E8C56C500D32052 /* GroupRecipesTableViewController.swift */,
 				FDC0FA391E8C751200D32052 /* AddRecipesToGroupTableViewController.swift */,
-				FD7A5CEA1EB85A430070ADEC /* GroupRecipeCollectionViewController.swift */,
+				FD91EDB51EBAA1A40001F898 /* GroupRecipeViewController.swift */,
 			);
 			name = GroupViewControllers;
 			sourceTree = "<group>";
@@ -346,12 +346,12 @@
 				FDD7D95D1E7746C900B19F21 /* CloudKitManager.swift in Sources */,
 				FDD7D9611E7759CB00B19F21 /* Ingredient.swift in Sources */,
 				FDA531301E7BB96A00DC3DB3 /* UserController.swift in Sources */,
-				FD7A5CEB1EB85A430070ADEC /* GroupRecipeCollectionViewController.swift in Sources */,
 				FDD7D9591E77466600B19F21 /* RecipeController.swift in Sources */,
 				FDD7D93B1E7738B600B19F21 /* ProfileViewController.swift in Sources */,
 				FD7A5CC71EB4EC930070ADEC /* WhatsNew.swift in Sources */,
 				FDD7D95B1E7746B300B19F21 /* Recipe+CloudKit.swift in Sources */,
 				FDC0FA321E8C0F7100D32052 /* AddGroupViewController.swift in Sources */,
+				FD91EDB61EBAA1A40001F898 /* GroupRecipeViewController.swift in Sources */,
 				FDD7D9431E77395900B19F21 /* ProfileFeedTableViewCell.swift in Sources */,
 				FDD7D97D1E7AFB7D00B19F21 /* UsernameViewController.swift in Sources */,
 				FDD7D9791E7AE02F00B19F21 /* Group.swift in Sources */,
