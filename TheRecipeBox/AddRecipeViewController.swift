@@ -41,15 +41,14 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
     @IBOutlet weak var instructionTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var addPhotoButton: UIButton!
-    
     @IBOutlet weak var saveButton: UIBarButtonItem!
     
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        recipeImageView.layer.masksToBounds = true
         
+        recipeImageView.layer.masksToBounds = true
         self.tableView.estimatedRowHeight = 40
         self.tableView.rowHeight = UITableViewAutomaticDimension
         
@@ -201,7 +200,7 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
             let cookTime = cookTimeTextField.text
             else { return }
         if let image = recipeImageView.image {
-            let imageData = UIImageJPEGRepresentation(image, 1.0)
+            let imageData = UIImageJPEGRepresentation(image, 0.5)
             let recipe = Recipe(name: name, prepTime: prepTime, servingSize: servings, cookTime: cookTime, recipeImageData: imageData)
             
             RecipeController.shared.addRecipeToCloudKit(recipe: recipe, ingredients: ingredients, instructions: instructions, completion: { (error) in

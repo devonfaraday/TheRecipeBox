@@ -23,13 +23,15 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
     @IBOutlet weak var groupsNumberLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
-    // segue from recipes button to recipe list without a second network call.
+    
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(performUpdate), for: UIControlEvents.valueChanged)
         tableView.refreshControl = refreshControl
+        self.navigationController?.navigationBar.backgroundColor = .clear
         
         CKManager.fetchCurrentUser { (user) in
             guard let user = user else {  return  }
@@ -57,7 +59,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
             
         }
         
-       
+        
         NotificationCenter.default.addObserver(self, selector: #selector(performUpdate), name: Constants.groupDidChangeNotificationName, object: nil)
         
         UserController.shared.profileImageDisplay(imageView: profileImageView)
@@ -76,7 +78,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
             UserController.shared.profileImageDisplay(imageView: self.profileImageView)
             self.tableView.reloadData()
         }
-
+        
     }
     
     // MARK: - Table view dataSource
@@ -108,15 +110,15 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Constants.toRecipeList {
-                    guard let destinationVC = segue.destination as? RecipeListTableViewController else { return }
+            guard let destinationVC = segue.destination as? RecipeListTableViewController else { return }
             
-                    destinationVC.recipes = RecipeController.shared.currentRecipes
+            destinationVC.recipes = RecipeController.shared.currentRecipes
         }
         if segue.identifier == "toRecipeFromProfile" {
             guard let indexPath = tableView.indexPathForSelectedRow else { return }
-           guard let destinationVC = segue.destination as? AddRecipeViewController else { return }
+            guard let destinationVC = segue.destination as? AddRecipeViewController else { return }
             let recipe = RecipeController.shared.allGroupsRecipes[indexPath.row]
-             destinationVC.recipe = recipe
+            destinationVC.recipe = recipe
         }
     }
     
@@ -140,3 +142,29 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
         
     }
 }
+
+/*
+
+
+func loadData(){
+    self.loading.startAnimating()
+    let query = CKQuery(recordType: self.recordType, predicate: predicate)
+    query.sortDescriptors = [NSSortDescriptor(key: "productID", ascending: true)]
+    operation.query = query
+    operation.resultsLimit = 1000
+    operation.qualityOfService = .userInteractive
+    operation.recordFetchedBlock = { (record) in
+        self.items.append(record)
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
+    }
+    operation.queryCompletionBlock = { (queryCursor, error) in
+        DispatchQueue.main.async {
+            self.loading.stopAnimating()
+        }
+    }
+    myData.add(operation)
+}
+
+*/

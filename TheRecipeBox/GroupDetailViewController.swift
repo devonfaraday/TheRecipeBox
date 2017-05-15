@@ -41,7 +41,7 @@ class GroupDetailViewController: UIViewController, UITableViewDataSource, UIText
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.navigationController?.navigationBar.backgroundColor = .clear
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

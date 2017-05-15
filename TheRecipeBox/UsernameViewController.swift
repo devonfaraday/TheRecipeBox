@@ -51,7 +51,7 @@ class UsernameViewController: UIViewController, UIImagePickerControllerDelegate,
         
         guard let username = usernameTextField.text else { return }
         if let image = profileImageView.image {
-            guard let imageData = UIImageJPEGRepresentation(image, 1.0) else { return }
+            guard let imageData = UIImageJPEGRepresentation(image, 0.5) else { return }
             submitButton.isEnabled = false
             loadingView.isHidden = false
             LoadingIndicatorView.show(loadingView, loadingText: "Creating Your Account")

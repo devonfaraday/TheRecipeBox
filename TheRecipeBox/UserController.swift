@@ -175,12 +175,14 @@ class UserController {
     }
     
     func fetchGroupsRecipesFor(user: User, completion: @escaping() -> Void) {
+        
         var recipeRecordIDs = [CKRecordID]()
         var recipes = [Recipe]()
         
         guard let userID = user.userRecordID else { return }
         let groupPredicate = NSPredicate(format: "userReferences CONTAINS %@", userID)
         let groupQuery = CKQuery(recordType: Constants.groupRecordType, predicate: groupPredicate)
+        
         publicDatabase.perform(groupQuery, inZoneWith: nil) { (records, error) in
             if let error = error {
                 NSLog(error.localizedDescription)
@@ -261,7 +263,7 @@ class UserController {
     // MARK: - Profile Image Function
     
     func profileImageDisplay(imageView: UIImageView) {
-        imageView.layer.borderWidth = 1.0
+        imageView.layer.borderWidth = 0.5
         imageView.layer.masksToBounds = false
         imageView.layer.borderColor = UIColor.white.cgColor
         imageView.layer.cornerRadius = imageView.frame.width / 2

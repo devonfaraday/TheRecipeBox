@@ -11,6 +11,7 @@ import CloudKit
 
 class CloudKitManager {
     
+    static let shared = CloudKitManager()
     let publicDatabase = CKContainer.default().publicCloudDatabase
     
     func fetchCurrentUser(completion: @escaping (User?) -> Void) {

@@ -30,6 +30,7 @@ class AddGroupViewController: UIViewController, UICollectionViewDataSource, UICo
         blurView.frame = self.view.bounds
         blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         backgroundImageView.addSubview(blurView)
+        self.navigationController?.navigationBar.backgroundColor = .clear
         
     }
     

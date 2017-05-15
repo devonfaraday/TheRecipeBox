@@ -43,7 +43,7 @@ class RecipeController {
         
         
         guard let image = recipe.recipeImage,
-            let data = UIImageJPEGRepresentation(image, 1.0),
+            let data = UIImageJPEGRepresentation(image, 0.5),
             let currentUser = UserController.shared.currentUser
             else { return }
         guard let userID = currentUser.userRecordID else { return }

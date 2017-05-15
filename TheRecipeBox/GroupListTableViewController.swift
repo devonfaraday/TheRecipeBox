@@ -24,6 +24,7 @@ class GroupListTableViewController: UITableViewController {
         refreshControl.addTarget(self, action: #selector(performUpdate), for: .valueChanged)
         NotificationCenter.default.addObserver(self, selector: #selector(performUpdate), name: Constants.groupDidChangeNotificationName, object: nil)
         tableView.refreshControl = refreshControl
+        self.navigationController?.navigationBar.backgroundColor = .clear
     }
     
     
