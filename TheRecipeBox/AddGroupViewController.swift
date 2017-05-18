@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import NotificationCenter
 
-class AddGroupViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate, MemberCollectionViewCellDelegate {
+class AddGroupViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate, MemberCollectionViewCellDelegate, UITextFieldDelegate {
     
     // MARK: - Properties
     
@@ -17,6 +18,7 @@ class AddGroupViewController: UIViewController, UICollectionViewDataSource, UICo
     var searchActive: Bool = false
     var searchResults = [User]()
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var collectionViewBottomConstraint: NSLayoutConstraint!
 
     
     @IBOutlet weak var backgroundImageView: UIImageView!
@@ -31,6 +33,8 @@ class AddGroupViewController: UIViewController, UICollectionViewDataSource, UICo
         blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         backgroundImageView.addSubview(blurView)
         self.navigationController?.navigationBar.backgroundColor = .clear
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
     }
     
@@ -131,6 +135,13 @@ class AddGroupViewController: UIViewController, UICollectionViewDataSource, UICo
         
     }
     
+    // MARK: - Text Field Delegate Methods
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
     // MARK: - CALayer Filter
     
     func bluryFilter() {
@@ -142,5 +153,33 @@ class AddGroupViewController: UIViewController, UICollectionViewDataSource, UICo
             layer.setValue(1, forKey: "backgroundFilters.myFilter.inputRadius")
         }
     }
+    
+    
+    
+    // MARK: - Keyboard functions
+    
+    
+    func keyboardWillShow(notification: NSNotification) {
+        
+        guard let tabHeight = tabBarController?.tabBar.layer.frame.height else { return }
+        
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            
+            collectionViewBottomConstraint.constant = collectionViewBottomConstraint.constant + keyboardSize.height - tabHeight
+            
+        }
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        
+        guard let tabHeight = tabBarController?.tabBar.layer.frame.height else { return }
+        
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+
+            collectionViewBottomConstraint.constant = collectionViewBottomConstraint.constant - keyboardSize.height + tabHeight
+            
+        }
+    }
+
 
 }

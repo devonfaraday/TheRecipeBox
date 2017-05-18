@@ -15,6 +15,7 @@ class GroupDetailViewController: UIViewController, UITableViewDataSource, UIText
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var leaveButton: UIButton!
     
     var searchActive: Bool = false
     var searchResults = [User]()
@@ -42,6 +43,9 @@ class GroupDetailViewController: UIViewController, UITableViewDataSource, UIText
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.backgroundColor = .clear
+        if group?.groupOwnerRef?.recordID == UserController.shared.currentUser?.userRecordID {
+            leaveButton.setTitle("Delete Group", for: .normal)
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -100,7 +104,11 @@ class GroupDetailViewController: UIViewController, UITableViewDataSource, UIText
     // MARK: - UI Functions
     
     @IBAction func leaveGroupButtonTapped(_ sender: Any) {
-        leavingGroupAlert()
+        if GroupController.shared.currentGroup?.groupOwnerRef?.recordID == UserController.shared.currentUser?.userRecordID {
+            deletingGroupAlert()
+        } else {
+            leavingGroupAlert()
+        }
     }
     
     // MARK: - Text Field Delegate Functions
@@ -183,6 +191,36 @@ class GroupDetailViewController: UIViewController, UITableViewDataSource, UIText
         alertController.addAction(noAction)
         present(alertController, animated: true, completion: nil)
     }
+    
+    func deletingGroupAlert() {
+        let alertController = UIAlertController(title: "WARNING!", message: "You are about to delete this group.\nAre you sure?", preferredStyle: .alert)
+        let yesAction = UIAlertAction(title: "Yes", style: .default) { (_) in
+            guard let group = GroupController.shared.currentGroup,
+                let groupID = group.groupRecordID
+                else { return }
+           GroupController.shared.deleteGroup(recordID: groupID, completion: { (error) in
+            if error != nil {
+                NSLog("Error deleting group")
+            } else {
+                guard let index = GroupController.shared.userGroups.index(of: group) else { return }
+                GroupController.shared.userGroups.remove(at: index)
+                DispatchQueue.main.async {
+                    _ = self.navigationController?.popViewController(animated: true)
+                }
+            }
+           })
+            
+            
+            _ = self.navigationController?.popViewController(animated: true)
+        }
+        let noAction = UIAlertAction(title: "No", style: .cancel) { (_) in
+            
+        }
+        alertController.addAction(yesAction)
+        alertController.addAction(noAction)
+        present(alertController, animated: true, completion: nil)
+    }
+
     
     
 }

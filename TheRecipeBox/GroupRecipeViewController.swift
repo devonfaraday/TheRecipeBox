@@ -35,11 +35,7 @@ class GroupRecipeViewController: UIViewController, UICollectionViewDataSource, U
         
         return cell
     }
-    
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//       performSegue(withIdentifier: Constants.toShowRecipeSegue, sender: self)
-//        
-//    }
+
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Constants.toAddRecipeToGroupSegue {
@@ -48,7 +44,6 @@ class GroupRecipeViewController: UIViewController, UICollectionViewDataSource, U
         }
         if segue.identifier == Constants.toShowRecipeSegue {
             
-//            guard let indexPath =  collectionView.indexPath(for: GroupRecipeCollectionViewCell()) else { return }
             guard let indexPath = collectionView.indexPathsForSelectedItems else { return }
             let destinationVC = segue.destination as? AddRecipeViewController
             destinationVC?.recipe = GroupController.shared.groupRecipes[indexPath[0].item]

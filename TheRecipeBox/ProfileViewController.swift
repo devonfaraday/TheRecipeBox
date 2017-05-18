@@ -92,8 +92,9 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
         
         let recipe = RecipeController.shared.allGroupsRecipes[indexPath.row]
         
-        cell.layer.borderWidth = 1
+        cell.layer.borderWidth = 6
         cell.layer.borderColor = UIColor.white.cgColor
+        cell.layer.cornerRadius = 25
         cell.recipe = recipe
         
         return cell
@@ -109,11 +110,6 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == Constants.toRecipeList {
-            guard let destinationVC = segue.destination as? RecipeListTableViewController else { return }
-            
-            destinationVC.recipes = RecipeController.shared.currentRecipes
-        }
         if segue.identifier == "toRecipeFromProfile" {
             guard let indexPath = tableView.indexPathForSelectedRow else { return }
             guard let destinationVC = segue.destination as? AddRecipeViewController else { return }
@@ -121,8 +117,6 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
             destinationVC.recipe = recipe
         }
     }
-    
-    
     
     // MARK: - Helpers
     
