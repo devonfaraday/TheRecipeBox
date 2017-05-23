@@ -148,21 +148,3 @@ class RecipeListViewController: UIViewController, UICollectionViewDelegate, UICo
     
     
 }
-
-
-/*
- 
- override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
- if editingStyle == .delete {
- let recipe = recipes[indexPath.row]
- 
- guard let recordID = recipe.recordID,
- let index = recipes.index(of: recipe) else { return }
- RecipeController.shared.deleteRecipeRecord(recipeID: recordID)
- recipes.remove(at: index)
- RecipeController.shared.currentRecipes.remove(at: index)
- tableView.deleteRows(at: [indexPath], with: .fade)
- }
- }
- 
- */

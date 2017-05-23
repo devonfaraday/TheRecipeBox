@@ -11,11 +11,9 @@ import CloudKit
 
 class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDelegate {
     
-    @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
-    @IBOutlet weak var textFieldStack: UIStackView!
+    // MARK: - Properties
     
-    var ingredients = [Ingredient]()
-    var instructions = [Instruction]()
+    
     var isEditingTextfields  = false
     
     var recipe: Recipe? {
@@ -27,9 +25,13 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
         }
     }
     
-    // MARK: - Properties
+    var ingredients = [Ingredient]()
+    var instructions = [Instruction]()
+    
     let sections = ["Ingredients", "Instructions"]
     
+    @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var textFieldStack: UIStackView!
     @IBOutlet weak var addInstructionButton: UIButton!
     @IBOutlet weak var addIngredientButton: UIButton!
     @IBOutlet weak var recipeImageView: UIImageView!
@@ -58,6 +60,7 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
+        // Allows for the tableView to take up more of the screen so the user can see more of the ingredients and instructions at once.
         
         if tableViewTopConstraint.constant <= 8 && tableViewTopConstraint.constant >= -recipeImageView.frame.height - 50 {
             tableViewTopConstraint.constant -= scrollView.contentOffset.y
@@ -138,6 +141,9 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
     }
     
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        
+        // if there is a recipe I don't want the user being able to delete the ingredients or instructions.
+        
         if recipe == nil {
             return .delete
         } else {
@@ -228,6 +234,9 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
             self.cameraButton()
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        // Only if the photo source is available will the option show up in the action sheet
+        
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary)  &&  UIImagePickerController.isSourceTypeAvailable(.camera){
             actionController.addAction(uploadAction)
             actionController.addAction(cameraAction)
@@ -244,43 +253,41 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
     // MARK: - functions for upload or camera
     
     func uploadButton() {
-        //Hide any keyboards that maybe open
-        recipeNameTextField.resignFirstResponder()
-        servingsTextField.resignFirstResponder()
-        prepTimeTextField.resignFirstResponder()
-        instructionTextField.resignFirstResponder()
-        ingredientTextField.resignFirstResponder()
         
-        let imagePickerController = UIImagePickerController()
+        hideAllKeyboards()
         
-        imagePickerController.sourceType = .photoLibrary
-        
-        imagePickerController.delegate = self
-        
-        present(imagePickerController, animated: true, completion: nil)
+        pickPhotoSource(sourceType: .photoLibrary)
         
     }
     
     func cameraButton() {
-        //Hide any keyboards that maybe open
+        
+        hideAllKeyboards()
+        
+        pickPhotoSource(sourceType: .camera)
+        
+    }
+
+    
+    // MARK: - Helper Functions
+    
+    func pickPhotoSource(sourceType: UIImagePickerControllerSourceType) {
+        let imagePickerController = UIImagePickerController()
+        
+        imagePickerController.sourceType = sourceType
+        
+        imagePickerController.delegate = self
+        
+        present(imagePickerController, animated: true, completion: nil)
+    }
+    
+    func hideAllKeyboards() {
         recipeNameTextField.resignFirstResponder()
         servingsTextField.resignFirstResponder()
         prepTimeTextField.resignFirstResponder()
         instructionTextField.resignFirstResponder()
         ingredientTextField.resignFirstResponder()
-        
-        let imagePickerController = UIImagePickerController()
-        
-        imagePickerController.sourceType = .camera
-        
-        imagePickerController.delegate = self
-        
-        present(imagePickerController, animated: true, completion: nil)
-        
     }
-    
-    // MARK: - Helper Functions
-    
     
     
     func updateViews() {
@@ -296,14 +303,18 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
         addInstructionButton.isHidden = true
         addIngredientButton.isHidden = true
         navigationItem.rightBarButtonItem?.isEnabled = false
-        RecipeController.shared.fetchIngredientsFor(recipe: recipe) { (ingredients) in
+        recipeNameTextField.isEnabled = false
+        servingsTextField.isEnabled = false
+        prepTimeTextField.isEnabled = false
+        cookTimeTextField.isEnabled = false
+        addPhotoButton.isEnabled = false
+       RecipeController.shared.fetchIngredientsFor(recipe: recipe) { (ingredients) in
             self.ingredients = ingredients
-            
-            RecipeController.shared.fetchInstructionsFor(recipe: recipe) { (instructions) in
-                self.instructions = instructions
+           RecipeController.shared.fetchInstructionsFor(recipe: recipe) { (instructions) in
+               self.instructions = instructions
                 DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
+                   self.tableView.reloadData()
+               }
             }
         }
     }

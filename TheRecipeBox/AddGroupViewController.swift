@@ -46,9 +46,11 @@ class AddGroupViewController: UIViewController, UICollectionViewDataSource, UICo
             let group = GroupController.shared.createGroupWith(name: groupName)
             GroupController.shared.saveToCloudKit(group: group, withUsers: usersToAdd, completion: { (_) in
             })
+            NSLog("Popping view controller")
+            _ = self.navigationController?.popViewController(animated: true)
+        } else {
+            noGroupNameAlert()
         }
-        NSLog("Popping view controller")
-        _ = self.navigationController?.popViewController(animated: true)
     }
     
     // MARK: - Collection View Data Source
@@ -84,7 +86,7 @@ class AddGroupViewController: UIViewController, UICollectionViewDataSource, UICo
     
     func checkMarkButtonTapped(_ sender: MemberCollectionViewCell) {
         guard let user = sender.user else { return }
-        if sender.isChecked {
+        if !sender.isChecked {
             usersToAdd.append(user)
         } else {
             if usersToAdd.contains(user) {
@@ -179,6 +181,15 @@ class AddGroupViewController: UIViewController, UICollectionViewDataSource, UICo
             collectionViewBottomConstraint.constant = collectionViewBottomConstraint.constant - keyboardSize.height + tabHeight
             
         }
+    }
+    
+    // MARK: - Alert Controller
+    
+    func noGroupNameAlert() {
+        let alertController = UIAlertController(title: "No Name", message: "Enter a group name.", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: nil)
     }
 
 

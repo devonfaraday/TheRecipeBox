@@ -66,12 +66,14 @@ class GroupController {
     }
     
     func saveToCloudKit(group: Group, withUsers users: [User], completion: @escaping((Error?) -> Void) = { _ in })  {
-
-        self.userGroups.append(group)
+        
 
         guard let user = UserController.shared.currentUser else { return }
         guard let userID = user.userRecordID else { return }
+    
         let ownerReference = CKReference(recordID: userID, action: .none)
+        group.groupOwnerRef = ownerReference
+        self.userGroups.append(group)
         var userIDs = users.flatMap { $0.userRecordID }
         userIDs.append(userID)
         let userReferences = userIDs.flatMap { CKReference(recordID: $0, action: .none) }
@@ -143,6 +145,9 @@ class GroupController {
         publicDB.delete(withRecordID: recordID) { (_, error) in
             if let error = error {
                 NSLog("Error deleting \(recordID)\n\(error.localizedDescription)")
+                completion(error)
+            } else {
+                completion(nil)
             }
         }
     }

@@ -129,6 +129,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
                         self.tableView.refreshControl?.endRefreshing()
+                        
                     }
                 })
             }
@@ -162,3 +163,24 @@ func loadData(){
 }
 
 */
+prefix func ++(value: inout Int) -> Int {
+    value += 1
+    return value
+}
+
+postfix func ++(value: inout Int) -> Int {
+    let oldValue = value
+    value += 1
+    return oldValue
+}
+
+prefix func --(value: inout Int) -> Int {
+    value -= 1
+    return value
+}
+
+postfix func --(value: inout Int) -> Int {
+    let oldValue = value
+    value -= 1
+    return oldValue
+}

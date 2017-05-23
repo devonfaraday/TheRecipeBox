@@ -43,10 +43,17 @@ class GroupDetailViewController: UIViewController, UITableViewDataSource, UIText
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.backgroundColor = .clear
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         if group?.groupOwnerRef?.recordID == UserController.shared.currentUser?.userRecordID {
             leaveButton.setTitle("Delete Group", for: .normal)
         }
     }
+    
+    // MARK: - Table View Data Source
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if searchActive {
@@ -58,6 +65,7 @@ class GroupDetailViewController: UIViewController, UITableViewDataSource, UIText
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.userCellIdentifier, for: indexPath)
+        // Making the image view of cell circular
         if let imageView = cell.imageView {
             UserController.shared.profileImageDisplay(imageView: imageView)
         }
@@ -71,10 +79,12 @@ class GroupDetailViewController: UIViewController, UITableViewDataSource, UIText
             }
         } else {
             let user = users[indexPath.row]
-            cell.textLabel?.text = user.username
-            if user.recipes != nil {
-                cell.detailTextLabel?.text = ""
+            DispatchQueue.main.async {
+                cell.textLabel?.text = user.username
             }
+//            if user.recipes != nil {
+//                cell.detailTextLabel?.text = ""
+//            }
         }
         return cell
     }
@@ -162,11 +172,7 @@ class GroupDetailViewController: UIViewController, UITableViewDataSource, UIText
     func updateViews() {
         guard let group = group else { return }
         groupNameTextLabel.text = group.groupName
-        GroupController.shared.fetchUsersIn(group: group) { (users) in
-            DispatchQueue.main.async {
-                self.users = users
-            }
-        }
+
     }
     
     // MARK: - Alert Controllers
@@ -211,7 +217,7 @@ class GroupDetailViewController: UIViewController, UITableViewDataSource, UIText
            })
             
             
-            _ = self.navigationController?.popViewController(animated: true)
+            
         }
         let noAction = UIAlertAction(title: "No", style: .cancel) { (_) in
             

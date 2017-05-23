@@ -29,7 +29,6 @@
 		FDC0FA301E8C05AE00D32052 /* GroupListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC0FA2F1E8C05AE00D32052 /* GroupListTableViewController.swift */; };
 		FDC0FA321E8C0F7100D32052 /* AddGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC0FA311E8C0F7100D32052 /* AddGroupViewController.swift */; };
 		FDC0FA341E8C0F8000D32052 /* GroupDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC0FA331E8C0F8000D32052 /* GroupDetailViewController.swift */; };
-		FDC0FA381E8C56C500D32052 /* GroupRecipesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC0FA371E8C56C500D32052 /* GroupRecipesTableViewController.swift */; };
 		FDC0FA3A1E8C751200D32052 /* AddRecipesToGroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC0FA391E8C751200D32052 /* AddRecipesToGroupTableViewController.swift */; };
 		FDD7D93B1E7738B600B19F21 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD7D93A1E7738B600B19F21 /* ProfileViewController.swift */; };
 		FDD7D9431E77395900B19F21 /* ProfileFeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD7D9421E77395900B19F21 /* ProfileFeedTableViewCell.swift */; };
@@ -76,7 +75,6 @@
 		FDC0FA2F1E8C05AE00D32052 /* GroupListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupListTableViewController.swift; sourceTree = "<group>"; };
 		FDC0FA311E8C0F7100D32052 /* AddGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGroupViewController.swift; sourceTree = "<group>"; };
 		FDC0FA331E8C0F8000D32052 /* GroupDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupDetailViewController.swift; sourceTree = "<group>"; };
-		FDC0FA371E8C56C500D32052 /* GroupRecipesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = GroupRecipesTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		FDC0FA391E8C751200D32052 /* AddRecipesToGroupTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AddRecipesToGroupTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		FDD7D93A1E7738B600B19F21 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ProfileViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		FDD7D9421E77395900B19F21 /* ProfileFeedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileFeedTableViewCell.swift; sourceTree = "<group>"; };
@@ -175,7 +173,6 @@
 				FDC0FA2F1E8C05AE00D32052 /* GroupListTableViewController.swift */,
 				FDC0FA311E8C0F7100D32052 /* AddGroupViewController.swift */,
 				FDC0FA331E8C0F8000D32052 /* GroupDetailViewController.swift */,
-				FDC0FA371E8C56C500D32052 /* GroupRecipesTableViewController.swift */,
 				FDC0FA391E8C751200D32052 /* AddRecipesToGroupTableViewController.swift */,
 				FD91EDB51EBAA1A40001F898 /* GroupRecipeViewController.swift */,
 			);
@@ -399,7 +396,6 @@
 				FDC0FA301E8C05AE00D32052 /* GroupListTableViewController.swift in Sources */,
 				FDD7D9761E7A58C400B19F21 /* User+CloudKit.swift in Sources */,
 				FD8809801ECA238A00D2A215 /* FeatureController.swift in Sources */,
-				FDC0FA381E8C56C500D32052 /* GroupRecipesTableViewController.swift in Sources */,
 				FDD7D9741E7A58BA00B19F21 /* User.swift in Sources */,
 				FDD7D9671E775B8900B19F21 /* Instruction+CloudKit.swift in Sources */,
 				FDD7D95F1E7754E400B19F21 /* Recipe.swift in Sources */,
