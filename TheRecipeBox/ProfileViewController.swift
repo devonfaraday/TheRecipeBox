@@ -24,9 +24,12 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
     
     
+    
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(performUpdate), for: UIControlEvents.valueChanged)
@@ -89,13 +92,14 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.profileFeedIdentifier, for: indexPath) as? ProfileFeedTableViewCell else { return ProfileFeedTableViewCell() }
-        
+        cell.loadingIndicator.startAnimating()
         let recipe = RecipeController.shared.allGroupsRecipes[indexPath.row]
         
         cell.layer.borderWidth = 6
         cell.layer.borderColor = UIColor.white.cgColor
         cell.layer.cornerRadius = 25
         cell.recipe = recipe
+        
         
         return cell
     }
@@ -163,24 +167,4 @@ func loadData(){
 }
 
 */
-prefix func ++(value: inout Int) -> Int {
-    value += 1
-    return value
-}
 
-postfix func ++(value: inout Int) -> Int {
-    let oldValue = value
-    value += 1
-    return oldValue
-}
-
-prefix func --(value: inout Int) -> Int {
-    value -= 1
-    return value
-}
-
-postfix func --(value: inout Int) -> Int {
-    let oldValue = value
-    value -= 1
-    return oldValue
-}

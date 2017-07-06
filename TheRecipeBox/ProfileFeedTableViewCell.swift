@@ -19,11 +19,18 @@ class ProfileFeedTableViewCell: UITableViewCell {
     @IBOutlet weak var servingSizeLabel: UILabel!
     @IBOutlet weak var cookTimeLabel: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     
     var recipe: Recipe? {
         didSet {
             updateViews()
         }
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        loadingIndicator.activityIndicatorViewStyle = .whiteLarge
     }
     
     // MARK: - Helper Functions
@@ -41,6 +48,8 @@ class ProfileFeedTableViewCell: UITableViewCell {
             DispatchQueue.main.async {
                 self.profileImageView.image = image
                 UserController.shared.profileImageDisplay(imageView: self.profileImageView)
+                self.loadingIndicator.stopAnimating()
+                self.loadingIndicator.isHidden = true
             }
         }
     }

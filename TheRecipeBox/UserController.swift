@@ -72,6 +72,50 @@ class UserController {
         }
     }
     
+    //  TODO: Get fetching recipes quicker and use less bandwidth
+    
+    
+    /*
+     
+     //        let queryOperation = CKQueryOperation()
+     //        queryOperation.query = query
+     //        queryOperation.qualityOfService = .userInteractive
+     //        queryOperation.queryCompletionBlock = { cursor, error in
+     //
+     //            if cursor != nil {
+     //                print("There is more data")
+     //                guard let cursor = cursor else { return }
+     //                let newOperation = CKQueryOperation(cursor: cursor)
+     //                newOperation.recordFetchedBlock =
+     //            }
+     //
+     //        }
+     
+     
+     /*
+     
+     queryOperation.queryCompletionBlock = { cursor, error in
+     
+     if cursor != nil {
+     print("there is more data to fetch")
+     let newOperation = CKQueryOperation(cursor: cursor!)
+     newOperation.recordFetchedBlock = self.createUserObject
+     newOperation.queryCompletionBlock = queryOperation.queryCompletionBlock
+     database.addOperation(newOperation)
+     
+     } else {
+     
+     print(userArray) //Never runs
+     }
+     }
+     
+     database.addOperation(queryOperation)
+     
+     
+     */
+     
+     */
+    
     func addUserToGroupRecord(user: User, group: Group, completion: @escaping(Error?) -> Void = { _ in }) {
         
         guard let userID = user.userRecordID,
@@ -268,6 +312,14 @@ class UserController {
         imageView.layer.borderColor = UIColor.white.cgColor
         imageView.layer.cornerRadius = imageView.frame.width / 2
         imageView.clipsToBounds = true
+    }
+    
+    func modify(user: User, completion: @escaping() -> Void) {
+        let record = CKRecord(user: user)
+        let operation = CKModifyRecordsOperation(recordsToSave: [record], recordIDsToDelete: nil)
+        operation.savePolicy = .ifServerRecordUnchanged
+        CloudKitManager.shared.publicDatabase.add(operation)
+        completion()
     }
 }
 

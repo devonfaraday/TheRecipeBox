@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="DAc-25-YJx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="17A264c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="DAc-25-YJx">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -155,7 +155,7 @@
             <objects>
                 <tableViewController id="DIA-Zx-ceh" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Gkw-a6-Qd9">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <sections>
@@ -234,7 +234,7 @@
             <objects>
                 <tableViewController id="tWL-Fa-odH" customClass="RequestTableViewController" customModule="TheRecipeBox" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="w7c-Jh-HGH">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <sections>
@@ -378,7 +378,7 @@
                         <viewControllerLayoutGuide type="bottom" id="dx2-S4-jxY"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="jhn-5Z-Tbn">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Rectangle" translatesAutoresizingMaskIntoConstraints="NO" id="o66-no-v5G">
@@ -519,6 +519,9 @@
                                                         <constraint firstAttribute="height" constant="54" id="s80-Um-YPD"/>
                                                     </constraints>
                                                 </stackView>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="DCS-LL-GhJ">
+                                                    <rect key="frame" x="197" y="89" width="20" height="20"/>
+                                                </activityIndicatorView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="Bns-Fn-nFq" secondAttribute="bottom" constant="8" id="3Rs-mb-A1m"/>
@@ -530,8 +533,10 @@
                                                 <constraint firstAttribute="bottom" secondItem="6zk-um-xeX" secondAttribute="bottom" id="KWL-s9-BmT"/>
                                                 <constraint firstItem="F9L-UG-bdY" firstAttribute="centerY" secondItem="6zk-um-xeX" secondAttribute="centerY" id="Me3-G0-nLX"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="Ke4-OF-RC7" secondAttribute="trailing" constant="10" id="Ncd-Uo-DfA"/>
+                                                <constraint firstItem="DCS-LL-GhJ" firstAttribute="centerX" secondItem="Yvh-e5-rZg" secondAttribute="centerX" id="QnF-1x-RP1"/>
                                                 <constraint firstItem="Bns-Fn-nFq" firstAttribute="centerX" secondItem="Yvh-e5-rZg" secondAttribute="centerX" id="aO7-nD-oRL"/>
                                                 <constraint firstItem="F9L-UG-bdY" firstAttribute="height" secondItem="6zk-um-xeX" secondAttribute="height" id="apV-wZ-w1Y"/>
+                                                <constraint firstItem="DCS-LL-GhJ" firstAttribute="centerY" secondItem="Yvh-e5-rZg" secondAttribute="centerY" id="ch0-6m-rav"/>
                                                 <constraint firstItem="iMM-QF-Nxe" firstAttribute="centerX" secondItem="Yvh-e5-rZg" secondAttribute="centerX" id="dMx-9I-PCW"/>
                                                 <constraint firstItem="6zk-um-xeX" firstAttribute="leading" secondItem="Yvh-e5-rZg" secondAttribute="leading" id="jpA-Oa-zFc"/>
                                                 <constraint firstItem="Ke4-OF-RC7" firstAttribute="top" secondItem="Yvh-e5-rZg" secondAttribute="topMargin" constant="10" id="rIn-yK-3uY"/>
@@ -543,6 +548,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="cookTimeLabel" destination="zOG-9o-4vc" id="QBQ-Dd-cZG"/>
+                                            <outlet property="loadingIndicator" destination="DCS-LL-GhJ" id="cTE-yZ-1a3"/>
                                             <outlet property="prepTimeLabel" destination="8lp-xe-Kod" id="v3i-Hj-VCC"/>
                                             <outlet property="profileImageView" destination="Ke4-OF-RC7" id="U93-wq-ksZ"/>
                                             <outlet property="recipeNameLabel" destination="nPi-ma-MaS" id="EdH-7Y-t8l"/>
@@ -644,7 +650,7 @@
             <objects>
                 <tableViewController id="Ug9-dC-xI5" customClass="GroupListTableViewController" customModule="TheRecipeBox" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="bgc-9n-BTG">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -692,7 +698,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QAY-P2-giO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="687" y="1659"/>
+            <point key="canvasLocation" x="-1599" y="1763"/>
         </scene>
         <!--Members-->
         <scene sceneID="cGi-Qb-lUz">
@@ -703,7 +709,7 @@
                         <viewControllerLayoutGuide type="bottom" id="6pZ-ee-k7P"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ffY-8O-buR">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="i84-CD-wvS">
@@ -802,7 +808,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Rf-c7-hIK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="687" y="2435"/>
+            <point key="canvasLocation" x="-1599" y="2539"/>
         </scene>
         <!--Create Group-->
         <scene sceneID="1BP-AR-pHd">
@@ -813,11 +819,11 @@
                         <viewControllerLayoutGuide type="bottom" id="yzD-Dc-N7M"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="HM4-sc-WiV">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Matterhorn_Riffelsee_2005-06-11" translatesAutoresizingMaskIntoConstraints="NO" id="PR0-VR-Pto">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Matterhorn_Riffelsee_2005-06-11" translatesAutoresizingMaskIntoConstraints="NO" id="PR0-VR-Pto">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="739"/>
                             </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="z6E-sO-3BD">
                                 <rect key="frame" x="0.0" y="165" width="414" height="522"/>
@@ -918,7 +924,7 @@
                             <constraint firstItem="aIe-Xm-YOh" firstAttribute="top" secondItem="H38-wE-59f" secondAttribute="bottom" constant="12" id="WHS-eZ-MYx"/>
                             <constraint firstItem="H38-wE-59f" firstAttribute="top" secondItem="5iK-YO-dKn" secondAttribute="bottom" id="XYU-Lq-N58"/>
                             <constraint firstAttribute="trailing" secondItem="aIe-Xm-YOh" secondAttribute="trailing" constant="20" id="Yxf-Qs-vYp"/>
-                            <constraint firstItem="yzD-Dc-N7M" firstAttribute="top" secondItem="PR0-VR-Pto" secondAttribute="bottom" id="aHm-ft-EXL"/>
+                            <constraint firstItem="yzD-Dc-N7M" firstAttribute="top" secondItem="PR0-VR-Pto" secondAttribute="bottom" constant="-52" id="aHm-ft-EXL"/>
                             <constraint firstItem="yzD-Dc-N7M" firstAttribute="top" secondItem="z6E-sO-3BD" secondAttribute="bottom" id="fF4-vm-0HM"/>
                             <constraint firstAttribute="trailing" secondItem="H38-wE-59f" secondAttribute="trailing" id="jnO-l3-9zG"/>
                             <constraint firstItem="z6E-sO-3BD" firstAttribute="leading" secondItem="HM4-sc-WiV" secondAttribute="leading" id="sWz-2e-wlO"/>
@@ -941,7 +947,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5q2-2E-dDv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1474" y="1659"/>
+            <point key="canvasLocation" x="-812" y="1763"/>
         </scene>
         <!--Recipe-->
         <scene sceneID="FIb-pz-ETQ">
@@ -952,7 +958,7 @@
                         <viewControllerLayoutGuide type="bottom" id="kma-F6-79A"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Y3e-Dw-vX5">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pm3-fv-9mv">
@@ -1173,7 +1179,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Recipe" id="sas-Nw-X2Q">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="Iq9-7i-XXq">
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="Iq9-7i-XXq">
                             <connections>
                                 <action selector="saveButtonTapped:" destination="ldY-Bg-hi3" id="dna-RF-RLQ"/>
                             </connections>
@@ -1198,13 +1204,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rrj-22-hNR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3246" y="1370"/>
+            <point key="canvasLocation" x="1104" y="1763"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Tab Bar View Controller-->
         <scene sceneID="yim-2h-BGU">
             <objects>
-                <tabBarController id="YTj-sb-nsT" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="z9l-5v-Bzr">
+                <tabBarController id="YTj-sb-nsT" customClass="TabBarViewController" customModule="TheRecipeBox" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" translucent="NO" id="z9l-5v-Bzr">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1244,7 +1250,7 @@
             <objects>
                 <tableViewController id="Yri-X9-QLJ" customClass="AddRecipesToGroupTableViewController" customModule="TheRecipeBox" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Q8w-ww-wUA">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -1265,7 +1271,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2dX-Dr-av9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2413" y="2462"/>
+            <point key="canvasLocation" x="525" y="2566"/>
         </scene>
         <!--Group Recipe View Controller-->
         <scene sceneID="SQu-6b-J1v">
@@ -1276,7 +1282,7 @@
                         <viewControllerLayoutGuide type="bottom" id="lmg-6V-pqU"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="hIp-Gu-ZLj">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="K0Q-6b-8el">
@@ -1455,7 +1461,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r6n-8K-guK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1474" y="2462"/>
+            <point key="canvasLocation" x="-812" y="2566"/>
         </scene>
         <!--Groups-->
         <scene sceneID="Mn2-UL-8JZ">
@@ -1474,7 +1480,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hri-Gd-oFv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-117" y="1659"/>
+            <point key="canvasLocation" x="-2401" y="1763"/>
         </scene>
         <!--Recipes-->
         <scene sceneID="oPC-Iy-O8W">
@@ -1504,7 +1510,7 @@
                         <viewControllerLayoutGuide type="bottom" id="RPh-6b-Jie"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="K2E-7U-dzC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Yau-F3-kLz">
@@ -1699,7 +1705,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u2a-eV-OVA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2256.521739130435" y="495.6521739130435"/>
+            <point key="canvasLocation" x="1741" y="518"/>
         </scene>
         <!--Add-->
         <scene sceneID="g2X-Lw-VV7">
@@ -1718,7 +1724,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fy6-gS-0O7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2257" y="1489"/>
+            <point key="canvasLocation" x="-28" y="1763"/>
         </scene>
     </scenes>
     <resources>
@@ -1736,6 +1742,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="YA1-Yd-O6A"/>
-        <segue reference="UV0-lU-VF1"/>
+        <segue reference="qg7-is-aka"/>
     </inferredMetricsTieBreakers>
 </document>

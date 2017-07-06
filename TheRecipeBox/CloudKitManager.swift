@@ -83,5 +83,58 @@ class CloudKitManager {
         
         self.publicDatabase.add(queryOperation)
     }
+    
+    // MARK: - Subscriptions
+    
+    func subscribe(_ type: String,
+                   predicate: NSPredicate,
+                   subscriptionID: String,
+                   contentAvailable: Bool,
+                   shouldBadge: Bool = false,
+                   alertBody: String? = nil,
+                   desiredKeys: [String]? = nil,
+                   options: CKQuerySubscriptionOptions,
+                   completion: ((_ subscription: CKSubscription?, _ error: Error?) -> Void)?) {
+        
+        let subscription = CKQuerySubscription(recordType: type, predicate: predicate, subscriptionID: subscriptionID, options: options)
+        
+        let notificationInfo = CKNotificationInfo()
+        notificationInfo.alertBody = alertBody
+        notificationInfo.shouldSendContentAvailable = contentAvailable
+        notificationInfo.desiredKeys = desiredKeys
+        notificationInfo.shouldBadge = shouldBadge
+        
+        subscription.notificationInfo = notificationInfo
+        
+        publicDatabase.save(subscription, completionHandler: { (subscription, error) in
+            
+            completion?(subscription, error)
+        })
+    }
+    
+    func unsubscribe(_ subscriptionID: String, completion: ((_ subscriptionID: String?, _ error: Error?) -> Void)?) {
+        
+        publicDatabase.delete(withSubscriptionID: subscriptionID) { (subscriptionID, error) in
+            
+            completion?(subscriptionID, error)
+        }
+    }
+    
+    func subscribeToBeingAddedToNewGroup(group: Group) {
+        
+        guard let groupID = group.groupRecordID else { return }
+        guard let currentUser = UserController.shared.currentUser, let userRecordID = currentUser.userRecordID else { return }
+        
+        let userReference = CKReference(recordID: userRecordID, action: .none)
+        
+        let predicate = NSPredicate(format: "userReferences CONTAINS %@", userReference)
+
+       subscribe(Constants.groupRecordType, predicate: predicate, subscriptionID: groupID.recordName, contentAvailable: true, shouldBadge: true, alertBody: "You have been added to a new group!", desiredKeys: ["userReferences"], options: .firesOnce) { (subscription, error) in
+        if let error = error {
+            NSLog("Error saving subscription:\n\(error.localizedDescription)")
+        }
+        }
+       
+    }
 }
 

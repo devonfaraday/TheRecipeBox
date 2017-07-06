@@ -14,8 +14,6 @@ class RequestTableViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var requestTextView: UITextView!
     
-    
-    
     // MARK: - UI Actions
     @IBAction func segmentSelected(_ sender: Any) {
         

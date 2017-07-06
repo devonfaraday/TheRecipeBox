@@ -22,7 +22,7 @@ extension User {
         self.userRecordID = cloudKitRecord.recordID
     }
     
-    fileprivate var temporaryPhotoURL: URL {
+     var temporaryPhotoURL: URL {
         
         let tempDir = NSTemporaryDirectory()
         let tempURL = URL(fileURLWithPath: tempDir)
@@ -45,17 +45,14 @@ extension User {
     }
 }
 
+extension CKRecord {
+    convenience init(user: User) {
+        let recordID = user.userRecordID ?? CKRecordID(recordName: UUID().uuidString)
+        self.init(recordType: Constants.userRecordType, recordID: recordID)
+        self.setValue(user.username, forKey: Constants.userusernameKey)
+        self.setValue(CKAsset(fileURL: user.temporaryPhotoURL), forKey: Constants.profileImageKey)
+        self.setValue(user.appleUserRef, forKey: Constants.defaultUserReferenceKey)
+        
+    }
+}
 
-/*
- 
- convenience init(recipe: Recipe) {
- self.init(recordType: Constants.recipeRecordType)
- self.setValue(recipe.name, forKey: Constants.recipeNameKey)
- self.setValue(recipe.prepTime, forKey: Constants.prepTimeKey)
- self.setValue(recipe.servingSize, forKey: Constants.servingSizeKey)
- self.setValue(recipe.cookTime, forKey: Constants.cookTimeKey)
- self[Constants.recipeImageKey] = CKAsset(fileURL: recipe.temporaryPhotoURL)
- 
-
- 
- */

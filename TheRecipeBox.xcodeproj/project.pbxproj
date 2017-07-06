@@ -14,6 +14,7 @@
 		FD7562011E75361B0059DE3D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD7561FF1E75361B0059DE3D /* Main.storyboard */; };
 		FD7562031E75361B0059DE3D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD7562021E75361B0059DE3D /* Assets.xcassets */; };
 		FD7562061E75361B0059DE3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD7562041E75361B0059DE3D /* LaunchScreen.storyboard */; };
+		FD75A1221ED4C19D0071600F /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD75A1211ED4C19D0071600F /* TabBarViewController.swift */; };
 		FD7A5CC71EB4EC930070ADEC /* WhatsNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7A5CC61EB4EC930070ADEC /* WhatsNew.swift */; };
 		FD7A5CE91EB85A0B0070ADEC /* GroupRecipeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7A5CE81EB85A0B0070ADEC /* GroupRecipeCollectionViewCell.swift */; };
 		FD8809781ECA20D400D2A215 /* Feature.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8809771ECA20D400D2A215 /* Feature.swift */; };
@@ -60,6 +61,7 @@
 		FD7562021E75361B0059DE3D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FD7562051E75361B0059DE3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FD7562071E75361B0059DE3D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FD75A1211ED4C19D0071600F /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		FD7A5CC61EB4EC930070ADEC /* WhatsNew.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhatsNew.swift; sourceTree = "<group>"; };
 		FD7A5CE81EB85A0B0070ADEC /* GroupRecipeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupRecipeCollectionViewCell.swift; sourceTree = "<group>"; };
 		FD8809771ECA20D400D2A215 /* Feature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Feature.swift; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 			isa = PBXGroup;
 			children = (
 				FDD7D93A1E7738B600B19F21 /* ProfileViewController.swift */,
+				FD75A1211ED4C19D0071600F /* TabBarViewController.swift */,
 				FDD7D97C1E7AFB7C00B19F21 /* UsernameViewController.swift */,
 				FDC0FA0A1E8AF50800D32052 /* LaunchScreenCopyViewController.swift */,
 				FD8809811ECA27B200D2A215 /* RequestTableViewController.swift */,
@@ -408,6 +411,7 @@
 				FD6E1F661EABCF18005D1C5A /* MemberCollectionViewCell.swift in Sources */,
 				FD7561FC1E75361B0059DE3D /* AppDelegate.swift in Sources */,
 				FD7A5CE91EB85A0B0070ADEC /* GroupRecipeCollectionViewCell.swift in Sources */,
+				FD75A1221ED4C19D0071600F /* TabBarViewController.swift in Sources */,
 				FDD7D94A1E773BE000B19F21 /* Constants.swift in Sources */,
 				FD8809781ECA20D400D2A215 /* Feature.swift in Sources */,
 				FDD7D9631E7759D100B19F21 /* Instruction.swift in Sources */,
