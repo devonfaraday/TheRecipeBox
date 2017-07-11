@@ -24,6 +24,7 @@ class RecipeController {
     
     // MARK: - Recipe Functions
     
+    // Creating the recipe with ingredients
     func createRecipeWith(name: String, prepTime: String, servings: String, cookTime: String, recipeImageData: Data?) -> Recipe {
         return Recipe(name: name, prepTime: prepTime, servingSize: servings, cookTime: cookTime, recipeImageData: recipeImageData)
     }
@@ -38,6 +39,7 @@ class RecipeController {
         return newInstruction
     }
     
+    // add recipe to cloud kit with instructions and ingredients in a parent to child relationship
     func addRecipeToCloudKit(recipe: Recipe, ingredients: [Ingredient], instructions: [Instruction], completion: @escaping ((Error?) -> Void) = { _ in }) {
         
         
@@ -90,6 +92,7 @@ class RecipeController {
         }
     }
     
+    // delete recipe
     func deleteRecipeRecord(recipeID: CKRecordID, completion: @escaping ((Error?) -> Void) = { _ in }) {
         cloudKitManager.publicDatabase.delete(withRecordID: recipeID) { (_, error) in
             if let error = error {
@@ -101,6 +104,8 @@ class RecipeController {
             
         }
     }
+    
+    // MARK: - Fetch Functions
     
     func fetchIngredientsFor(recipe: Recipe, completion: @escaping([Ingredient]) -> Void) {
         guard let recipeRecordID = recipe.recordID else { return }
@@ -152,11 +157,47 @@ class RecipeController {
         }
     }
     
+    func fetchAllRecipes(completion: @escaping([Recipe]) -> Void) {
+        let predicate = NSPredicate(value: true)
+        let query = CKQuery(recordType: Constants.recipeRecordType, predicate: predicate)
+        Constants.publicDatabase.perform(query, inZoneWith: nil) { (records, error) in
+            if let error = error {
+                NSLog("Error fetching all recipes:\n\(error.localizedDescription)")
+                completion([])
+                return
+            } else {
+                guard let records = records else { completion([]); return }
+                let recipes = records.flatMap { Recipe(cloudKitRecord: $0) }
+                completion(recipes)
+            }
+        }
+    }
+    
     func modify(recipe: Recipe, completion: @escaping() -> Void) {
         let record = CKRecord(recipe: recipe)
         let operation = CKModifyRecordsOperation(recordsToSave: [record], recordIDsToDelete: nil)
-        operation.savePolicy = .ifServerRecordUnchanged
+        operation.savePolicy = .changedKeys
         self.cloudKitManager.publicDatabase.add(operation)
         completion()
+    }
+    
+    
+    // MARK: - Temp Func to resize photos
+    
+    func fecthAndResizePhotos(completion: @escaping() -> Void) {
+        fetchAllRecipes { (recipes) in
+            for recipe in recipes {
+                NSLog("\(String(describing: recipe.recipeImage?.cgImage?.width))")
+                guard let image = recipe.recipeImage
+                    else { completion(); return }
+                let newImage = ImageResizer.resizeImage(image: image, targetSize: CGSize(width: 414, height: 200))
+                recipe.recipeImageData = UIImageJPEGRepresentation(newImage, 1.0)
+                self.modify(recipe: recipe, completion: { 
+                    NSLog("Recipe image updated")
+                    NSLog("\(String(describing: recipe.recipeImage?.cgImage?.width))")
+                })
+            }
+            completion()
+        }
     }
 }

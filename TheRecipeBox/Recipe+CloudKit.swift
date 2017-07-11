@@ -35,7 +35,7 @@ extension Recipe {
         
         let tempDir = NSTemporaryDirectory()
         let tempURL = URL(fileURLWithPath: tempDir)
-        let fileURL = tempURL.appendingPathComponent(UUID().uuidString).appendingPathExtension("png")
+        let fileURL = tempURL.appendingPathComponent(UUID().uuidString).appendingPathExtension("jpeg")
         
         try? recipeImageData?.write(to: fileURL, options: [.atomic])
         

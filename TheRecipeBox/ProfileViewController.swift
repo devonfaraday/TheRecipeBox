@@ -29,8 +29,12 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let cell = ProfileFeedTableViewCell()
         
         
+        RecipeController.shared.fecthAndResizePhotos {
+            NSLog("Recipe photos resized")
+        }
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(performUpdate), for: UIControlEvents.valueChanged)
         tableView.refreshControl = refreshControl
