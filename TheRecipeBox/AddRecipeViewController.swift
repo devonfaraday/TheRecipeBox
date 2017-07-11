@@ -208,7 +208,8 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
                 let cookTime = cookTimeTextField.text
                 else { return }
             if let image = recipeImageView.image {
-                let imageData = UIImageJPEGRepresentation(image, 0.5)
+                let img = ImageResizer.resizeImage(image: image, targetSize: CGSize(width: 414, height: 200))
+                let imageData = UIImageJPEGRepresentation(img, 1.0)
                 let recipe = Recipe(name: name, prepTime: prepTime, servingSize: servings, cookTime: cookTime, recipeImageData: imageData)
                 
                 RecipeController.shared.addRecipeToCloudKit(recipe: recipe, ingredients: ingredients, instructions: instructions, completion: { (error) in

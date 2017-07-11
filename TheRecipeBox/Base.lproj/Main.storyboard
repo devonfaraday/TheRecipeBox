@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="17A264c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="DAc-25-YJx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="17A306f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="DAc-25-YJx">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -1232,7 +1232,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lAl-4c-gAq" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Profile" image="ProfileIcon" selectedImage="ProfileIcon" id="SwT-Tt-T7t"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="z9O-ps-hY0">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="z9O-ps-hY0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1469,7 +1469,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="azx-g8-tyQ" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Groups" image="Group" id="qZr-D5-uU3"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="C5d-CQ-ww7">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="C5d-CQ-ww7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1488,7 +1488,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="IyU-he-uPK" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Recipes" image="RecipeTab" id="ITK-mD-rVT"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ghC-zr-Cdf">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ghC-zr-Cdf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1713,7 +1713,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="pfC-Gn-boi" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" tag="1" title="Add" image="AddTab" id="wcs-Ql-0Pa"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="FVf-Qe-zW1">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="FVf-Qe-zW1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1742,6 +1742,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="YA1-Yd-O6A"/>
-        <segue reference="qg7-is-aka"/>
+        <segue reference="yzS-YU-akp"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		FD6C138A1ECB8EBC0034E67C /* RecipeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6C13891ECB8EBC0034E67C /* RecipeListViewController.swift */; };
 		FD6C138C1ECB91610034E67C /* RecipeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6C138B1ECB91610034E67C /* RecipeCollectionViewCell.swift */; };
+		FD6D64AF1F15306000E23FC2 /* StackOverflow solutions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6D64AE1F15306000E23FC2 /* StackOverflow solutions.swift */; };
+		FD6D64B11F15314100E23FC2 /* ImageResizing.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6D64B01F15314100E23FC2 /* ImageResizing.swift */; };
 		FD6E1F661EABCF18005D1C5A /* MemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6E1F651EABCF18005D1C5A /* MemberCollectionViewCell.swift */; };
 		FD7561FC1E75361B0059DE3D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7561FB1E75361B0059DE3D /* AppDelegate.swift */; };
 		FD7562011E75361B0059DE3D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD7561FF1E75361B0059DE3D /* Main.storyboard */; };
@@ -54,6 +56,8 @@
 /* Begin PBXFileReference section */
 		FD6C13891ECB8EBC0034E67C /* RecipeListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeListViewController.swift; sourceTree = "<group>"; };
 		FD6C138B1ECB91610034E67C /* RecipeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeCollectionViewCell.swift; sourceTree = "<group>"; };
+		FD6D64AE1F15306000E23FC2 /* StackOverflow solutions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "StackOverflow solutions.swift"; sourceTree = "<group>"; };
+		FD6D64B01F15314100E23FC2 /* ImageResizing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageResizing.swift; sourceTree = "<group>"; };
 		FD6E1F651EABCF18005D1C5A /* MemberCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberCollectionViewCell.swift; sourceTree = "<group>"; };
 		FD7561F81E75361B0059DE3D /* TheRecipeBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheRecipeBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD7561FB1E75361B0059DE3D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -195,6 +199,7 @@
 			children = (
 				FDD7D9491E773BE000B19F21 /* Constants.swift */,
 				FDD7D95C1E7746C900B19F21 /* CloudKitManager.swift */,
+				FD6D64B01F15314100E23FC2 /* ImageResizing.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -255,6 +260,7 @@
 				FD7562021E75361B0059DE3D /* Assets.xcassets */,
 				FD7562071E75361B0059DE3D /* Info.plist */,
 				FD7A5CC61EB4EC930070ADEC /* WhatsNew.swift */,
+				FD6D64AE1F15306000E23FC2 /* StackOverflow solutions.swift */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -383,6 +389,7 @@
 				FDC0FA341E8C0F8000D32052 /* GroupDetailViewController.swift in Sources */,
 				FD6C138A1ECB8EBC0034E67C /* RecipeListViewController.swift in Sources */,
 				FDC0FA3A1E8C751200D32052 /* AddRecipesToGroupTableViewController.swift in Sources */,
+				FD6D64B11F15314100E23FC2 /* ImageResizing.swift in Sources */,
 				FDD7D95D1E7746C900B19F21 /* CloudKitManager.swift in Sources */,
 				FDD7D9611E7759CB00B19F21 /* Ingredient.swift in Sources */,
 				FDA531301E7BB96A00DC3DB3 /* UserController.swift in Sources */,
@@ -398,6 +405,7 @@
 				FDD7D9651E775B7F00B19F21 /* Ingredient+CloudKit.swift in Sources */,
 				FDC0FA301E8C05AE00D32052 /* GroupListTableViewController.swift in Sources */,
 				FDD7D9761E7A58C400B19F21 /* User+CloudKit.swift in Sources */,
+				FD6D64AF1F15306000E23FC2 /* StackOverflow solutions.swift in Sources */,
 				FD8809801ECA238A00D2A215 /* FeatureController.swift in Sources */,
 				FDD7D9741E7A58BA00B19F21 /* User.swift in Sources */,
 				FDD7D9671E775B8900B19F21 /* Instruction+CloudKit.swift in Sources */,
