@@ -47,8 +47,8 @@ class UserController {
             
         }
         
-        fetchAllUsers { 
-            print("Users Fetched")
+        fetchAllUsers { (users) in
+            NSLog("Fetched all users")
         }
     }
     
@@ -199,20 +199,20 @@ class UserController {
     
     
     
-    func fetchAllUsers(completion: @escaping() -> Void) {
+    func fetchAllUsers(completion: @escaping([User]) -> Void) {
         let predicate = NSPredicate(value: true)
         let query = CKQuery(recordType: Constants.userRecordType, predicate: predicate)
         publicDatabase.perform(query, inZoneWith: nil) { (records, error) in
             if let error = error {
                 print("an error accured \(error)")
-                completion()
+                completion([])
                 return
             } else {
                 guard let records = records else { return }
                 let users = records.flatMap { User(cloudKitRecord: $0) }
                 self.allUsers = users
                 
-                completion()
+                completion(users)
                 
             }
         }
@@ -317,9 +317,28 @@ class UserController {
     func modify(user: User, completion: @escaping() -> Void) {
         let record = CKRecord(user: user)
         let operation = CKModifyRecordsOperation(recordsToSave: [record], recordIDsToDelete: nil)
-        operation.savePolicy = .ifServerRecordUnchanged
+        operation.savePolicy = .changedKeys
         CloudKitManager.shared.publicDatabase.add(operation)
         completion()
     }
+    
+    
+    func fecthAndResizeProfilePhotos(completion: @escaping() -> Void) {
+        fetchAllUsers { (users) in
+            
+            for user in users {
+                
+                let image = user.profilePhoto
+                let newImage = ImageResizer.resizeImage(image: image, targetSize: CGSize(width: 98, height: 98))
+                user.profilePhotoData = UIImageJPEGRepresentation(newImage, 1.0)
+                self.modify(user: user, completion: {
+                    NSLog("Recipe image updated")
+                    
+                })
+            }
+            completion()
+        }
+     }
+    
 }
 
