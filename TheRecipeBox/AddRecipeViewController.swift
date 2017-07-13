@@ -201,6 +201,8 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
     
     // TODO: Change saveButtonTapped to include editing when someone is viewing their recipe.
     @IBAction func saveButtonTapped(_ sender: Any) {
+        
+            
         if recipe == nil {
             guard let name = recipeNameTextField.text,
                 let prepTime = prepTimeTextField.text,
@@ -217,14 +219,37 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
                         NSLog("\(error.localizedDescription)\nProblem saving recipe with photo")
                     }
                 })
+                _ = navigationController?.popViewController(animated: true)
             } else {
                 noRecipePhotoAlert()
             }
-        } else {
-            guard let recipe = recipe else { return }
+        } else if saveButton.title == "Save" && recipe != nil {
             
+            guard let recipe = recipe else { return }
+            guard let name = recipeNameTextField.text,
+                let prepTime = prepTimeTextField.text,
+                let servings = servingsTextField.text,
+                let cookTime = cookTimeTextField.text
+                else { return }
+            if let image = recipeImageView.image {
+                let img = ImageResizer.resizeImage(image: image, targetSize: CGSize(width: recipeImageView.frame.width, height: recipeImageView.frame.height))
+                let imageData = UIImageJPEGRepresentation(img, 1.0)
+                recipe.name = name
+                recipe.prepTime = prepTime
+                recipe.servingSize = servings
+                recipe.cookTime = cookTime
+                recipe.recipeImageData = imageData
+                // TODO: - Create a function to add ingredients and instructions with a recipe that already exists
+                RecipeController.shared.modify(recipe: recipe, completion: {
+                    NSLog("Recipe updated")
+                })
+                _ = navigationController?.popViewController(animated: true)
+            }
+        } else {
+                hideTextFields(false)
+                enableTextFields(true)
+                saveButton.title = "Save"
         }
-        _ = navigationController?.popViewController(animated: true)
     }
     @IBAction func addPhotoButtonTapped(_ sender: UIButton) {
         addPhotoActionSheet()
@@ -305,28 +330,30 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
         recipeImageView.image = recipe.recipeImage
     }
     
-    func hideTextFields() {
-        instructionTextField.isHidden = true
-        ingredientTextField.isHidden = true
-        addInstructionButton.isHidden = true
-        addIngredientButton.isHidden = true
+    func hideTextFields(_ bool: Bool) {
+        instructionTextField.isHidden = bool
+        ingredientTextField.isHidden = bool
+        addInstructionButton.isHidden = bool
+        addIngredientButton.isHidden = bool
     }
     
-    func disableTextFields() {
-        recipeNameTextField.isEnabled = false
-        servingsTextField.isEnabled = false
-        prepTimeTextField.isEnabled = false
-        cookTimeTextField.isEnabled = false
-        addPhotoButton.isEnabled = false
+    func enableTextFields(_ bool: Bool) {
+        recipeNameTextField.isEnabled = bool
+        servingsTextField.isEnabled = bool
+        prepTimeTextField.isEnabled = bool
+        cookTimeTextField.isEnabled = bool
+        addPhotoButton.isEnabled = bool
     }
+    
+    
     
     func updateViews() {
         guard let recipe = recipe else { return }
         saveButton.title = "Edit"
         addPhotoButton.setTitle("", for: .normal)
         assignAllProperties()
-        hideTextFields()
-        disableTextFields()
+        hideTextFields(true)
+        enableTextFields(false)
         RecipeController.shared.fetchIngredientsFor(recipe: recipe) { (ingredients) in
             self.ingredients = ingredients
             RecipeController.shared.fetchInstructionsFor(recipe: recipe) { (instructions) in
@@ -337,7 +364,7 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
             }
         }
     }
-
+    
     
     func updateIngredients() {
         guard let recipe = recipe else { return }
