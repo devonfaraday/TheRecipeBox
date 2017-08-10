@@ -200,55 +200,68 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
     }
     
     // TODO: Change saveButtonTapped to include editing when someone is viewing their recipe.
-    @IBAction func saveButtonTapped(_ sender: Any) {
-        
+    
+    func editRecipe() {
+        guard let recipe = recipe else { return }
+        guard let name = recipeNameTextField.text,
+            let prepTime = prepTimeTextField.text,
+            let servings = servingsTextField.text,
+            let cookTime = cookTimeTextField.text
+            else { return }
+        if let image = recipeImageView.image {
+            let img = ImageResizer.resizeImage(image: image, targetSize: CGSize(width: recipeImageView.frame.width * 3, height: recipeImageView.frame.height * 3))
+            let imageData = UIImageJPEGRepresentation(img, 1.0)
+            recipe.name = name
+            recipe.prepTime = prepTime
+            recipe.servingSize = servings
+            recipe.cookTime = cookTime
+            recipe.recipeImageData = imageData
+            // TODO: - Create a function to add ingredients and instructions with a recipe that already exists
+            RecipeController.shared.modify(recipe: recipe, completion: {
+                NSLog("Recipe updated")
+            })
+        }
+    }
+    
+    func createNewRecipe() {
+        guard let name = recipeNameTextField.text,
+            let prepTime = prepTimeTextField.text,
+            let servings = servingsTextField.text,
+            let cookTime = cookTimeTextField.text
+            else { return }
+        if let image = recipeImageView.image {
+            let img = ImageResizer.resizeImage(image: image, targetSize: CGSize(width: recipeImageView.frame.width * 3, height: recipeImageView.frame.height * 3))
+            let imageData = UIImageJPEGRepresentation(img, 1.0)
+            let recipe = Recipe(name: name, prepTime: prepTime, servingSize: servings, cookTime: cookTime, recipeImageData: imageData)
             
+            RecipeController.shared.addRecipeToCloudKit(recipe: recipe, ingredients: ingredients, instructions: instructions, completion: { (error) in
+                if let error = error {
+                    NSLog("\(error.localizedDescription)\nProblem saving recipe with photo")
+                }
+            })
+        }  else {
+            noRecipePhotoAlert()
+        }
+    }
+    
+    @IBAction func saveButtonTapped(_ sender: Any) {
         if recipe == nil {
-            guard let name = recipeNameTextField.text,
-                let prepTime = prepTimeTextField.text,
-                let servings = servingsTextField.text,
-                let cookTime = cookTimeTextField.text
-                else { return }
-            if let image = recipeImageView.image {
-                let img = ImageResizer.resizeImage(image: image, targetSize: CGSize(width: recipeImageView.frame.width, height: recipeImageView.frame.height))
-                let imageData = UIImageJPEGRepresentation(img, 1.0)
-                let recipe = Recipe(name: name, prepTime: prepTime, servingSize: servings, cookTime: cookTime, recipeImageData: imageData)
-                
-                RecipeController.shared.addRecipeToCloudKit(recipe: recipe, ingredients: ingredients, instructions: instructions, completion: { (error) in
-                    if let error = error {
-                        NSLog("\(error.localizedDescription)\nProblem saving recipe with photo")
-                    }
-                })
-                _ = navigationController?.popViewController(animated: true)
-            } else {
-                noRecipePhotoAlert()
-            }
+            
+            createNewRecipe()
+            
+            
+            
         } else if saveButton.title == "Save" && recipe != nil {
             
-            guard let recipe = recipe else { return }
-            guard let name = recipeNameTextField.text,
-                let prepTime = prepTimeTextField.text,
-                let servings = servingsTextField.text,
-                let cookTime = cookTimeTextField.text
-                else { return }
-            if let image = recipeImageView.image {
-                let img = ImageResizer.resizeImage(image: image, targetSize: CGSize(width: recipeImageView.frame.width, height: recipeImageView.frame.height))
-                let imageData = UIImageJPEGRepresentation(img, 1.0)
-                recipe.name = name
-                recipe.prepTime = prepTime
-                recipe.servingSize = servings
-                recipe.cookTime = cookTime
-                recipe.recipeImageData = imageData
-                // TODO: - Create a function to add ingredients and instructions with a recipe that already exists
-                RecipeController.shared.modify(recipe: recipe, completion: {
-                    NSLog("Recipe updated")
-                })
-                _ = navigationController?.popViewController(animated: true)
-            }
+            editRecipe()
+            
+        _ = navigationController?.popViewController(animated: true)
+            
+            
         } else {
-                hideTextFields(false)
-                enableTextFields(true)
-                saveButton.title = "Save"
+            hideTextFields(false)
+            enableTextFields(true)
+            saveButton.title = "Save"
         }
     }
     @IBAction func addPhotoButtonTapped(_ sender: UIButton) {
@@ -345,8 +358,6 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
         addPhotoButton.isEnabled = bool
     }
     
-    
-    
     func updateViews() {
         guard let recipe = recipe else { return }
         saveButton.title = "Edit"
@@ -354,6 +365,7 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
         assignAllProperties()
         hideTextFields(true)
         enableTextFields(false)
+        
         RecipeController.shared.fetchIngredientsFor(recipe: recipe) { (ingredients) in
             self.ingredients = ingredients
             RecipeController.shared.fetchInstructionsFor(recipe: recipe) { (instructions) in

@@ -45,7 +45,7 @@ class RecipeController {
         
         
         guard let image = recipe.recipeImage,
-            let data = UIImageJPEGRepresentation(image, 0.5),
+            let data = UIImageJPEGRepresentation(image, 1.0),
             let currentUser = UserController.shared.currentUser
             else { return }
         guard let userID = currentUser.userRecordID else { return }
@@ -190,7 +190,7 @@ class RecipeController {
                 NSLog("\(String(describing: recipe.recipeImage?.cgImage?.width))")
                 guard let image = recipe.recipeImage
                     else { completion(); return }
-                let newImage = ImageResizer.resizeImage(image: image, targetSize: CGSize(width: 414, height: 200))
+                let newImage = ImageResizer.resizeImage(image: image, targetSize: CGSize(width: 828, height: 400))
                 recipe.recipeImageData = UIImageJPEGRepresentation(newImage, 1.0)
                 self.modify(recipe: recipe, completion: { 
                     NSLog("Recipe image updated")

@@ -24,12 +24,12 @@ class UserController {
     
     
     init() {
-        // switch fetching default user record id to app delegate
-   // CKContainer.default().fetchUserRecordID { (recordID, _) in
-   //     guard let recordID = recordID else { return }
-   //     self.appleUserRecordID = recordID
         
-   //     }
+    CKContainer.default().fetchUserRecordID { (recordID, _) in
+        guard let recordID = recordID else { return }
+        self.appleUserRecordID = recordID
+        }
+        
         
         self.CKManager.fetchCurrentUser { (user) in
             guard let user = user else {  return  }
@@ -72,51 +72,7 @@ class UserController {
         }
     }
     
-    //  TODO: Get fetching recipes quicker and use less bandwidth
-    
-    
-    /*
-     
-     //        let queryOperation = CKQueryOperation()
-     //        queryOperation.query = query
-     //        queryOperation.qualityOfService = .userInteractive
-     //        queryOperation.queryCompletionBlock = { cursor, error in
-     //
-     //            if cursor != nil {
-     //                print("There is more data")
-     //                guard let cursor = cursor else { return }
-     //                let newOperation = CKQueryOperation(cursor: cursor)
-     //                newOperation.recordFetchedBlock =
-     //            }
-     //
-     //        }
-     
-     
-     /*
-     
-     queryOperation.queryCompletionBlock = { cursor, error in
-     
-     if cursor != nil {
-     print("there is more data to fetch")
-     let newOperation = CKQueryOperation(cursor: cursor!)
-     newOperation.recordFetchedBlock = self.createUserObject
-     newOperation.queryCompletionBlock = queryOperation.queryCompletionBlock
-     database.addOperation(newOperation)
-     
-     } else {
-     
-     print(userArray) //Never runs
-     }
-     }
-     
-     database.addOperation(queryOperation)
-     
-     
-     */
-     
-     */
-    
-    func addUserToGroupRecord(user: User, group: Group, completion: @escaping(Error?) -> Void = { _ in }) {
+       func addUserToGroupRecord(user: User, group: Group, completion: @escaping(Error?) -> Void = { _ in }) {
         
         guard let userID = user.userRecordID,
             let groupID = group.groupRecordID  else { return }
@@ -188,6 +144,8 @@ class UserController {
         publicDatabase.save(userRecord) { (record, error) in
             if let error = error {
                 print("\(error.localizedDescription)")
+                completion(nil)
+                return
             }
             guard let record = record, let currentUser = User(cloudKitRecord: record) else { completion(nil); return }
             
