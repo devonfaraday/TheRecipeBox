@@ -13,6 +13,7 @@ class Ingredient: Equatable {
     var nameAndAmount: String
     var recipeReference: CKReference?
     var index: Int
+    var recordID: CKRecordID?
     
     init(nameAndAmount: String, index: Int = 0) {
         self.nameAndAmount = nameAndAmount

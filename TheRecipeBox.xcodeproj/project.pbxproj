@@ -25,6 +25,8 @@
 		FD8809801ECA238A00D2A215 /* FeatureController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD88097F1ECA238A00D2A215 /* FeatureController.swift */; };
 		FD8809821ECA27B200D2A215 /* RequestTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8809811ECA27B200D2A215 /* RequestTableViewController.swift */; };
 		FD91EDB61EBAA1A40001F898 /* GroupRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD91EDB51EBAA1A40001F898 /* GroupRecipeViewController.swift */; };
+		FD95AE7B1F41FD9000441A59 /* IngredientController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD95AE7A1F41FD9000441A59 /* IngredientController.swift */; };
+		FD95AE7D1F41FD9800441A59 /* InstructionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD95AE7C1F41FD9800441A59 /* InstructionController.swift */; };
 		FDA5312E1E7B904C00DC3DB3 /* Group+CloudKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA5312D1E7B904C00DC3DB3 /* Group+CloudKit.swift */; };
 		FDA531301E7BB96A00DC3DB3 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA5312F1E7BB96A00DC3DB3 /* UserController.swift */; };
 		FDA531321E7BB97300DC3DB3 /* GroupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA531311E7BB97300DC3DB3 /* GroupController.swift */; };
@@ -74,6 +76,8 @@
 		FD88097F1ECA238A00D2A215 /* FeatureController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeatureController.swift; sourceTree = "<group>"; };
 		FD8809811ECA27B200D2A215 /* RequestTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestTableViewController.swift; sourceTree = "<group>"; };
 		FD91EDB51EBAA1A40001F898 /* GroupRecipeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupRecipeViewController.swift; sourceTree = "<group>"; };
+		FD95AE7A1F41FD9000441A59 /* IngredientController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientController.swift; sourceTree = "<group>"; };
+		FD95AE7C1F41FD9800441A59 /* InstructionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionController.swift; sourceTree = "<group>"; };
 		FDA5312D1E7B904C00DC3DB3 /* Group+CloudKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Group+CloudKit.swift"; sourceTree = "<group>"; };
 		FDA5312F1E7BB96A00DC3DB3 /* UserController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = UserController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		FDA531311E7BB97300DC3DB3 /* GroupController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupController.swift; sourceTree = "<group>"; };
@@ -238,6 +242,8 @@
 				FDA531311E7BB97300DC3DB3 /* GroupController.swift */,
 				FD88097D1ECA238300D2A215 /* BugController.swift */,
 				FD88097F1ECA238A00D2A215 /* FeatureController.swift */,
+				FD95AE7A1F41FD9000441A59 /* IngredientController.swift */,
+				FD95AE7C1F41FD9800441A59 /* InstructionController.swift */,
 			);
 			name = ModelControllers;
 			sourceTree = "<group>";
@@ -405,6 +411,7 @@
 				FDD7D9651E775B7F00B19F21 /* Ingredient+CloudKit.swift in Sources */,
 				FDC0FA301E8C05AE00D32052 /* GroupListTableViewController.swift in Sources */,
 				FDD7D9761E7A58C400B19F21 /* User+CloudKit.swift in Sources */,
+				FD95AE7B1F41FD9000441A59 /* IngredientController.swift in Sources */,
 				FD6D64AF1F15306000E23FC2 /* StackOverflow solutions.swift in Sources */,
 				FD8809801ECA238A00D2A215 /* FeatureController.swift in Sources */,
 				FDD7D9741E7A58BA00B19F21 /* User.swift in Sources */,
@@ -412,6 +419,7 @@
 				FDD7D95F1E7754E400B19F21 /* Recipe.swift in Sources */,
 				FDD7D9691E785AF100B19F21 /* AddRecipeViewController.swift in Sources */,
 				FD8809821ECA27B200D2A215 /* RequestTableViewController.swift in Sources */,
+				FD95AE7D1F41FD9800441A59 /* InstructionController.swift in Sources */,
 				FDA531321E7BB97300DC3DB3 /* GroupController.swift in Sources */,
 				FD88097E1ECA238300D2A215 /* BugController.swift in Sources */,
 				FD88097A1ECA20D900D2A215 /* Bug.swift in Sources */,
