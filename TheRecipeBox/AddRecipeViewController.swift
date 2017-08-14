@@ -217,8 +217,15 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
             recipe.cookTime = cookTime
             recipe.recipeImageData = imageData
             // TODO: - Create a function to add ingredients and instructions with a recipe that already exists
+            
             RecipeController.shared.modify(recipe: recipe, completion: {
                 NSLog("Recipe updated")
+            })
+            InstructionController.shared.addInstructions(instructions: instructions, toRecipe: recipe, completion: {
+                NSLog("instructions added to Recipe")
+            })
+            IngredientController.shared.addIngredient(ingredients: ingredients, toRecipe: recipe, completion: {
+                NSLog("Ingredients added to recipe")
             })
         }
     }
