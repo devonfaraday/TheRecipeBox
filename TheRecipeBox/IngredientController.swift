@@ -13,6 +13,7 @@ class IngredientController {
     
     static let shared = IngredientController()
     
+    
     func addIngredient(ingredients: [Ingredient], toRecipe recipe: Recipe, completion: @escaping() -> Void) {
         
         // get the recipe recordID
@@ -32,5 +33,22 @@ class IngredientController {
         }
     }
     
-    //TODO: delete ingredient for editing
+    func modify(ingredient: Ingredient, completion: @escaping() -> Void) {
+        let cloudKitManager = CloudKitManager()
+        let record = CKRecord(ingredient: ingredient)
+        let operation = CKModifyRecordsOperation(recordsToSave: [record], recordIDsToDelete: nil)
+        operation.savePolicy = .changedKeys
+        cloudKitManager.publicDatabase.add(operation)
+        completion()
+    }
+    
+    func delete(ingredient: Ingredient, completion: @escaping() -> Void) {
+        guard let recordID = ingredient.recordID else { return }
+        
+        CloudKitManager.shared.publicDatabase.delete(withRecordID: recordID) { (_, error) in
+            NSLog("Could not delete instruction \(ingredient.nameAndAmount):\n\(error?.localizedDescription)")
+            completion()
+        }
+    }
+    
 }

@@ -24,12 +24,11 @@ class UserController {
     
     
     init() {
-        
-    CKContainer.default().fetchUserRecordID { (recordID, _) in
+        CKContainer.default().fetchUserRecordID { (recordID, _) in
         guard let recordID = recordID else { return }
         self.appleUserRecordID = recordID
-        }
         
+        }
         
         self.CKManager.fetchCurrentUser { (user) in
             guard let user = user else {  return  }
@@ -47,8 +46,8 @@ class UserController {
             
         }
         
-        fetchAllUsers { (users) in
-            NSLog("Fetched all users")
+        fetchAllUsers {
+            print("Users Fetched")
         }
     }
     
@@ -57,6 +56,9 @@ class UserController {
         guard let userID = user.userRecordID else { return }
         let predicate = NSPredicate(format: "userReference == %@", userID)
         let query = CKQuery(recordType: Constants.recipeRecordType, predicate: predicate)
+        
+        
+        
         CKManager.publicDatabase.perform(query, inZoneWith: nil) { (records, error) in
             if let error = error {
                 print(error.localizedDescription)
@@ -68,11 +70,13 @@ class UserController {
                 self.currentUser?.recipes = recipes
                 completion(recipes)
             }
-            
-        }
+//
+        
+    }
     }
     
-       func addUserToGroupRecord(user: User, group: Group, completion: @escaping(Error?) -> Void = { _ in }) {
+    
+    func addUserToGroupRecord(user: User, group: Group, completion: @escaping(Error?) -> Void = { _ in }) {
         
         guard let userID = user.userRecordID,
             let groupID = group.groupRecordID  else { return }
@@ -144,8 +148,6 @@ class UserController {
         publicDatabase.save(userRecord) { (record, error) in
             if let error = error {
                 print("\(error.localizedDescription)")
-                completion(nil)
-                return
             }
             guard let record = record, let currentUser = User(cloudKitRecord: record) else { completion(nil); return }
             
@@ -157,20 +159,20 @@ class UserController {
     
     
     
-    func fetchAllUsers(completion: @escaping([User]) -> Void) {
+    func fetchAllUsers(completion: @escaping() -> Void) {
         let predicate = NSPredicate(value: true)
         let query = CKQuery(recordType: Constants.userRecordType, predicate: predicate)
         publicDatabase.perform(query, inZoneWith: nil) { (records, error) in
             if let error = error {
                 print("an error accured \(error)")
-                completion([])
+                completion()
                 return
             } else {
                 guard let records = records else { return }
                 let users = records.flatMap { User(cloudKitRecord: $0) }
                 self.allUsers = users
                 
-                completion(users)
+                completion()
                 
             }
         }
@@ -247,11 +249,11 @@ class UserController {
         let predicate = NSPredicate(format: "userReferences CONTAINS %@", userReference)
         let notificationInfo = CKNotificationInfo()
 //        notificationInfo.alertLocalizationKey = "You've Been Added to a new group"
-//        notificationInfo.shouldBadge = false
         notificationInfo.shouldSendContentAvailable = true
         
         
-        let subscription = CKQuerySubscription(recordType: "Group", predicate: predicate, options: .firesOnRecordUpdate)
+        
+        let subscription = CKQuerySubscription(recordType: "Group", predicate: predicate, options: [.firesOnRecordUpdate])
         
         subscription.notificationInfo = notificationInfo
         
@@ -259,6 +261,7 @@ class UserController {
             if let error = error {
                 NSLog("\(error.localizedDescription)")
             }
+            
         }
     }
     
@@ -271,32 +274,5 @@ class UserController {
         imageView.layer.cornerRadius = imageView.frame.width / 2
         imageView.clipsToBounds = true
     }
-    
-    func modify(user: User, completion: @escaping() -> Void) {
-        let record = CKRecord(user: user)
-        let operation = CKModifyRecordsOperation(recordsToSave: [record], recordIDsToDelete: nil)
-        operation.savePolicy = .changedKeys
-        CloudKitManager.shared.publicDatabase.add(operation)
-        completion()
-    }
-    
-    
-    func fecthAndResizeProfilePhotos(completion: @escaping() -> Void) {
-        fetchAllUsers { (users) in
-            
-            for user in users {
-                
-                let image = user.profilePhoto
-                let newImage = ImageResizer.resizeImage(image: image, targetSize: CGSize(width: 98, height: 98))
-                user.profilePhotoData = UIImageJPEGRepresentation(newImage, 1.0)
-                self.modify(user: user, completion: {
-                    NSLog("Recipe image updated")
-                    
-                })
-            }
-            completion()
-        }
-     }
-    
 }
 

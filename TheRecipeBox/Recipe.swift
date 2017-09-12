@@ -40,8 +40,6 @@ class Recipe: Equatable {
         self.creationDate = creationDate
         
     }
-
-    
 }
     
 func ==(lhs: Recipe, rhs: Recipe) -> Bool {

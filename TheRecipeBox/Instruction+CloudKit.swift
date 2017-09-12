@@ -14,16 +14,13 @@ extension Instruction {
         guard let instruction = cloudKitRecord[Constants.instructionKey] as? String,
               let index = cloudKitRecord["index"] as? Int  else { return nil }
         self.init(instruction: instruction, index: index)
-        
-        self.recordID = cloudKitRecord.recordID
         self.recipeReference = cloudKitRecord[Constants.recipeReferenceKey] as? CKReference
     }
 }
 
 extension CKRecord {
     convenience init(instruction: Instruction) {
-        let recordID = instruction.recordID ?? CKRecordID(recordName: UUID().uuidString)
-        self.init(recordType: Constants.instructionsRecordType, recordID: recordID)
+        self.init(recordType: Constants.instructionsRecordType)
         self.setValue(instruction.instruction, forKey: Constants.instructionKey)
         self.setValue(instruction.recipeReference, forKey: Constants.recipeReferenceKey)
         self.setValue(instruction.index, forKey: "index")

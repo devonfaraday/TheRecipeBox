@@ -13,7 +13,6 @@ class Instruction: Equatable {
     var instruction: String
     var recipeReference: CKReference?
     var index: Int
-    var recordID: CKRecordID?
     
     init(instruction: String, index: Int = 0) {
         self.instruction = instruction

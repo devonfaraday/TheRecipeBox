@@ -24,6 +24,7 @@ extension Recipe {
         let recipeImageData = try? Data(contentsOf: photoAsset.fileURL)
         self.init(name: name, prepTime: prepTime, servingSize: servingSize, cookTime: cookTime, recipeImageData: recipeImageData, creationDate: creationDate)
         self.recipeImageData = recipeImageData
+        
         self.ingredients = []
         self.instructions = []
         self.recordID = cloudKitRecord.recordID
@@ -35,7 +36,7 @@ extension Recipe {
         
         let tempDir = NSTemporaryDirectory()
         let tempURL = URL(fileURLWithPath: tempDir)
-        let fileURL = tempURL.appendingPathComponent(UUID().uuidString).appendingPathExtension("jpeg")
+        let fileURL = tempURL.appendingPathComponent(UUID().uuidString).appendingPathExtension("png")
         
         try? recipeImageData?.write(to: fileURL, options: [.atomic])
         

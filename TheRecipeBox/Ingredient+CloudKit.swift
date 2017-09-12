@@ -16,15 +16,13 @@ extension Ingredient {
            let index = cloudKitRecord["index"] as? Int else { return nil }
         self.init(nameAndAmount: name, index: index)
         
-        self.recordID = cloudKitRecord.recordID
         self.recipeReference = cloudKitRecord[Constants.recipeReferenceKey] as? CKReference
     }
 }
 
 extension CKRecord {
     convenience init(ingredient: Ingredient) {
-        let recordID = ingredient.recordID ?? CKRecordID(recordName: UUID().uuidString)
-        self.init(recordType: Constants.ingredientRecordType, recordID: recordID)
+        self.init(recordType: Constants.ingredientRecordType)
         self.setValue(ingredient.nameAndAmount, forKey: Constants.ingredientKey)
         self.setValue(ingredient.recipeReference, forKey: Constants.recipeReferenceKey)
         self.setValue(ingredient.index, forKey: "index")

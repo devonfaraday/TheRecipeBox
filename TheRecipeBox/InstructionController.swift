@@ -31,6 +31,23 @@ class InstructionController {
             })
     }
 }
+    // Modifies instruction
+    func modify(instruction: Instruction, completion: @escaping() -> Void) {
+        let cloudKitManager = CloudKitManager()
+        let record = CKRecord(instruction: instruction)
+        let operation = CKModifyRecordsOperation(recordsToSave: [record], recordIDsToDelete: nil)
+        operation.savePolicy = .changedKeys
+        cloudKitManager.publicDatabase.add(operation)
+        completion()
+    }
+    // Delete instruction for editing
     
-    // TODO: delete instruction for editing
+    func delete(instruction: Instruction, completion: @escaping() -> Void) {
+        guard let recordID = instruction else { return }
+        
+        CloudKitManager.shared.publicDatabase.delete(withRecordID: recordID) { (_, error) in
+            NSLog("Could not delete instruction \(instruction.instruction):\n\(error?.localizedDescription)")
+            completion()
+        }
+    }
 }

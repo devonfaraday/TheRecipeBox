@@ -29,15 +29,6 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Only uncomment while in development and need to resize images that have been saved before update was pushed
-//        UserController.shared.fecthAndResizeProfilePhotos {
-//            NSLog("Profile Images Resized")
-//        }
-//        
-//        
-//        RecipeController.shared.fecthAndResizePhotos {
-//            NSLog("Recipe photos resized")
-//        }
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(performUpdate), for: UIControlEvents.valueChanged)
         tableView.refreshControl = refreshControl
@@ -68,7 +59,6 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
             }
             
         }
-        
         
         NotificationCenter.default.addObserver(self, selector: #selector(performUpdate), name: Constants.groupDidChangeNotificationName, object: nil)
         
@@ -148,30 +138,3 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
         
     }
 }
-
-/*
-
-
-func loadData(){
-    self.loading.startAnimating()
-    let query = CKQuery(recordType: self.recordType, predicate: predicate)
-    query.sortDescriptors = [NSSortDescriptor(key: "productID", ascending: true)]
-    operation.query = query
-    operation.resultsLimit = 1000
-    operation.qualityOfService = .userInteractive
-    operation.recordFetchedBlock = { (record) in
-        self.items.append(record)
-        DispatchQueue.main.async {
-            self.collectionView.reloadData()
-        }
-    }
-    operation.queryCompletionBlock = { (queryCursor, error) in
-        DispatchQueue.main.async {
-            self.loading.stopAnimating()
-        }
-    }
-    myData.add(operation)
-}
-
-*/
-
