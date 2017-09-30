@@ -23,8 +23,6 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
     @IBOutlet weak var groupsNumberLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
-    
-    
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -126,14 +124,15 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
             DispatchQueue.main.async {
                 self.groupsNumberLabel.text = "\(GroupController.shared.userGroups.count)"
                 UserController.shared.fetchGroupsRecipesFor(user: user, completion: { () in
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                        self.tableView.refreshControl?.endRefreshing()
-                        
-                    }
+                    reloadTableDataOnMainQueue()
                 })
             }
         }
-        
+    }
+    func reloadTableDataOnMainQueue() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+            self.tableView.refreshControl?.endRefreshing()
+        }
     }
 }
