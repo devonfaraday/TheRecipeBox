@@ -57,15 +57,9 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
                     self.groupsNumberLabel.text = "\(GroupController.shared.userGroups.count)"
                 }
             }
-            
         }
-        
-       
-        
-        UserController.shared.profileImageDisplay(imageView: profileImageView)
-        
-        
-    }
+         UserController.shared.profileImageDisplay(imageView: profileImageView)
+     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

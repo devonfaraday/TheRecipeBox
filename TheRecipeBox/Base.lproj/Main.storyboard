@@ -119,13 +119,13 @@
             </objects>
             <point key="canvasLocation" x="-791" y="-105"/>
         </scene>
-        <!--GroupRecipe-->
+        <!--GroupRecipeViewController-->
         <scene sceneID="dhX-yG-ygq">
             <objects>
-                <viewControllerPlaceholder storyboardName="GroupRecipe" id="s9H-RV-8uB" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardIdentifier="GroupRecipeViewController" storyboardName="GroupRecipe" referencedIdentifier="GroupRecipeViewController" id="s9H-RV-8uB" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SWi-1g-0Jz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-793" y="2539"/>
+            <point key="canvasLocation" x="-1175" y="258"/>
         </scene>
         <!--UINavigationController-azx-g8-tyQ-->
         <scene sceneID="r2G-W6-YQ2">
@@ -133,7 +133,7 @@
                 <viewControllerPlaceholder storyboardIdentifier="UINavigationController-azx-g8-tyQ" storyboardName="Group" referencedIdentifier="UINavigationController-azx-g8-tyQ" id="Txy-9i-Yga" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gm8-xZ-SCT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2401" y="1763"/>
+            <point key="canvasLocation" x="-1560" y="258"/>
         </scene>
     </scenes>
 </document>
