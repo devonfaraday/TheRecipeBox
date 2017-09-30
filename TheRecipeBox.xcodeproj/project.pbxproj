@@ -213,6 +213,46 @@
 			name = RecipeViewControllers;
 			sourceTree = "<group>";
 		};
+		FDC875F91F8006D000282414 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				FDD7D93A1E7738B600B19F21 /* ProfileViewController.swift */,
+			);
+			name = Profile;
+			sourceTree = "<group>";
+		};
+		FDC875FA1F8006DC00282414 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				FD75A1211ED4C19D0071600F /* TabBarViewController.swift */,
+			);
+			name = TabBar;
+			sourceTree = "<group>";
+		};
+		FDC875FB1F8006EA00282414 /* UserviewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				FDD7D97C1E7AFB7C00B19F21 /* UsernameViewController.swift */,
+			);
+			name = UserviewControllers;
+			sourceTree = "<group>";
+		};
+		FDC875FC1F80070C00282414 /* LauchScreen */ = {
+			isa = PBXGroup;
+			children = (
+				FDC0FA0A1E8AF50800D32052 /* LaunchScreenCopyViewController.swift */,
+			);
+			name = LauchScreen;
+			sourceTree = "<group>";
+		};
+		FDC875FD1F80072500282414 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				FD8809811ECA27B200D2A215 /* RequestTableViewController.swift */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
 		FDD7D93C1E77390300B19F21 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -238,12 +278,12 @@
 		FDD7D93E1E77390500B19F21 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				FDD7D93A1E7738B600B19F21 /* ProfileViewController.swift */,
-				FD75A1211ED4C19D0071600F /* TabBarViewController.swift */,
-				FDD7D97C1E7AFB7C00B19F21 /* UsernameViewController.swift */,
-				FDC0FA0A1E8AF50800D32052 /* LaunchScreenCopyViewController.swift */,
-				FD8809811ECA27B200D2A215 /* RequestTableViewController.swift */,
+				FDC875FC1F80070C00282414 /* LauchScreen */,
+				FDC875FB1F8006EA00282414 /* UserviewControllers */,
+				FDC875F91F8006D000282414 /* Profile */,
 				FDC0FA2E1E8C058400D32052 /* RecipeViewControllers */,
+				FDC875FD1F80072500282414 /* Settings */,
+				FDC875FA1F8006DC00282414 /* TabBar */,
 				FDC0FA2D1E8C057800D32052 /* GroupViewControllers */,
 			);
 			name = ViewControllers;

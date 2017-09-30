@@ -15,27 +15,32 @@ class LaunchScreenCopyViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+        fetchCurrentUser()
+    }
+    
+    func fetchCurrentUser() {
         cloudKitManager.fetchCurrentUser { (user) in
             if user != nil {
                 guard let user = user else { return }
                 print("Fetching recipes in launch screen")
                 UserController.shared.fetchGroupsRecipesFor(user: user, completion: { () in
-                    print("Recipes fetched")
-                    
-                    DispatchQueue.main.async {
-                        self.performSegue(withIdentifier: Constants.toProfileSegue, sender: self)
-                    }
-                    
+                    self.segueToProfile()
                 })
             } else {
-                DispatchQueue.main.async {
-                    self.performSegue(withIdentifier: Constants.toUserCreationSegue, sender: self)
-                }
+                segueToUserCreation()
             }
         }
-        
-        
+    }
+    
+    func segueToProfile() {
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: Constants.toProfileSegue, sender: self)
+        }
+    }
+    
+    func segueToUserCreation() {
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: Constants.toUserCreationSegue, sender: self)
+        }
     }
 }
