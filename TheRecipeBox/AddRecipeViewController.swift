@@ -176,8 +176,6 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
     
     
     // MARK: - UI Functions
-    
-    
     @IBAction func addIngredientButtonTapped(_ sender: Any) {
         guard let ingredient = ingredientTextField.text else { return }
         let newIngredient = Ingredient(nameAndAmount: ingredient)
@@ -206,7 +204,8 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
             let cookTime = cookTimeTextField.text
             else { return }
         if let image = recipeImageView.image {
-            let imageData = UIImageJPEGRepresentation(image, 0.5)
+            let newImage = ImageResizer.resizeImage(image: image, targetSize: CGSize(width: 800, height: 800))
+            let imageData = UIImageJPEGRepresentation(newImage, 1.0)
             let recipe = Recipe(name: name, prepTime: prepTime, servingSize: servings, cookTime: cookTime, recipeImageData: imageData)
             
             RecipeController.shared.addRecipeToCloudKit(recipe: recipe, ingredients: ingredients, instructions: instructions, completion: { (error) in
@@ -288,7 +287,6 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
         instructionTextField.resignFirstResponder()
         ingredientTextField.resignFirstResponder()
     }
-    
     
     func updateViews() {
         guard let recipe = recipe else { return }

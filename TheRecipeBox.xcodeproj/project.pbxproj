@@ -40,13 +40,10 @@
 		FDD7D94A1E773BE000B19F21 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD7D9491E773BE000B19F21 /* Constants.swift */; };
 		FDD7D94E1E773D3D00B19F21 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDD7D94D1E773D3D00B19F21 /* CloudKit.framework */; };
 		FDD7D9591E77466600B19F21 /* RecipeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD7D9581E77466600B19F21 /* RecipeController.swift */; };
-		FDD7D95B1E7746B300B19F21 /* Recipe+CloudKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD7D95A1E7746B300B19F21 /* Recipe+CloudKit.swift */; };
 		FDD7D95D1E7746C900B19F21 /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD7D95C1E7746C900B19F21 /* CloudKitManager.swift */; };
 		FDD7D95F1E7754E400B19F21 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD7D95E1E7754E400B19F21 /* Recipe.swift */; };
 		FDD7D9611E7759CB00B19F21 /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD7D9601E7759CB00B19F21 /* Ingredient.swift */; };
 		FDD7D9631E7759D100B19F21 /* Instruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD7D9621E7759D100B19F21 /* Instruction.swift */; };
-		FDD7D9651E775B7F00B19F21 /* Ingredient+CloudKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD7D9641E775B7F00B19F21 /* Ingredient+CloudKit.swift */; };
-		FDD7D9671E775B8900B19F21 /* Instruction+CloudKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD7D9661E775B8900B19F21 /* Instruction+CloudKit.swift */; };
 		FDD7D9691E785AF100B19F21 /* AddRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD7D9681E785AF100B19F21 /* AddRecipeViewController.swift */; };
 		FDD7D9741E7A58BA00B19F21 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD7D9731E7A58BA00B19F21 /* User.swift */; };
 		FDD7D9761E7A58C400B19F21 /* User+CloudKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD7D9751E7A58C400B19F21 /* User+CloudKit.swift */; };
@@ -92,13 +89,10 @@
 		FDD7D94B1E773D3B00B19F21 /* TheRecipeBox.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TheRecipeBox.entitlements; sourceTree = "<group>"; };
 		FDD7D94D1E773D3D00B19F21 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		FDD7D9581E77466600B19F21 /* RecipeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = RecipeController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		FDD7D95A1E7746B300B19F21 /* Recipe+CloudKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Recipe+CloudKit.swift"; sourceTree = "<group>"; };
 		FDD7D95C1E7746C900B19F21 /* CloudKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitManager.swift; sourceTree = "<group>"; };
 		FDD7D95E1E7754E400B19F21 /* Recipe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		FDD7D9601E7759CB00B19F21 /* Ingredient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
 		FDD7D9621E7759D100B19F21 /* Instruction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Instruction.swift; sourceTree = "<group>"; };
-		FDD7D9641E775B7F00B19F21 /* Ingredient+CloudKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Ingredient+CloudKit.swift"; sourceTree = "<group>"; };
-		FDD7D9661E775B8900B19F21 /* Instruction+CloudKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Instruction+CloudKit.swift"; sourceTree = "<group>"; };
 		FDD7D9681E785AF100B19F21 /* AddRecipeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddRecipeViewController.swift; sourceTree = "<group>"; };
 		FDD7D9731E7A58BA00B19F21 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = User.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		FDD7D9751E7A58C400B19F21 /* User+CloudKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = "User+CloudKit.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -285,9 +279,6 @@
 				FDD7D95E1E7754E400B19F21 /* Recipe.swift */,
 				FDD7D9601E7759CB00B19F21 /* Ingredient.swift */,
 				FDD7D9621E7759D100B19F21 /* Instruction.swift */,
-				FDD7D95A1E7746B300B19F21 /* Recipe+CloudKit.swift */,
-				FDD7D9641E775B7F00B19F21 /* Ingredient+CloudKit.swift */,
-				FDD7D9661E775B8900B19F21 /* Instruction+CloudKit.swift */,
 			);
 			name = Recipe;
 			sourceTree = "<group>";
@@ -402,20 +393,17 @@
 				FDD7D9591E77466600B19F21 /* RecipeController.swift in Sources */,
 				FDD7D93B1E7738B600B19F21 /* ProfileViewController.swift in Sources */,
 				FD7A5CC71EB4EC930070ADEC /* WhatsNew.swift in Sources */,
-				FDD7D95B1E7746B300B19F21 /* Recipe+CloudKit.swift in Sources */,
 				FDC0FA321E8C0F7100D32052 /* AddGroupViewController.swift in Sources */,
 				FD91EDB61EBAA1A40001F898 /* GroupRecipeViewController.swift in Sources */,
 				FDD7D9431E77395900B19F21 /* ProfileFeedTableViewCell.swift in Sources */,
 				FDD7D97D1E7AFB7D00B19F21 /* UsernameViewController.swift in Sources */,
 				FDD7D9791E7AE02F00B19F21 /* Group.swift in Sources */,
-				FDD7D9651E775B7F00B19F21 /* Ingredient+CloudKit.swift in Sources */,
 				FDC0FA301E8C05AE00D32052 /* GroupListTableViewController.swift in Sources */,
 				FDD7D9761E7A58C400B19F21 /* User+CloudKit.swift in Sources */,
 				FD95AE7B1F41FD9000441A59 /* IngredientController.swift in Sources */,
 				FD6D64AF1F15306000E23FC2 /* StackOverflow solutions.swift in Sources */,
 				FD8809801ECA238A00D2A215 /* FeatureController.swift in Sources */,
 				FDD7D9741E7A58BA00B19F21 /* User.swift in Sources */,
-				FDD7D9671E775B8900B19F21 /* Instruction+CloudKit.swift in Sources */,
 				FDD7D95F1E7754E400B19F21 /* Recipe.swift in Sources */,
 				FDD7D9691E785AF100B19F21 /* AddRecipeViewController.swift in Sources */,
 				FD8809821ECA27B200D2A215 /* RequestTableViewController.swift in Sources */,

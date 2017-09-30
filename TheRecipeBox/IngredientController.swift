@@ -13,7 +13,6 @@ class IngredientController {
     
     static let shared = IngredientController()
     
-    
     func addIngredient(ingredients: [Ingredient], toRecipe recipe: Recipe, completion: @escaping() -> Void) {
         
         // get the recipe recordID
@@ -46,7 +45,9 @@ class IngredientController {
         guard let recordID = ingredient.recordID else { return }
         
         CloudKitManager.shared.publicDatabase.delete(withRecordID: recordID) { (_, error) in
-            NSLog("Could not delete instruction \(ingredient.nameAndAmount):\n\(error?.localizedDescription)")
+            if let error = error {
+                NSLog("Could not delete instruction \(ingredient.nameAndAmount):\n\(error.localizedDescription)")
+            }
             completion()
         }
     }

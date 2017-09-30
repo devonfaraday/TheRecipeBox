@@ -43,11 +43,14 @@ class InstructionController {
     // Delete instruction for editing
     
     func delete(instruction: Instruction, completion: @escaping() -> Void) {
-        guard let recordID = instruction else { return }
+        guard let recordID = instruction.recordID else { return }
         
         CloudKitManager.shared.publicDatabase.delete(withRecordID: recordID) { (_, error) in
-            NSLog("Could not delete instruction \(instruction.instruction):\n\(error?.localizedDescription)")
+            if let error = error {
+                NSLog("Could not delete instruction \(instruction.instruction):\n\(error.localizedDescription)")
+            }
             completion()
+                
         }
     }
 }
