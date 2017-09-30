@@ -28,6 +28,7 @@ extension Ingredient {
             let index = cloudKitRecord["index"] as? Int else { return nil }
         self.init(nameAndAmount: name, index: index)
         self.recipeReference = cloudKitRecord[Constants.recipeReferenceKey] as? CKReference
+        self.recordID = cloudKitRecord.recordID
     }
 }
 
@@ -38,6 +39,7 @@ extension CKRecord {
         self.setValue(ingredient.nameAndAmount, forKey: Constants.ingredientKey)
         self.setValue(ingredient.recipeReference, forKey: Constants.recipeReferenceKey)
         self.setValue(ingredient.index, forKey: "index")
+        ingredient.recordID = recordID
     }
 }
 

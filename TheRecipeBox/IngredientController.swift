@@ -32,10 +32,10 @@ class IngredientController {
         }
     }
     
-    func modify(ingredient: Ingredient, completion: @escaping() -> Void) {
+    func modify(ingredients: [Ingredient], completion: @escaping() -> Void) {
         let cloudKitManager = CloudKitManager()
-        let record = CKRecord(ingredient: ingredient)
-        let operation = CKModifyRecordsOperation(recordsToSave: [record], recordIDsToDelete: nil)
+        let records = ingredients.flatMap { CKRecord(ingredient: $0)}
+        let operation = CKModifyRecordsOperation(recordsToSave: records, recordIDsToDelete: nil)
         operation.savePolicy = .changedKeys
         cloudKitManager.publicDatabase.add(operation)
         completion()

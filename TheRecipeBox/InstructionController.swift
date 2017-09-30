@@ -32,10 +32,10 @@ class InstructionController {
     }
 }
     // Modifies instruction
-    func modify(instruction: Instruction, completion: @escaping() -> Void) {
+    func modify(instructions: [Instruction], completion: @escaping() -> Void) {
         let cloudKitManager = CloudKitManager()
-        let record = CKRecord(instruction: instruction)
-        let operation = CKModifyRecordsOperation(recordsToSave: [record], recordIDsToDelete: nil)
+        let records = instructions.flatMap { CKRecord(instruction: $0) }
+        let operation = CKModifyRecordsOperation(recordsToSave: records, recordIDsToDelete: nil)
         operation.savePolicy = .changedKeys
         cloudKitManager.publicDatabase.add(operation)
         completion()

@@ -12,7 +12,7 @@ import CloudKit
 class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDelegate {
     
     // MARK: - Properties
-    var isEditingTextfields  = false
+    var isEditingRecipe = false
     var recipe: Recipe? {
         didSet {
             if !isViewLoaded {
@@ -46,20 +46,13 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        checkIsRecipeNil()
         recipeImageView.layer.masksToBounds = true
         self.tableView.estimatedRowHeight = 40
         self.tableView.rowHeight = UITableViewAutomaticDimension
-        
     }
     
     // MARK: - Scroll View Function
-//    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-//        let yDistance = UIScreen.main.bounds.height - tableView.frame.height
-//        UIView.animate(withDuration: 0.5) {
-//            self.tableView.transform = CGAffineTransform(translationX: 0, y: yDistance)
-//        }
-//    }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
@@ -122,34 +115,38 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
         if indexPath.section == 0 {
-            if recipe == nil && !ingredients.isEmpty && editingStyle == .delete  {
+            if recipe == nil || isEditingRecipe || !ingredients.isEmpty && editingStyle == .delete  {
                 let ingredient = ingredients[indexPath.row]
                 
                 guard let ingredientIndex = ingredients.index(of: ingredient)
                     else { return }
-                ingredients.remove(at: ingredientIndex)
+                IngredientController.shared.delete(ingredient: ingredient, completion: {
+                })
+                self.ingredients.remove(at: ingredientIndex)
+                tableView.deleteRows(at: [indexPath], with: .fade)
                 print("Removing \(ingredient) from index \(ingredientIndex)")
             }
         }
         
         if indexPath.section == 1 {
-            if recipe == nil && !instructions.isEmpty && editingStyle == .delete {
+            if recipe == nil || isEditingRecipe || !instructions.isEmpty && editingStyle == .delete {
                 
                 let instruction = instructions[indexPath.row]
                 
                 guard let instructionIndex = instructions.index(of: instruction) else { return }
                 print("Removing \(instruction) from index \(instructionIndex)")
-                instructions.remove(at: instructionIndex)
+                InstructionController.shared.delete(instruction: instruction, completion: {
+                })
+                self.instructions.remove(at: instructionIndex)
+                tableView.deleteRows(at: [indexPath], with: .fade)
             }
         }
-        tableView.deleteRows(at: [indexPath], with: .fade)
     }
     
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
         
         // if there is a recipe I don't want the user being able to delete the ingredients or instructions.
-        
-        if recipe == nil {
+        if recipe == nil || isEditingRecipe {
             return .delete
         } else {
             return .none
@@ -175,12 +172,11 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
-        isEditingTextfields = false
         return true
     }
     
     
-    // MARK: - UI Functions
+    // MARK: - IBActions
     @IBAction func addIngredientButtonTapped(_ sender: Any) {
         guard let ingredient = ingredientTextField.text else { return }
         let newIngredient = Ingredient(nameAndAmount: ingredient)
@@ -190,7 +186,6 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
             self.tableView.reloadData()
         }
     }
-    
     
     @IBAction func addInstructionButtonTapped(_ sender: Any) {
         guard let instruction = instructionTextField.text else { return }
@@ -203,32 +198,21 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
-        guard let name = recipeNameTextField.text,
-            let prepTime = prepTimeTextField.text,
-            let servings = servingsTextField.text,
-            let cookTime = cookTimeTextField.text
-            else { return }
-        if let image = recipeImageView.image {
-            let newImage = ImageResizer.resizeImage(image: image, targetSize: CGSize(width: 800, height: 800))
-            let imageData = UIImageJPEGRepresentation(newImage, 1.0)
-            let recipe = Recipe(name: name, prepTime: prepTime, servingSize: servings, cookTime: cookTime, recipeImageData: imageData)
-            
-            RecipeController.shared.addRecipeToCloudKit(recipe: recipe, ingredients: ingredients, instructions: instructions, completion: { (error) in
-                if let error = error {
-                    NSLog("\(error.localizedDescription)\nProblem saving recipe with photo")
-                }
-            })
+        if !isEditingRecipe && recipe != nil {
+            setupEditingView()
+        } else if recipe != nil {
+            editRecipe()
+            setupDetailView()
         } else {
-            noRecipePhotoAlert()
+            saveRecipeToCloudKit()
         }
-        _ = navigationController?.popViewController(animated: true)
     }
+    
     @IBAction func addPhotoButtonTapped(_ sender: UIButton) {
         addPhotoActionSheet()
     }
     
     // MARK: - Action Sheet Controller
-    
     func addPhotoActionSheet() {
         let actionController = UIAlertController(title: "Upload Photo", message: nil, preferredStyle: .actionSheet)
         let uploadAction = UIAlertAction(title: "Photo Library", style: .default) { (_) in
@@ -275,6 +259,50 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
     
     // MARK: - Helper Functions
     
+    func checkIsRecipeNil() {
+        if recipe == nil {
+            saveButton.title = "Save"
+        } else {
+            saveButton.title = "Edit"
+        }
+    }
+    
+    func saveRecipeToCloudKit() {
+        guard let name = recipeNameTextField.text,
+            let prepTime = prepTimeTextField.text,
+            let servings = servingsTextField.text,
+            let cookTime = cookTimeTextField.text
+            else { return }
+        if let image = recipeImageView.image {
+            let newImage = ImageResizer.resizeImage(image: image, targetSize: CGSize(width: 800, height: 800))
+            let imageData = UIImageJPEGRepresentation(newImage, 1.0)
+            let recipe = Recipe(name: name, prepTime: prepTime, servingSize: servings, cookTime: cookTime, recipeImageData: imageData)
+            
+            RecipeController.shared.addRecipeToCloudKit(recipe: recipe, ingredients: ingredients, instructions: instructions, completion: { (error) in
+                if let error = error {
+                    NSLog("\(error.localizedDescription)\nProblem saving recipe with photo")
+                }
+            })
+        } else {
+            noRecipePhotoAlert()
+        }
+    }
+    
+    func editRecipe() {
+        updateIngredients()
+        updateInstructions()
+        updateRecipeInfo()
+        guard let recipe = recipe else { return }
+            IngredientController.shared.addIngredient(ingredients: self.ingredients, toRecipe: recipe) {
+                print("Ingredients added To Recipe")
+                InstructionController.shared.addInstructions(instructions: self.instructions, toRecipe: recipe, completion: {
+                    print("Instructions added to recipe")
+                    self.reloadTableViewOnMainQueue()
+                })
+            }
+        isEditingRecipe = false
+    }
+    
     func pickPhotoSource(sourceType: UIImagePickerControllerSourceType) {
         let imagePickerController = UIImagePickerController()
         
@@ -293,43 +321,102 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
         ingredientTextField.resignFirstResponder()
     }
     
-    func updateViews() {
+    func setupEditingView() {
+        saveButton.title = "Save"
+        addPhotoButton.setTitle("", for: .normal)
+        instructionTextField.isHidden = false
+        ingredientTextField.isHidden = false
+        addInstructionButton.isHidden = false
+        addIngredientButton.isHidden = false
+        recipeNameTextField.isEnabled = true
+        servingsTextField.isEnabled = true
+        prepTimeTextField.isEnabled = true
+        cookTimeTextField.isEnabled = true
+        addPhotoButton.isEnabled = true
+        isEditingRecipe = true
+    }
+    
+    func setupDetailView() {
+        saveButton.title = "Edit"
+        addPhotoButton.setTitle("", for: .normal)
+        instructionTextField.isHidden = true
+        ingredientTextField.isHidden = true
+        addInstructionButton.isHidden = true
+        addIngredientButton.isHidden = true
+        recipeNameTextField.isEnabled = false
+        servingsTextField.isEnabled = false
+        prepTimeTextField.isEnabled = false
+        cookTimeTextField.isEnabled = false
+        addPhotoButton.isEnabled = false
+        isEditingRecipe = false
+    }
+    
+    func setupRecipe() {
         guard let recipe = recipe else { return }
         recipeNameTextField.text = recipe.name
         prepTimeTextField.text = recipe.prepTime
         servingsTextField.text = recipe.servingSize
         cookTimeTextField.text = recipe.cookTime
         recipeImageView.image = recipe.recipeImage
-        addPhotoButton.setTitle("", for: .normal)
-        instructionTextField.isHidden = true
-        ingredientTextField.isHidden = true
-        addInstructionButton.isHidden = true
-        addIngredientButton.isHidden = true
-        navigationItem.rightBarButtonItem?.isEnabled = false
-        recipeNameTextField.isEnabled = false
-        servingsTextField.isEnabled = false
-        prepTimeTextField.isEnabled = false
-        cookTimeTextField.isEnabled = false
-        addPhotoButton.isEnabled = false
-       RecipeController.shared.fetchIngredientsFor(recipe: recipe) { (ingredients) in
-            self.ingredients = ingredients
-           RecipeController.shared.fetchInstructionsFor(recipe: recipe) { (instructions) in
-               self.instructions = instructions
-                DispatchQueue.main.async {
-                   self.tableView.reloadData()
-               }
-            }
+    }
+    
+    func setupInstructions(completion: @escaping() -> Void) {
+        guard let recipe = recipe else { return }
+        RecipeController.shared.fetchInstructionsFor(recipe: recipe) { (instructions) in
+            self.instructions = instructions
+            completion()
         }
     }
     
-    func updateIngredients() {
+    func setupIngredients(completion: @escaping() -> Void) {
         guard let recipe = recipe else { return }
-        ingredients = recipe.ingredients
+        RecipeController.shared.fetchIngredientsFor(recipe: recipe) { (ingredients) in
+            self.ingredients = ingredients
+            completion()
+        }
+    }
+    
+    func reloadTableViewOnMainQueue() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+    
+    func updateViews() {
+        setupDetailView()
+        setupRecipe()
+        setupIngredients {
+            self.setupInstructions {
+                self.reloadTableViewOnMainQueue()
+            }
+        }
+            }
+    
+    
+    
+    func updateIngredients() {
+        recipe?.ingredients = ingredients
     }
     
     func updateInstructions() {
-        guard let recipe = recipe else { return }
-        instructions = recipe.instructions
+        recipe?.instructions = instructions
+    }
+
+    func updateRecipeInfo() {
+        guard let recipe = recipe,
+            let name = recipeNameTextField.text,
+            let servings = servingsTextField.text,
+            let prepTime = prepTimeTextField.text,
+            let cookTime = cookTimeTextField.text
+        else { return }
+        recipe.name = name
+        recipe.servingSize = servings
+        recipe.prepTime = prepTime
+        recipe.cookTime = cookTime
+        RecipeController.shared.modify(recipe: recipe) {
+            print("Recipe Modified")
+        }
+        
     }
     // MARK: - Constraints
     
