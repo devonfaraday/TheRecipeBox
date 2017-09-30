@@ -47,6 +47,7 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
     override func viewDidLoad() {
         super.viewDidLoad()
         checkIsRecipeNil()
+        checkIfRecipeBelongsToCurrentUser()
         recipeImageView.layer.masksToBounds = true
         self.tableView.estimatedRowHeight = 40
         self.tableView.rowHeight = UITableViewAutomaticDimension
@@ -198,9 +199,15 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
-        if !isEditingRecipe && recipe != nil {
+        var recipeUserID = CKRecordID(recordName: UUID().uuidString)
+        var userID = CKRecordID(recordName: UUID().uuidString)
+        if let recipeReference = recipe?.userReference?.recordID, let userIdentifier = UserController.shared.currentUser?.userRecordID {
+            recipeUserID = recipeReference
+            userID = userIdentifier
+        }
+        if !isEditingRecipe && recipe != nil && recipeUserID == userID {
             setupEditingView()
-        } else if recipe != nil {
+        } else if recipe != nil && recipeUserID == userID {
             editRecipe()
             setupDetailView()
         } else {
@@ -258,6 +265,19 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
 
     
     // MARK: - Helper Functions
+    
+    func checkIfRecipeBelongsToCurrentUser() {
+        guard recipe != nil else { return }
+        if let recipeReference = recipe?.userReference?.recordID, let userIdentifier = UserController.shared.currentUser?.userRecordID {
+            if recipeReference == userIdentifier {
+                saveButton.isEnabled = true
+                saveButton.title = "Edit"
+            } else {
+                saveButton.isEnabled = false
+                saveButton.title = ""
+            }
+        }
+    }
     
     func checkIsRecipeNil() {
         if recipe == nil {
