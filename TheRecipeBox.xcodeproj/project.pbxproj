@@ -15,7 +15,6 @@
 		FD7561FC1E75361B0059DE3D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7561FB1E75361B0059DE3D /* AppDelegate.swift */; };
 		FD7562011E75361B0059DE3D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD7561FF1E75361B0059DE3D /* Main.storyboard */; };
 		FD7562031E75361B0059DE3D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD7562021E75361B0059DE3D /* Assets.xcassets */; };
-		FD7562061E75361B0059DE3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD7562041E75361B0059DE3D /* LaunchScreen.storyboard */; };
 		FD75A1221ED4C19D0071600F /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD75A1211ED4C19D0071600F /* TabBarViewController.swift */; };
 		FD7A5CC71EB4EC930070ADEC /* WhatsNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7A5CC61EB4EC930070ADEC /* WhatsNew.swift */; };
 		FD7A5CE91EB85A0B0070ADEC /* GroupRecipeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7A5CE81EB85A0B0070ADEC /* GroupRecipeCollectionViewCell.swift */; };
@@ -35,6 +34,14 @@
 		FDC0FA321E8C0F7100D32052 /* AddGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC0FA311E8C0F7100D32052 /* AddGroupViewController.swift */; };
 		FDC0FA341E8C0F8000D32052 /* GroupDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC0FA331E8C0F8000D32052 /* GroupDetailViewController.swift */; };
 		FDC0FA3A1E8C751200D32052 /* AddRecipesToGroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC0FA391E8C751200D32052 /* AddRecipesToGroupTableViewController.swift */; };
+		FDD404201F7F3AB40002D736 /* AccountCreation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDD4041E1F7F3AB40002D736 /* AccountCreation.storyboard */; };
+		FDD404221F7F3AE70002D736 /* TabBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDD404211F7F3AE70002D736 /* TabBar.storyboard */; };
+		FDD404251F7F3B920002D736 /* RecipeList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDD404231F7F3B920002D736 /* RecipeList.storyboard */; };
+		FDD404281F7F3BE20002D736 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDD404261F7F3BE20002D736 /* Profile.storyboard */; };
+		FDD4042B1F7F3CB20002D736 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDD404291F7F3CB20002D736 /* Settings.storyboard */; };
+		FDD4042E1F7F3D040002D736 /* RecipeCreation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDD4042C1F7F3D040002D736 /* RecipeCreation.storyboard */; };
+		FDD404311F7F3D510002D736 /* GroupRecipe.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDD4042F1F7F3D510002D736 /* GroupRecipe.storyboard */; };
+		FDD404341F7F3D810002D736 /* Group.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDD404321F7F3D810002D736 /* Group.storyboard */; };
 		FDD7D93B1E7738B600B19F21 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD7D93A1E7738B600B19F21 /* ProfileViewController.swift */; };
 		FDD7D9431E77395900B19F21 /* ProfileFeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD7D9421E77395900B19F21 /* ProfileFeedTableViewCell.swift */; };
 		FDD7D94A1E773BE000B19F21 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD7D9491E773BE000B19F21 /* Constants.swift */; };
@@ -62,7 +69,6 @@
 		FD7561FB1E75361B0059DE3D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FD7562001E75361B0059DE3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FD7562021E75361B0059DE3D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		FD7562051E75361B0059DE3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FD7562071E75361B0059DE3D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FD75A1211ED4C19D0071600F /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		FD7A5CC61EB4EC930070ADEC /* WhatsNew.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhatsNew.swift; sourceTree = "<group>"; };
@@ -83,6 +89,14 @@
 		FDC0FA311E8C0F7100D32052 /* AddGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGroupViewController.swift; sourceTree = "<group>"; };
 		FDC0FA331E8C0F8000D32052 /* GroupDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupDetailViewController.swift; sourceTree = "<group>"; };
 		FDC0FA391E8C751200D32052 /* AddRecipesToGroupTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AddRecipesToGroupTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		FDD4041F1F7F3AB40002D736 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = TheRecipeBox/Base.lproj/AccountCreation.storyboard; sourceTree = "<group>"; };
+		FDD404211F7F3AE70002D736 /* TabBar.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = TabBar.storyboard; path = ../TabBar.storyboard; sourceTree = "<group>"; };
+		FDD404241F7F3B920002D736 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = TheRecipeBox/Base.lproj/RecipeList.storyboard; sourceTree = "<group>"; };
+		FDD404271F7F3BE20002D736 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = TheRecipeBox/Base.lproj/Profile.storyboard; sourceTree = "<group>"; };
+		FDD4042A1F7F3CB20002D736 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = TheRecipeBox/Base.lproj/Settings.storyboard; sourceTree = "<group>"; };
+		FDD4042D1F7F3D040002D736 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = TheRecipeBox/Base.lproj/RecipeCreation.storyboard; sourceTree = "<group>"; };
+		FDD404301F7F3D510002D736 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = TheRecipeBox/Base.lproj/GroupRecipe.storyboard; sourceTree = "<group>"; };
+		FDD404331F7F3D810002D736 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = TheRecipeBox/Base.lproj/Group.storyboard; sourceTree = "<group>"; };
 		FDD7D93A1E7738B600B19F21 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ProfileViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		FDD7D9421E77395900B19F21 /* ProfileFeedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileFeedTableViewCell.swift; sourceTree = "<group>"; };
 		FDD7D9491E773BE000B19F21 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Constants.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -116,8 +130,15 @@
 		FD6C13881ECB8AC30034E67C /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				FDD4041E1F7F3AB40002D736 /* AccountCreation.storyboard */,
+				FDD404321F7F3D810002D736 /* Group.storyboard */,
+				FDD4042F1F7F3D510002D736 /* GroupRecipe.storyboard */,
 				FD7561FF1E75361B0059DE3D /* Main.storyboard */,
-				FD7562041E75361B0059DE3D /* LaunchScreen.storyboard */,
+				FDD404261F7F3BE20002D736 /* Profile.storyboard */,
+				FDD4042C1F7F3D040002D736 /* RecipeCreation.storyboard */,
+				FDD404231F7F3B920002D736 /* RecipeList.storyboard */,
+				FDD404291F7F3CB20002D736 /* Settings.storyboard */,
+				FDD404211F7F3AE70002D736 /* TabBar.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -369,9 +390,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FD7562061E75361B0059DE3D /* LaunchScreen.storyboard in Resources */,
+				FDD404281F7F3BE20002D736 /* Profile.storyboard in Resources */,
+				FDD404221F7F3AE70002D736 /* TabBar.storyboard in Resources */,
 				FD7562031E75361B0059DE3D /* Assets.xcassets in Resources */,
+				FDD404251F7F3B920002D736 /* RecipeList.storyboard in Resources */,
+				FDD404341F7F3D810002D736 /* Group.storyboard in Resources */,
 				FD7562011E75361B0059DE3D /* Main.storyboard in Resources */,
+				FDD4042E1F7F3D040002D736 /* RecipeCreation.storyboard in Resources */,
+				FDD404311F7F3D510002D736 /* GroupRecipe.storyboard in Resources */,
+				FDD404201F7F3AB40002D736 /* AccountCreation.storyboard in Resources */,
+				FDD4042B1F7F3CB20002D736 /* Settings.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -435,12 +463,60 @@
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		FD7562041E75361B0059DE3D /* LaunchScreen.storyboard */ = {
+		FDD4041E1F7F3AB40002D736 /* AccountCreation.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				FD7562051E75361B0059DE3D /* Base */,
+				FDD4041F1F7F3AB40002D736 /* Base */,
 			);
-			name = LaunchScreen.storyboard;
+			name = AccountCreation.storyboard;
+			sourceTree = "<group>";
+		};
+		FDD404231F7F3B920002D736 /* RecipeList.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FDD404241F7F3B920002D736 /* Base */,
+			);
+			name = RecipeList.storyboard;
+			sourceTree = "<group>";
+		};
+		FDD404261F7F3BE20002D736 /* Profile.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FDD404271F7F3BE20002D736 /* Base */,
+			);
+			name = Profile.storyboard;
+			sourceTree = "<group>";
+		};
+		FDD404291F7F3CB20002D736 /* Settings.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FDD4042A1F7F3CB20002D736 /* Base */,
+			);
+			name = Settings.storyboard;
+			sourceTree = "<group>";
+		};
+		FDD4042C1F7F3D040002D736 /* RecipeCreation.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FDD4042D1F7F3D040002D736 /* Base */,
+			);
+			name = RecipeCreation.storyboard;
+			sourceTree = "<group>";
+		};
+		FDD4042F1F7F3D510002D736 /* GroupRecipe.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FDD404301F7F3D510002D736 /* Base */,
+			);
+			name = GroupRecipe.storyboard;
+			sourceTree = "<group>";
+		};
+		FDD404321F7F3D810002D736 /* Group.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FDD404331F7F3D810002D736 /* Base */,
+			);
+			name = Group.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

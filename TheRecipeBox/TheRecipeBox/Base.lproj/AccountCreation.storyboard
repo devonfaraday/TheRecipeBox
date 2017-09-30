@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Username View Controller-->
+        <scene sceneID="35v-uO-11g">
+            <objects>
+                <viewController storyboardIdentifier="welcomeViewController" id="MQT-lK-lZc" customClass="UsernameViewController" customModule="TheRecipeBox" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ezg-RJ-QMq"/>
+                        <viewControllerLayoutGuide type="bottom" id="RS0-da-nYq"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hF7-tH-fQh">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="hwA-2f-eNP">
+                                <rect key="frame" x="20" y="287" width="374" height="93"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter A Username" textAlignment="center" minimumFontSize="17" background="LongTextField" translatesAutoresizingMaskIntoConstraints="NO" id="T1h-ZF-ab8">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="3Ke-0w-PuH"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="MQT-lK-lZc" id="DP1-dG-CdA"/>
+                                        </connections>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FqD-ZD-prk">
+                                        <rect key="frame" x="0.0" y="53" width="374" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="RQJ-xj-Zux"/>
+                                        </constraints>
+                                        <state key="normal" title="Submit"/>
+                                        <connections>
+                                            <action selector="submitButtonTapped:" destination="MQT-lK-lZc" eventType="touchUpInside" id="O9M-aY-XR7"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FvR-Lw-SoQ">
+                                <rect key="frame" x="84.666666666666686" y="18" width="245" height="245"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="245" id="5tu-VR-Oge"/>
+                                    <constraint firstAttribute="width" constant="245" id="g2I-op-GVN"/>
+                                    <constraint firstAttribute="width" secondItem="FvR-Lw-SoQ" secondAttribute="height" multiplier="1:1" id="sb2-Bf-Ts9"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IJo-R3-41A">
+                                <rect key="frame" x="84.666666666666686" y="18" width="245" height="245"/>
+                                <state key="normal" title="Tap To Upload Photo"/>
+                                <connections>
+                                    <action selector="tapToUploadButtonTapped:" destination="MQT-lK-lZc" eventType="touchUpInside" id="Ftu-OD-hTj"/>
+                                </connections>
+                            </button>
+                            <view alpha="0.25" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zDj-PU-neF">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <accessibility key="accessibilityConfiguration" identifier="loadingView"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="zDj-PU-neF" secondAttribute="trailing" id="3x0-Aa-kM4"/>
+                            <constraint firstItem="zDj-PU-neF" firstAttribute="top" secondItem="hF7-tH-fQh" secondAttribute="top" id="9o8-Xb-Rrg"/>
+                            <constraint firstItem="FvR-Lw-SoQ" firstAttribute="top" secondItem="ezg-RJ-QMq" secondAttribute="bottom" constant="-2" id="Bnd-8i-qpn"/>
+                            <constraint firstItem="RS0-da-nYq" firstAttribute="top" secondItem="zDj-PU-neF" secondAttribute="bottom" id="DUl-bz-XHP"/>
+                            <constraint firstItem="IJo-R3-41A" firstAttribute="height" secondItem="FvR-Lw-SoQ" secondAttribute="height" id="JF1-8f-km9"/>
+                            <constraint firstItem="IJo-R3-41A" firstAttribute="centerX" secondItem="FvR-Lw-SoQ" secondAttribute="centerX" id="LZT-8Q-Gro"/>
+                            <constraint firstItem="IJo-R3-41A" firstAttribute="width" secondItem="FvR-Lw-SoQ" secondAttribute="width" id="MgS-GR-4E3"/>
+                            <constraint firstItem="IJo-R3-41A" firstAttribute="top" secondItem="ezg-RJ-QMq" secondAttribute="bottom" constant="-2" id="Osh-c4-511"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="hwA-2f-eNP" secondAttribute="trailing" id="SHG-ud-uYf"/>
+                            <constraint firstItem="hwA-2f-eNP" firstAttribute="leading" secondItem="hF7-tH-fQh" secondAttribute="leadingMargin" id="Ve1-RB-bu4"/>
+                            <constraint firstItem="IJo-R3-41A" firstAttribute="centerX" secondItem="hF7-tH-fQh" secondAttribute="centerX" id="ZJg-z4-fmB"/>
+                            <constraint firstItem="FvR-Lw-SoQ" firstAttribute="centerX" secondItem="hF7-tH-fQh" secondAttribute="centerX" id="kGy-Qt-3Zh"/>
+                            <constraint firstItem="IJo-R3-41A" firstAttribute="centerY" secondItem="FvR-Lw-SoQ" secondAttribute="centerY" id="lYp-ce-QaB"/>
+                            <constraint firstItem="hwA-2f-eNP" firstAttribute="centerX" secondItem="hF7-tH-fQh" secondAttribute="centerX" id="sIw-fO-HPw"/>
+                            <constraint firstItem="zDj-PU-neF" firstAttribute="leading" secondItem="hF7-tH-fQh" secondAttribute="leading" id="wli-mk-8bU"/>
+                            <constraint firstItem="hwA-2f-eNP" firstAttribute="top" secondItem="FvR-Lw-SoQ" secondAttribute="bottom" constant="24" id="yGo-za-sNR"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="loadingView" destination="zDj-PU-neF" id="pjD-Fi-rEl"/>
+                        <outlet property="profileImageView" destination="FvR-Lw-SoQ" id="WRZ-h1-3MU"/>
+                        <outlet property="submitButton" destination="FqD-ZD-prk" id="5cU-Cz-3XR"/>
+                        <outlet property="tapToUploadButton" destination="IJo-R3-41A" id="Oek-Yp-MaX"/>
+                        <outlet property="usernameTextField" destination="T1h-ZF-ab8" id="Pug-Or-ZjT"/>
+                        <segue destination="cE7-9h-TGj" kind="show" identifier="toProfile" id="YA1-Yd-O6A"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fkJ-mj-Bf5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-791" y="-507"/>
+        </scene>
+        <!--UITabBarController-YTj-sb-nsT-->
+        <scene sceneID="MW6-cT-4nW">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="UITabBarController-YTj-sb-nsT" id="cE7-9h-TGj" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nUr-O5-KWs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1120" y="298"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="LongTextField" width="402" height="38"/>
+    </resources>
+</document>
