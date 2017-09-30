@@ -60,7 +60,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
             
         }
         
-        NotificationCenter.default.addObserver(self, selector: #selector(performUpdate), name: Constants.groupDidChangeNotificationName, object: nil)
+       
         
         UserController.shared.profileImageDisplay(imageView: profileImageView)
         
@@ -69,6 +69,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+         NotificationCenter.default.addObserver(self, selector: #selector(performUpdate), name: Constants.groupDidChangeNotificationName, object: nil)
         guard let currentUser = UserController.shared.currentUser else { return }
         DispatchQueue.main.async {
             self.nameLabel.text =  currentUser.username
@@ -78,7 +79,11 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
             UserController.shared.profileImageDisplay(imageView: self.profileImageView)
             self.tableView.reloadData()
         }
-        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: Constants.groupDidChangeNotificationName, object: nil)
     }
     
     // MARK: - Table view dataSource

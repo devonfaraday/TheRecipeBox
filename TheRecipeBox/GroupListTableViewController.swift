@@ -22,7 +22,7 @@ class GroupListTableViewController: UITableViewController {
         super.viewDidLoad()
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(performUpdate), for: .valueChanged)
-        NotificationCenter.default.addObserver(self, selector: #selector(performUpdate), name: Constants.groupDidChangeNotificationName, object: nil)
+        
         tableView.refreshControl = refreshControl
         self.navigationController?.navigationBar.backgroundColor = .clear
     }
@@ -30,8 +30,13 @@ class GroupListTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(performUpdate), name: Constants.groupDidChangeNotificationName, object: nil)
         tableView.reloadData()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: Constants.groupDidChangeNotificationName, object: nil)
     }
     
     // MARK: - Data Source
