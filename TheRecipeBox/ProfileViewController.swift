@@ -124,7 +124,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
             DispatchQueue.main.async {
                 self.groupsNumberLabel.text = "\(GroupController.shared.userGroups.count)"
                 UserController.shared.fetchGroupsRecipesFor(user: user, completion: { () in
-                    reloadTableDataOnMainQueue()
+                    self.reloadTableDataOnMainQueue()
                 })
             }
         }

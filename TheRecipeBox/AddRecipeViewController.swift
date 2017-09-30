@@ -12,10 +12,7 @@ import CloudKit
 class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDelegate {
     
     // MARK: - Properties
-    
-    
     var isEditingTextfields  = false
-    
     var recipe: Recipe? {
         didSet {
             if !isViewLoaded {
@@ -57,21 +54,29 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
     }
     
     // MARK: - Scroll View Function
+//    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+//        let yDistance = UIScreen.main.bounds.height - tableView.frame.height
+//        UIView.animate(withDuration: 0.5) {
+//            self.tableView.transform = CGAffineTransform(translationX: 0, y: yDistance)
+//        }
+//    }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         // Allows for the tableView to take up more of the screen so the user can see more of the ingredients and instructions at once.
-        
-        if tableViewTopConstraint.constant <= 8 && tableViewTopConstraint.constant >= -recipeImageView.frame.height - 50 {
-            tableViewTopConstraint.constant -= scrollView.contentOffset.y
-        }
-        
-        if tableViewTopConstraint.constant > 8  {
-            tableViewTopConstraint.constant = 8
-        }
-        
-        if tableViewTopConstraint.constant < -recipeImageView.frame.height - 50 {
-            tableViewTopConstraint.constant = -recipeImageView.frame.height - 50
+        UIView.animate(withDuration: 0.5) {
+            
+            if self.tableViewTopConstraint.constant <= 8 && self.tableViewTopConstraint.constant >= -self.recipeImageView.frame.height - 100 {
+                self.tableViewTopConstraint.constant -= scrollView.contentOffset.y
+            }
+            
+            if self.tableViewTopConstraint.constant > 8  {
+                self.tableViewTopConstraint.constant = 8
+            }
+            
+            if self.tableViewTopConstraint.constant < -self.recipeImageView.frame.height - 100 {
+                self.tableViewTopConstraint.constant = -self.recipeImageView.frame.height - 100
+            }
         }
     }
     
