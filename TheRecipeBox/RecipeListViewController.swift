@@ -27,14 +27,12 @@ class RecipeListViewController: UIViewController, UICollectionViewDelegate, UICo
     
     
     
-    var selectedRecipes = [CKRecordID]()
-    
+    var selectedRecipes = [Recipe]()
     var isSelecting: Bool = false
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        if self.recipes.count < RecipeController.shared.currentRecipes.count {
+            if self.recipes.count < RecipeController.shared.currentRecipes.count {
             self.recipes = RecipeController.shared.currentRecipes
         }
     }
@@ -65,65 +63,51 @@ class RecipeListViewController: UIViewController, UICollectionViewDelegate, UICo
         
        //  TODO: - FIGURE OUT HOW TO DELETE THIS  ARRAY OF RECIPES.
         
-        if selectButton.title == "Delete" {
-            
-            for id in selectedRecipes {
-                RecipeController.shared.deleteRecipeRecord(recipeID: id)
-                guard let indexOfId = selectedRecipes.index(of: id) else { return }
-                selectedRecipes.remove(at: indexOfId)
-                for recipe in recipes {
-                    if recipe.recordID == id {
-                        guard let index = recipes.index(of: recipe),
-                            let indexTwo = RecipeController.shared.currentRecipes.index(of: recipe)
-                            else { return }
-                        recipes.remove(at: index)
-                        RecipeController.shared.currentRecipes.remove(at: indexTwo)
-                    }
+            if selectButton.title == "Delete" {
+                
+                for recipe in selectedRecipes {
+                    guard let recordID = recipe.recordID,
+                        let recipesIndex = recipes.index(of: recipe),
+                        let sharedIndex = RecipeController.shared.currentRecipes.index(of: recipe)
+                        else { return }
+                    RecipeController.shared.deleteRecipeRecord(recipeID: recordID, completion: { (_) in
+                        self.recipes.remove(at: recipesIndex)
+                        RecipeController.shared.currentRecipes.remove(at: sharedIndex)
+                    })
+                }
+                self.selectedRecipes = []
+                self.selectButton.title = "Cancel"
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
                 }
                 
-            }
-            
-            self.selectedRecipes = []
-            self.selectButton.title = "Cancel"
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-            }
-            
-        } else {
-            if isSelecting {
-                isSelecting = false
-                self.selectButton.title = "Select"
-                DispatchQueue.main.async {
-                    self.collectionView.reloadData()
-                }
             } else {
-                isSelecting = true
-                selectButton.title = "Cancel"
-                DispatchQueue.main.async {
-                    self.collectionView.reloadData()
+                if isSelecting {
+                    setToIsSelecting()
+                } else {
+                    setToIsCanceled()
                 }
             }
         }
-    }
+    
+    
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         
     }
     
     // MARK: - Recipe Delegate Method
     
     func isSelectedStatusChanged(_ sender: RecipeCollectionViewCell) {
-        guard let recipe = sender.recipe,
-            let recipeID = recipe.recordID
+        guard let recipe = sender.recipe
             else { return }
         
-        if selectedRecipes.contains(recipeID) {
-            guard let index = selectedRecipes.index(of: recipeID) else { return }
+        if selectedRecipes.contains(recipe) {
+            guard let index = selectedRecipes.index(of: recipe) else { return }
             selectedRecipes.remove(at: index)
         } else {
-            selectedRecipes.append(recipeID)
+            selectedRecipes.append(recipe)
         }
         
         if isSelecting && !selectedRecipes.isEmpty {
@@ -132,6 +116,23 @@ class RecipeListViewController: UIViewController, UICollectionViewDelegate, UICo
             selectButton.title = "Cancel"
         } else {
             selectButton.title = "Select"
+        }
+    }
+    
+    // MARK: - Helpers
+    func setToIsSelecting() {
+        isSelecting = false
+        self.selectButton.title = "Select"
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
+    }
+    
+    func setToIsCanceled() {
+        isSelecting = true
+        selectButton.title = "Cancel"
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
         }
     }
     

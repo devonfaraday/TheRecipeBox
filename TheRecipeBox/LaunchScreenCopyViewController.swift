@@ -27,7 +27,7 @@ class LaunchScreenCopyViewController: UIViewController {
                     self.segueToProfile()
                 })
             } else {
-                segueToUserCreation()
+                self.segueToUserCreation()
             }
         }
     }

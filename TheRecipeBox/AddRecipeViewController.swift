@@ -248,24 +248,17 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
     // MARK: - functions for upload or camera
     
     func uploadButton() {
-        
         hideAllKeyboards()
-        
         pickPhotoSource(sourceType: .photoLibrary)
-        
     }
     
     func cameraButton() {
-        
         hideAllKeyboards()
-        
         pickPhotoSource(sourceType: .camera)
-        
     }
 
     
     // MARK: - Helper Functions
-    
     func checkIfRecipeBelongsToCurrentUser() {
         guard recipe != nil else { return }
         if let recipeReference = recipe?.userReference?.recordID, let userIdentifier = UserController.shared.currentUser?.userRecordID {
