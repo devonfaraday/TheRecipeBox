@@ -25,5 +25,5 @@ class Group: Equatable {
 }
 
 func ==(lhs: Group, rhs: Group) -> Bool {
-    return lhs === rhs
+    return lhs.groupRecordID?.recordName == rhs.groupRecordID?.recordName
 }

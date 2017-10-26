@@ -61,8 +61,6 @@ class RecipeListViewController: UIViewController, UICollectionViewDelegate, UICo
     }
     @IBAction func selectButtonTapped(_ sender: RecipeCollectionViewCell) {
         
-       //  TODO: - FIGURE OUT HOW TO DELETE THIS  ARRAY OF RECIPES.
-        
             if selectButton.title == "Delete" {
                 
                 for recipe in selectedRecipes {

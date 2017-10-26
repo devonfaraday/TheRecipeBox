@@ -35,5 +35,5 @@ class User: Equatable {
 }
 
 func ==(lhs: User, rhs: User) -> Bool {
-    return lhs === rhs
+    return lhs.userRecordID?.recordName == rhs.userRecordID?.recordName
 }
