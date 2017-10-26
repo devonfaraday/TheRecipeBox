@@ -88,17 +88,7 @@ class RecipeController {
         }
     }
     
-    func deleteRecipeRecord(recipeID: CKRecordID, completion: @escaping ((Error?) -> Void) = { _ in }) {
-        cloudKitManager.publicDatabase.delete(withRecordID: recipeID) { (_, error) in
-            if let error = error {
-                NSLog("Error deleting \(recipeID)\n\(error.localizedDescription)")
-                completion(error)
-            } else {
-                completion(nil)
-            }
-            
-        }
-    }
+    
     
     func fetchIngredientsFor(recipe: Recipe, completion: @escaping([Ingredient]) -> Void) {
         guard let recipeRecordID = recipe.recordID else { return }
@@ -156,5 +146,17 @@ class RecipeController {
         operation.savePolicy = .ifServerRecordUnchanged
         self.cloudKitManager.publicDatabase.add(operation)
         completion()
+    }
+    
+    func deleteRecipeRecord(recipeID: CKRecordID, completion: @escaping ((Error?) -> Void) = { _ in }) {
+        cloudKitManager.publicDatabase.delete(withRecordID: recipeID) { (_, error) in
+            if let error = error {
+                NSLog("Error deleting \(recipeID)\n\(error.localizedDescription)")
+                completion(error)
+            } else {
+                completion(nil)
+            }
+            
+        }
     }
 }

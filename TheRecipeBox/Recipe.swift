@@ -97,6 +97,6 @@ extension CKRecord {
 }
     
 func ==(lhs: Recipe, rhs: Recipe) -> Bool {
-    return lhs.ingredients == rhs.ingredients
+    return lhs.recordID?.recordName == rhs.recordID?.recordName
 }
 

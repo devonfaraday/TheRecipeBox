@@ -241,7 +241,7 @@ class UserController {
     
     
     func subscribeToBeingAddedToNewGroup() {
-        
+    
         guard let currentUser = currentUser, let userRecordID = currentUser.userRecordID else { return }
         
         let userReference = CKReference(recordID: userRecordID, action: .none)

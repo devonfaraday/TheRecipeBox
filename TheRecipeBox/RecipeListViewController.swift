@@ -70,9 +70,9 @@ class RecipeListViewController: UIViewController, UICollectionViewDelegate, UICo
                         let recipesIndex = recipes.index(of: recipe),
                         let sharedIndex = RecipeController.shared.currentRecipes.index(of: recipe)
                         else { return }
+                    self.recipes.remove(at: recipesIndex)
+                    RecipeController.shared.currentRecipes.remove(at: sharedIndex)
                     RecipeController.shared.deleteRecipeRecord(recipeID: recordID, completion: { (_) in
-                        self.recipes.remove(at: recipesIndex)
-                        RecipeController.shared.currentRecipes.remove(at: sharedIndex)
                     })
                 }
                 self.selectedRecipes = []

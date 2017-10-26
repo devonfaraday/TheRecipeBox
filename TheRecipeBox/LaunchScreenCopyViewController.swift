@@ -52,7 +52,9 @@ class LaunchScreenCopyViewController: UIViewController {
     
     func errorAlert(withTitle title: String, message: String) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let dismissAction = UIAlertAction(title: "Dismiss", style: .cancel, handler: nil)
+        let dismissAction = UIAlertAction(title: "Dismiss", style: .cancel) { (_) in
+            
+        }
         alertController.addAction(dismissAction)
         present(alertController, animated: true, completion: nil)
     }
