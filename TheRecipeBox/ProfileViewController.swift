@@ -86,12 +86,12 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.profileFeedIdentifier, for: indexPath) as? ProfileFeedTableViewCell else { return ProfileFeedTableViewCell() }
-        cell.loadingIndicator.startAnimating()
+        
         let recipe = RecipeController.shared.allGroupsRecipes[indexPath.row]
         
-        cell.layer.borderWidth = 6
+        cell.layer.borderWidth = 2
         cell.layer.borderColor = UIColor.white.cgColor
-        cell.layer.cornerRadius = 25
+        cell.layer.cornerRadius = 10
         cell.recipe = recipe
         
         

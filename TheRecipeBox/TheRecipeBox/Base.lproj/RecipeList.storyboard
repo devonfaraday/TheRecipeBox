@@ -5,7 +5,7 @@
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -46,8 +46,8 @@
                                 <color key="backgroundColor" red="0.99019607840000001" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="70g-uD-JdQ">
-                                <rect key="frame" x="0.0" y="82" width="375" height="585"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" red="0.29459046909999997" green="0.43710005149999998" blue="0.48270939089999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="QcO-2K-whs">
                                     <size key="itemSize" width="388" height="192"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -72,7 +72,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Np1-Ho-9TO" userLabel="Recipe Name">
                                                     <rect key="frame" x="20" y="20.5" width="169" height="20.5"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="169" id="PxW-m4-7LI"/>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="169" id="PxW-m4-7LI"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.99019607840000001" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -156,7 +156,7 @@
                                                     </constraints>
                                                 </stackView>
                                                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bb7-i6-eBU">
-                                                    <rect key="frame" x="354" y="0.0" width="34" height="34"/>
+                                                    <rect key="frame" x="334" y="20" width="34" height="34"/>
                                                     <color key="backgroundColor" red="0.99019607840000001" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="34" id="icG-fN-4p6"/>
@@ -183,6 +183,7 @@
                                             <constraint firstItem="6lj-Sk-j9T" firstAttribute="centerY" secondItem="OYR-pJ-yhM" secondAttribute="centerY" id="Z9j-P8-ncZ"/>
                                             <constraint firstItem="6lj-Sk-j9T" firstAttribute="width" secondItem="OYR-pJ-yhM" secondAttribute="width" id="ZUl-2w-7rk"/>
                                             <constraint firstItem="OYR-pJ-yhM" firstAttribute="leading" secondItem="y3N-bF-6Hr" secondAttribute="leading" id="eUe-98-ot8"/>
+                                            <constraint firstItem="Np1-Ho-9TO" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="y3N-bF-6Hr" secondAttribute="leading" symbolic="YES" id="tZk-oe-mbd"/>
                                             <constraint firstItem="OYR-pJ-yhM" firstAttribute="leading" secondItem="Np1-Ho-9TO" secondAttribute="trailing" constant="-189" id="vzE-u1-wWP"/>
                                             <constraint firstItem="OYR-pJ-yhM" firstAttribute="top" secondItem="Np1-Ho-9TO" secondAttribute="bottom" constant="-41" id="zLo-2i-PtF"/>
                                             <constraint firstItem="bb7-i6-eBU" firstAttribute="top" secondItem="y3N-bF-6Hr" secondAttribute="topMargin" id="zqQ-zV-EXW"/>
@@ -209,7 +210,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="RPh-6b-Jie" firstAttribute="top" secondItem="70g-uD-JdQ" secondAttribute="bottom" id="3Qw-hE-6WQ"/>
-                            <constraint firstItem="70g-uD-JdQ" firstAttribute="top" secondItem="KCn-q0-aFh" secondAttribute="bottom" constant="18" id="CcD-RB-4ml"/>
+                            <constraint firstItem="70g-uD-JdQ" firstAttribute="top" secondItem="KCn-q0-aFh" secondAttribute="bottom" id="CcD-RB-4ml"/>
                             <constraint firstAttribute="trailing" secondItem="70g-uD-JdQ" secondAttribute="trailing" id="FPK-46-uFN"/>
                             <constraint firstItem="Yau-F3-kLz" firstAttribute="top" secondItem="K2E-7U-dzC" secondAttribute="top" id="JQm-VA-h7D"/>
                             <constraint firstItem="RPh-6b-Jie" firstAttribute="top" secondItem="Yau-F3-kLz" secondAttribute="bottom" id="YZ7-Mn-xaZ"/>

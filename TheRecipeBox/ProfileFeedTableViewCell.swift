@@ -29,7 +29,7 @@ class ProfileFeedTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        loadingIndicator.startAnimating()
         loadingIndicator.activityIndicatorViewStyle = .whiteLarge
     }
     

@@ -22,7 +22,7 @@ class UsernameViewController: UIViewController, UIImagePickerControllerDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
         loadingView.isHidden = true
-        profileImageView.layer.masksToBounds = true
+        setupImageView()
     }
     
     // MARK: - Image Picker Delegate Functions
@@ -99,8 +99,6 @@ class UsernameViewController: UIViewController, UIImagePickerControllerDelegate,
     
     func uploadButton() {
         
-        
-        
         let imagePickerController = UIImagePickerController()
         
         imagePickerController.sourceType = .photoLibrary
@@ -112,9 +110,6 @@ class UsernameViewController: UIViewController, UIImagePickerControllerDelegate,
     }
     
     func cameraButton() {
-        
-        
-        
         
         let imagePickerController = UIImagePickerController()
         
@@ -134,6 +129,13 @@ class UsernameViewController: UIViewController, UIImagePickerControllerDelegate,
         alertController.addAction(okAction)
         
         present(alertController, animated: true, completion: nil)
+    }
+    
+    func setupImageView() {
+        profileImageView.layer.cornerRadius = profileImageView.frame.width / 2
+        profileImageView.layer.borderWidth = 2
+        profileImageView.layer.borderColor = UIColor.white.cgColor
+        profileImageView.layer.masksToBounds = true
     }
 }
 

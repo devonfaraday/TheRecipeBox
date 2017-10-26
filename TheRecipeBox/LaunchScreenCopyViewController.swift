@@ -20,15 +20,15 @@ class LaunchScreenCopyViewController: UIViewController {
     
     func fetchCurrentUser() {
         cloudKitManager.fetchCurrentUser { (user) in
-            if user != nil {
-                guard let user = user else { return }
-                print("Fetching recipes in launch screen")
-                UserController.shared.fetchGroupsRecipesFor(user: user, completion: { () in
-                    self.segueToProfile()
-                })
-            } else {
-                self.segueToUserCreation()
-            }
+//            if user != nil {
+//                guard let user = user else { return }
+//                print("Fetching recipes in launch screen")
+//                UserController.shared.fetchGroupsRecipesFor(user: user, completion: { () in
+//                    self.segueToProfile()
+//                })
+//            } else {
+//            }
+            self.segueToUserCreation()
         }
     }
     

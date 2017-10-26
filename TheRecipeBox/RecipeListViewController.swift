@@ -46,7 +46,7 @@ class RecipeListViewController: UIViewController, UICollectionViewDelegate, UICo
         
         cell.layer.cornerRadius = 10
         cell.layer.borderColor = UIColor.white.cgColor
-        cell.layer.borderWidth = 1
+        cell.layer.borderWidth = 2
         cell.recipe = recipes[indexPath.row]
         cell.isSelectedButton.setBackgroundImage(nil, for: .normal)
         cell.delegate = self

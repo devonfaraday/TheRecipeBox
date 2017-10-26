@@ -5,7 +5,7 @@
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -49,13 +49,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="K0Q-6b-8el">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" red="0.99019607840000001" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="s4R-jO-pgM">
-                                <rect key="frame" x="0.0" y="82" width="375" height="585"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" red="0.29459046909999997" green="0.43710005149999998" blue="0.48270939089999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="FsB-ZM-fNO">
                                     <size key="itemSize" width="388" height="192"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -201,12 +197,8 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="lmg-6V-pqU" firstAttribute="top" secondItem="K0Q-6b-8el" secondAttribute="bottom" id="6rL-Uy-qAV"/>
-                            <constraint firstAttribute="trailing" secondItem="K0Q-6b-8el" secondAttribute="trailing" id="M8K-Ah-JZn"/>
-                            <constraint firstItem="K0Q-6b-8el" firstAttribute="top" secondItem="hIp-Gu-ZLj" secondAttribute="top" id="SgD-eu-Gwf"/>
-                            <constraint firstItem="s4R-jO-pgM" firstAttribute="top" secondItem="YOg-Vl-6s1" secondAttribute="bottom" constant="18" id="UOj-8X-dLx"/>
+                            <constraint firstItem="s4R-jO-pgM" firstAttribute="top" secondItem="YOg-Vl-6s1" secondAttribute="bottom" id="UOj-8X-dLx"/>
                             <constraint firstAttribute="trailing" secondItem="s4R-jO-pgM" secondAttribute="trailing" id="WNl-CY-GS4"/>
-                            <constraint firstItem="K0Q-6b-8el" firstAttribute="leading" secondItem="hIp-Gu-ZLj" secondAttribute="leading" id="nJn-QV-nGd"/>
                             <constraint firstItem="s4R-jO-pgM" firstAttribute="leading" secondItem="hIp-Gu-ZLj" secondAttribute="leading" id="nzy-dE-XMK"/>
                             <constraint firstItem="lmg-6V-pqU" firstAttribute="top" secondItem="s4R-jO-pgM" secondAttribute="bottom" id="r9S-Nr-vak"/>
                         </constraints>
