@@ -30,7 +30,7 @@ class UserController {
         
         }
         
-        self.CKManager.fetchCurrentUser { (user) in
+        self.CKManager.fetchCurrentUser { (user, error) in
             guard let user = user else {  return  }
             
             self.currentUser = user

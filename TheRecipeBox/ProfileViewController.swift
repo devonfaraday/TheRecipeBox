@@ -32,7 +32,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource {
         tableView.refreshControl = refreshControl
         self.navigationController?.navigationBar.backgroundColor = .clear
         
-        CKManager.fetchCurrentUser { (user) in
+        CKManager.fetchCurrentUser { (user, error) in
             guard let user = user else {  return  }
             
             DispatchQueue.main.async {

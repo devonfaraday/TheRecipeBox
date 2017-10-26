@@ -14,12 +14,12 @@ class CloudKitManager {
     static let shared = CloudKitManager()
     let publicDatabase = CKContainer.default().publicCloudDatabase
     
-    func fetchCurrentUser(completion: @escaping (User?) -> Void) {
+    func fetchCurrentUser(completion: @escaping (User?, Error?) -> Void) {
         // Fetch default Apple 'Users' recordID
         
         CKContainer.default().fetchUserRecordID { (appleUserRecordID, error) in
             DispatchQueue.main.async {
-                if let error = error { print(error.localizedDescription) }
+                if let error = error { print(error.localizedDescription); completion(nil, error) }
                 
                 guard let appleUserRecordID = appleUserRecordID else { return }
                 
@@ -34,12 +34,12 @@ class CloudKitManager {
                 // Fetch the real User record
                 let query = CKQuery(recordType: Constants.userRecordType, predicate: predicate)
                 self.publicDatabase.perform(query, inZoneWith: nil, completionHandler: { (records, error) in
-                    if let error = error { print(error.localizedDescription) }
+                    if let error = error { print(error.localizedDescription); completion(nil, error) }
                     
                     guard let records = records else { return }
                     let users = records.flatMap { User(cloudKitRecord: $0 ) }
                     let user = users.first
-                    completion(user)
+                    completion(user, nil)
                     
                 })
             }
