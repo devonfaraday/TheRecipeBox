@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		FD66D3151FA2D57E006B2CD5 /* Array+TRB.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD66D3141FA2D57E006B2CD5 /* Array+TRB.swift */; };
+		FD66D3171FA2E4BC006B2CD5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD66D3161FA2E4BC006B2CD5 /* LaunchScreen.storyboard */; };
 		FD6C138A1ECB8EBC0034E67C /* RecipeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6C13891ECB8EBC0034E67C /* RecipeListViewController.swift */; };
 		FD6C138C1ECB91610034E67C /* RecipeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6C138B1ECB91610034E67C /* RecipeCollectionViewCell.swift */; };
 		FD6D64AF1F15306000E23FC2 /* StackOverflow solutions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6D64AE1F15306000E23FC2 /* StackOverflow solutions.swift */; };
@@ -62,6 +63,7 @@
 
 /* Begin PBXFileReference section */
 		FD66D3141FA2D57E006B2CD5 /* Array+TRB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+TRB.swift"; sourceTree = "<group>"; };
+		FD66D3161FA2E4BC006B2CD5 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FD6C13891ECB8EBC0034E67C /* RecipeListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeListViewController.swift; sourceTree = "<group>"; };
 		FD6C138B1ECB91610034E67C /* RecipeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeCollectionViewCell.swift; sourceTree = "<group>"; };
 		FD6D64AE1F15306000E23FC2 /* StackOverflow solutions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "StackOverflow solutions.swift"; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 				FDD404231F7F3B920002D736 /* RecipeList.storyboard */,
 				FDD404291F7F3CB20002D736 /* Settings.storyboard */,
 				FDD404211F7F3AE70002D736 /* TabBar.storyboard */,
+				FD66D3161FA2E4BC006B2CD5 /* LaunchScreen.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -450,6 +453,7 @@
 				FDD4042E1F7F3D040002D736 /* RecipeCreation.storyboard in Resources */,
 				FDD404311F7F3D510002D736 /* GroupRecipe.storyboard in Resources */,
 				FDD404201F7F3AB40002D736 /* AccountCreation.storyboard in Resources */,
+				FD66D3171FA2E4BC006B2CD5 /* LaunchScreen.storyboard in Resources */,
 				FDD4042B1F7F3CB20002D736 /* Settings.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
