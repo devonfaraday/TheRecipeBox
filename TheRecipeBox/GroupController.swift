@@ -129,16 +129,18 @@ class GroupController {
         for id in recipeRecordIDs {
             group.enter()
             publicDB.fetch(withRecordID: id, completionHandler: { (record, _) in
-                guard let record = record else { return }
-                guard let recipe = Recipe(cloudKitRecord: record) else { return }
-                recipes.append(recipe)
+                if let record = record {
+                   if let recipe = Recipe(cloudKitRecord: record)  {
+                    recipes.append(recipe)
+                    }
+                }
                 group.leave()
             })
         }
-        group.notify(queue: DispatchQueue.main) {
+        group.notify(queue: DispatchQueue.main, execute:  {
             self.groupRecipes = recipes.sorted(by: {$0.creationDate > $1.creationDate })
             completion(recipes)
-        }
+        })
     }
     
     func deleteGroup(recordID: CKRecordID, completion: @escaping((Error?) -> Void) = { _ in }) {
@@ -180,7 +182,7 @@ class GroupController {
     }
     
     func add(recipe: Recipe, toGroup group: Group, completion: @escaping(Error?) -> Void) {
-        
+        self.groupRecipes.append(recipe)
         guard let recipeID = recipe.recordID,
             let groupID = group.groupRecordID else { return }
         publicDB.fetch(withRecordID: groupID) { (record, error) in

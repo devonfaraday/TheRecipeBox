@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FD66D3151FA2D57E006B2CD5 /* Array+TRB.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD66D3141FA2D57E006B2CD5 /* Array+TRB.swift */; };
 		FD6C138A1ECB8EBC0034E67C /* RecipeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6C13891ECB8EBC0034E67C /* RecipeListViewController.swift */; };
 		FD6C138C1ECB91610034E67C /* RecipeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6C138B1ECB91610034E67C /* RecipeCollectionViewCell.swift */; };
 		FD6D64AF1F15306000E23FC2 /* StackOverflow solutions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6D64AE1F15306000E23FC2 /* StackOverflow solutions.swift */; };
@@ -33,7 +34,6 @@
 		FDC0FA301E8C05AE00D32052 /* GroupListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC0FA2F1E8C05AE00D32052 /* GroupListTableViewController.swift */; };
 		FDC0FA321E8C0F7100D32052 /* AddGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC0FA311E8C0F7100D32052 /* AddGroupViewController.swift */; };
 		FDC0FA341E8C0F8000D32052 /* GroupDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC0FA331E8C0F8000D32052 /* GroupDetailViewController.swift */; };
-		FDC0FA3A1E8C751200D32052 /* AddRecipesToGroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC0FA391E8C751200D32052 /* AddRecipesToGroupTableViewController.swift */; };
 		FDD404201F7F3AB40002D736 /* AccountCreation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDD4041E1F7F3AB40002D736 /* AccountCreation.storyboard */; };
 		FDD404221F7F3AE70002D736 /* TabBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDD404211F7F3AE70002D736 /* TabBar.storyboard */; };
 		FDD404251F7F3B920002D736 /* RecipeList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDD404231F7F3B920002D736 /* RecipeList.storyboard */; };
@@ -57,9 +57,11 @@
 		FDD7D9791E7AE02F00B19F21 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD7D9781E7AE02F00B19F21 /* Group.swift */; };
 		FDD7D97D1E7AFB7D00B19F21 /* UsernameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD7D97C1E7AFB7C00B19F21 /* UsernameViewController.swift */; };
 		FDE6BED81E92F7A30045C865 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE6BED71E92F7A30045C865 /* LoadingView.swift */; };
+		FDF3AEE51FA2A88100145E7B /* String+TRB.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF3AEE41FA2A88100145E7B /* String+TRB.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FD66D3141FA2D57E006B2CD5 /* Array+TRB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+TRB.swift"; sourceTree = "<group>"; };
 		FD6C13891ECB8EBC0034E67C /* RecipeListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeListViewController.swift; sourceTree = "<group>"; };
 		FD6C138B1ECB91610034E67C /* RecipeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeCollectionViewCell.swift; sourceTree = "<group>"; };
 		FD6D64AE1F15306000E23FC2 /* StackOverflow solutions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "StackOverflow solutions.swift"; sourceTree = "<group>"; };
@@ -88,7 +90,6 @@
 		FDC0FA2F1E8C05AE00D32052 /* GroupListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupListTableViewController.swift; sourceTree = "<group>"; };
 		FDC0FA311E8C0F7100D32052 /* AddGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGroupViewController.swift; sourceTree = "<group>"; };
 		FDC0FA331E8C0F8000D32052 /* GroupDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupDetailViewController.swift; sourceTree = "<group>"; };
-		FDC0FA391E8C751200D32052 /* AddRecipesToGroupTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AddRecipesToGroupTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		FDD4041F1F7F3AB40002D736 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = TheRecipeBox/Base.lproj/AccountCreation.storyboard; sourceTree = "<group>"; };
 		FDD404211F7F3AE70002D736 /* TabBar.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = TabBar.storyboard; path = ../TabBar.storyboard; sourceTree = "<group>"; };
 		FDD404241F7F3B920002D736 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = TheRecipeBox/Base.lproj/RecipeList.storyboard; sourceTree = "<group>"; };
@@ -113,6 +114,7 @@
 		FDD7D9781E7AE02F00B19F21 /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		FDD7D97C1E7AFB7C00B19F21 /* UsernameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = UsernameViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		FDE6BED71E92F7A30045C865 /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		FDF3AEE41FA2A88100145E7B /* String+TRB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+TRB.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,7 +200,6 @@
 				FDC0FA2F1E8C05AE00D32052 /* GroupListTableViewController.swift */,
 				FDC0FA311E8C0F7100D32052 /* AddGroupViewController.swift */,
 				FDC0FA331E8C0F8000D32052 /* GroupDetailViewController.swift */,
-				FDC0FA391E8C751200D32052 /* AddRecipesToGroupTableViewController.swift */,
 				FD91EDB51EBAA1A40001F898 /* GroupRecipeViewController.swift */,
 			);
 			name = GroupViewControllers;
@@ -256,6 +257,7 @@
 		FDD7D93C1E77390300B19F21 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				FDF3AEE31FA2A87000145E7B /* Extensions */,
 				FDD7D9491E773BE000B19F21 /* Constants.swift */,
 				FDD7D95C1E7746C900B19F21 /* CloudKitManager.swift */,
 				FD6D64B01F15314100E23FC2 /* ImageResizing.swift */,
@@ -362,6 +364,15 @@
 			name = Group;
 			sourceTree = "<group>";
 		};
+		FDF3AEE31FA2A87000145E7B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				FDF3AEE41FA2A88100145E7B /* String+TRB.swift */,
+				FD66D3141FA2D57E006B2CD5 /* Array+TRB.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -453,7 +464,6 @@
 				FDA5312E1E7B904C00DC3DB3 /* Group+CloudKit.swift in Sources */,
 				FDC0FA341E8C0F8000D32052 /* GroupDetailViewController.swift in Sources */,
 				FD6C138A1ECB8EBC0034E67C /* RecipeListViewController.swift in Sources */,
-				FDC0FA3A1E8C751200D32052 /* AddRecipesToGroupTableViewController.swift in Sources */,
 				FD6D64B11F15314100E23FC2 /* ImageResizing.swift in Sources */,
 				FDD7D95D1E7746C900B19F21 /* CloudKitManager.swift in Sources */,
 				FDD7D9611E7759CB00B19F21 /* Ingredient.swift in Sources */,
@@ -471,6 +481,7 @@
 				FD95AE7B1F41FD9000441A59 /* IngredientController.swift in Sources */,
 				FD6D64AF1F15306000E23FC2 /* StackOverflow solutions.swift in Sources */,
 				FD8809801ECA238A00D2A215 /* FeatureController.swift in Sources */,
+				FDF3AEE51FA2A88100145E7B /* String+TRB.swift in Sources */,
 				FDD7D9741E7A58BA00B19F21 /* User.swift in Sources */,
 				FDD7D95F1E7754E400B19F21 /* Recipe.swift in Sources */,
 				FDD7D9691E785AF100B19F21 /* AddRecipeViewController.swift in Sources */,
@@ -478,6 +489,7 @@
 				FD95AE7D1F41FD9800441A59 /* InstructionController.swift in Sources */,
 				FDA531321E7BB97300DC3DB3 /* GroupController.swift in Sources */,
 				FD88097E1ECA238300D2A215 /* BugController.swift in Sources */,
+				FD66D3151FA2D57E006B2CD5 /* Array+TRB.swift in Sources */,
 				FD88097A1ECA20D900D2A215 /* Bug.swift in Sources */,
 				FDE6BED81E92F7A30045C865 /* LoadingView.swift in Sources */,
 				FD6E1F661EABCF18005D1C5A /* MemberCollectionViewCell.swift in Sources */,

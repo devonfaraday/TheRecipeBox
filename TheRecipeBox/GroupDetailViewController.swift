@@ -36,6 +36,7 @@ class GroupDetailViewController: UIViewController, UITableViewDataSource, UIText
             }
         }
     }
+    var groupRecipes = [Recipe]()
     var usernames: [String] {
         return users.map { $0.username }
     }
@@ -50,6 +51,11 @@ class GroupDetailViewController: UIViewController, UITableViewDataSource, UIText
         super.viewWillAppear(animated)
         if group?.groupOwnerRef?.recordID == UserController.shared.currentUser?.userRecordID {
             leaveButton.setTitle("Delete Group", for: .normal)
+        }
+        if let group = group {
+            GroupController.shared.fetchRecipesIn(group: group, completion: { (recipes) in
+                self.groupRecipes = recipes
+            })
         }
     }
     
@@ -227,6 +233,11 @@ class GroupDetailViewController: UIViewController, UITableViewDataSource, UIText
         present(alertController, animated: true, completion: nil)
     }
 
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toGroupRecipeList" {
+            guard let destination = segue.destination as? GroupRecipeViewController else { return }
+            destination.recipes = groupRecipes
+        }
+    }
     
 }

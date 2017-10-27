@@ -92,9 +92,7 @@ class GroupListTableViewController: UITableViewController {
                 destinationVC.users = users
             }
         }
-        GroupController.shared.fetchRecipesIn(group: group) { (recipes) in
-                GroupController.shared.groupRecipes = recipes
-        }
+    
         GroupController.shared.currentGroup = group
         destinationVC.group = group
         

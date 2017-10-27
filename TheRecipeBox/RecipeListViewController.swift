@@ -24,7 +24,7 @@ class RecipeListViewController: UIViewController, UICollectionViewDelegate, UICo
             }
         }
     }
-    
+    var isAddingToGroup: Bool = false
     
     
     var selectedRecipes = [Recipe]()
@@ -93,6 +93,27 @@ class RecipeListViewController: UIViewController, UICollectionViewDelegate, UICo
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        let recipe = recipes[indexPath.row]
+        if !isAddingToGroup {
+            performSegue(withIdentifier: "toShowRecipe", sender: self)
+        }
+        
+        guard let recipeID = recipe.recordID, let currentGroup = GroupController.shared.currentGroup, let recipeRefs = currentGroup.recipeReferences else { return }
+        let recipeRef = CKReference(recordID: recipeID, action: .none)
+        if isAddingToGroup {
+        if recipeRefs.contains(recipeRef) {
+            self.allReadyAddedAlert()
+        } else {
+            GroupController.shared.add(recipe: recipe, toGroup: currentGroup) { (_) in
+                print("recipe added to group")
+                RecipeController.shared.allGroupsRecipes.append(recipe)
+                
+                DispatchQueue.main.async {
+                    self.dismiss(animated: true, completion: nil)
+                }
+            }
+        }
+        }
     }
     
     // MARK: - Recipe Delegate Method
@@ -134,11 +155,21 @@ class RecipeListViewController: UIViewController, UICollectionViewDelegate, UICo
         }
     }
     
+    func allReadyAddedAlert()  {
+        let alertController = UIAlertController(title: nil, message: "Recipe already added", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .cancel) { (_) in
+            self.dismiss(animated: true, completion: nil)
+        }
+        
+        alertController.addAction(okAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == Constants.toShowRecipeSegue {
-            
             guard let indexPath = collectionView.indexPathsForSelectedItems else { return }
             let destinationVC = segue.destination as? AddRecipeViewController
             destinationVC?.recipe = recipes[indexPath[0].item]

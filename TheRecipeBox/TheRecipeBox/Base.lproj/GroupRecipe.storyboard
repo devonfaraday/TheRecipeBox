@@ -9,34 +9,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Add Recipes To Group Table View Controller-->
-        <scene sceneID="rYH-6O-ZmY">
-            <objects>
-                <tableViewController id="Yri-X9-QLJ" customClass="AddRecipesToGroupTableViewController" customModule="TheRecipeBox" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Q8w-ww-wUA">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="recipeCell" id="xTH-cC-b4u">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xTH-cC-b4u" id="Nuv-dw-BIW">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="Yri-X9-QLJ" id="5yI-rG-O4Q"/>
-                            <outlet property="delegate" destination="Yri-X9-QLJ" id="QfD-qe-cgF"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2dX-Dr-av9" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4" y="2539"/>
-        </scene>
         <!--Group Recipe View Controller-->
         <scene sceneID="SQu-6b-J1v">
             <objects>
@@ -206,13 +178,14 @@
                     <navigationItem key="navigationItem" id="knE-Mp-l6B">
                         <barButtonItem key="rightBarButtonItem" title="Add Racipes" id="bgW-ZS-Pqo">
                             <connections>
-                                <segue destination="Yri-X9-QLJ" kind="show" id="qPN-1T-5n0"/>
+                                <action selector="addRecipesToGroupButtonTapped:" destination="Lnc-qg-108" id="ChT-Wn-JvQ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="collectionView" destination="s4R-jO-pgM" id="fFE-RY-BEY"/>
+                        <segue destination="4d2-mN-hYb" kind="presentation" identifier="toRecipeListViewController" id="nHo-vL-cwO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r6n-8K-guK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -225,7 +198,15 @@
                 <viewControllerPlaceholder storyboardIdentifier="UIViewController-ldY-Bg-hi3" storyboardName="RecipeCreation" referencedIdentifier="UIViewController-ldY-Bg-hi3" id="FU4-n8-399" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FvJ-sG-Nzo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-410" y="1871"/>
+            <point key="canvasLocation" x="-153" y="1915"/>
+        </scene>
+        <!--RecipeListViewController-->
+        <scene sceneID="W2n-wE-pk1">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="RecipeListViewController" storyboardName="RecipeList" referencedIdentifier="RecipeListViewController" id="4d2-mN-hYb" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="27R-ZJ-iFc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="94" y="2298"/>
         </scene>
     </scenes>
     <resources>

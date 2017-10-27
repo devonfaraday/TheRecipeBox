@@ -12,17 +12,29 @@ class GroupRecipeViewController: UIViewController, UICollectionViewDataSource, U
     
     
     @IBOutlet weak var collectionView: UICollectionView!
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        guard let group = GroupController.shared.currentGroup else { return }
-        self.title = group.groupName
+    var group: Group?
+    var recipes = [Recipe]() {
+        didSet {
+            if !isViewLoaded {
+                loadViewIfNeeded()
+            }
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let group = GroupController.shared.currentGroup {
+        getNewRecipes()
+       self.title = group.groupName
+        }
         self.navigationController?.navigationBar.backgroundColor = .clear
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return GroupController.shared.groupRecipes.count
+        return recipes.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -31,16 +43,26 @@ class GroupRecipeViewController: UIViewController, UICollectionViewDataSource, U
         cell.layer.cornerRadius = 10
         cell.layer.borderColor = UIColor.white.cgColor
         cell.layer.borderWidth = 1
-        cell.recipe = GroupController.shared.groupRecipes[indexPath.row]
+        cell.recipe = recipes[indexPath.row]
         
         return cell
     }
 
+    @IBAction func addRecipesToGroupButtonTapped(_ sender: Any) {
+        performSegue(withIdentifier: .toRecipeListViewControllerSegue, sender: self)
+    }
+    
+    func getNewRecipes() {
+        if recipes.count < GroupController.shared.groupRecipes.count {
+            recipes = GroupController.shared.groupRecipes
+        }
+        
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == Constants.toAddRecipeToGroupSegue {
-            let destinationVC = segue.destination as? AddRecipesToGroupTableViewController
-            destinationVC?.recipes = RecipeController.shared.currentRecipes
+        if segue.identifier == String.toRecipeListViewControllerSegue {
+            guard let destination = segue.destination as? RecipeListViewController else { return }
+            destination.isAddingToGroup = true
         }
         if segue.identifier == Constants.toShowRecipeSegue {
             

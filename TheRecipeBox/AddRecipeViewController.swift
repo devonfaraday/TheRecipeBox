@@ -212,7 +212,9 @@ class AddRecipeViewController: UIViewController, UITableViewDataSource, UITextFi
             setupDetailView()
         } else {
             saveRecipeToCloudKit()
+            tabBarController?.selectedIndex = 2
         }
+        
     }
     
     @IBAction func addPhotoButtonTapped(_ sender: UIButton) {

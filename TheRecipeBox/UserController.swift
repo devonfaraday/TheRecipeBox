@@ -222,7 +222,7 @@ class UserController {
                     })
                 }
                 group.notify(queue: DispatchQueue.main, execute: {
-                    var sorted = recipes.sorted(by: {$0.creationDate > $1.creationDate })
+                    var sorted = recipes.sorted(by: {$0.creationDate > $1.creationDate }).removeDuplicates()
                     print("Completing")
                     if sorted.count > 9 {
                         let numberToRemove = sorted.count - 9

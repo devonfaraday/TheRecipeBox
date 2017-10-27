@@ -32,7 +32,7 @@
         <!--Recipe List View Controller-->
         <scene sceneID="3i2-A3-UMf">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="ZLj-MP-496" customClass="RecipeListViewController" customModule="TheRecipeBox" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RecipeListViewController" automaticallyAdjustsScrollViewInsets="NO" id="ZLj-MP-496" customClass="RecipeListViewController" customModule="TheRecipeBox" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="KCn-q0-aFh"/>
                         <viewControllerLayoutGuide type="bottom" id="RPh-6b-Jie"/>
@@ -196,7 +196,6 @@
                                             <outlet property="recipeImageView" destination="OYR-pJ-yhM" id="r1k-Sx-ine"/>
                                             <outlet property="recipeNameLabel" destination="Np1-Ho-9TO" id="xzJ-tC-Fc1"/>
                                             <outlet property="servingsLabel" destination="rnq-he-gQi" id="NXX-3D-ZuF"/>
-                                            <segue destination="eTU-ti-Xzs" kind="show" identifier="toShowRecipe" id="qg7-is-aka"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -230,6 +229,7 @@
                     <connections>
                         <outlet property="collectionView" destination="70g-uD-JdQ" id="ORh-2D-VVG"/>
                         <outlet property="selectButton" destination="ta8-EW-nZN" id="gBq-Pe-L2c"/>
+                        <segue destination="eTU-ti-Xzs" kind="show" identifier="toShowRecipe" id="dRt-AB-419"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u2a-eV-OVA" userLabel="First Responder" sceneMemberID="firstResponder"/>
